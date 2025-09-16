@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 설치 가이드 - 로컬 미리보기</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .notice {
+            background: #fffbe6;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .notice h3 {
+            margin-top: 0;
+            color: #ff6b00;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .image-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+        .description {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        ul {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+        li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="notice">
+        <h3>📌 로컬 미리보기 전용</h3>
+        <p>이 파일은 로컬에서 이미지를 미리보기 위한 테스트 파일입니다.<br>
+        실제 가이드는 <strong>index.html</strong>을 사용하세요.</p>
+    </div>
+
+    <h1>Claude 3종 + VS Code 통합 작업환경</h1>
+
+    <div class="description">
+        <p>모든 설치를 완료하면 아래와 같은 강력한 통합 작업환경을 구축할 수 있습니다:</p>
+    </div>
+
+    <div class="image-container">
+        <h2>🖼️ 통합 환경 스크린샷</h2>
+        <p>아래 이미지는 실제 구축된 환경의 예시입니다:</p>
+
+        <!-- 다양한 경로 시도 -->
+        <h3>통합 환경 스크린샷</h3>
+        <img src="screenshots/integrated-environment-compressed.jpg"
+             alt="Claude 3종 + VS Code 통합 환경">
+        <p style="color: green;">✅ Python 로컬 서버로 접속 시 이미지가 표시됩니다.</p>
+    </div>
+
+    <div class="description">
+        <h2>🎭 완벽한 통합 작업환경 구성</h2>
+        <ul>
+            <li><strong>Claude Code</strong> (좌측 세로형 모니터) - 터미널 기반 AI 업무 도우미</li>
+            <li><strong>Claude 데스크탑</strong> (우측 가로형 모니터 좌측) - MCP 서버 연결 및 고급 기능</li>
+            <li><strong>Claude 모바일</strong> (태블릿) - 🎙️ 음성 대화 기능으로 핸즈프리 작업</li>
+            <li><strong>VS Code</strong> (우측 가로형 모니터 우측) - 전문적인 코드 편집</li>
+        </ul>
+
+        <p><strong>💡 이미지가 보이지 않는 경우:</strong></p>
+        <ol>
+            <li>Chrome에서 파일 열기: <code>Ctrl+O</code> → HTML 파일 선택</li>
+            <li>VS Code Live Server 사용: Live Server 확장 설치 → 우클릭 → "Open with Live Server"</li>
+            <li>Python 서버 실행: <code>python -m http.server 8000</code> → http://localhost:8000 접속</li>
+        </ol>
+    </div>
+
+    <script>
+        // 이미지 로드 상태 확인
+        window.onload = function() {
+            const images = document.querySelectorAll('img');
+            let loadedCount = 0;
+
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    loadedCount++;
+                    console.log('✅ 이미지 로드 성공:', img.src);
+                } else {
+                    console.log('❌ 이미지 로드 실패:', img.src);
+                }
+            });
+
+            if (loadedCount === 0) {
+                console.log('⚠️ 모든 이미지 로드 실패. 로컬 서버를 사용해보세요.');
+            }
+        };
+    </script>
+</body>
+</html>
