@@ -1,0 +1,23 @@
+# GitHub에 푸시하는 방법
+
+1. GitHub.com에 로그인하세요
+2. 우측 상단의 '+' 버튼을 클릭하고 'New repository'를 선택하세요
+3. Repository name: claude-code-guide (또는 원하는 이름)
+4. Description: Claude & Claude Code 입문 - 현직 공인회계사가 만든 가이드북
+5. Public 선택
+6. 'Create repository' 클릭
+
+저장소를 만든 후, 아래 명령어를 실행하세요:
+
+# GitHub 저장소 URL을 연결 (YOUR_USERNAME을 실제 GitHub 사용자명으로 변경)
+git remote add origin https://github.com/YOUR_USERNAME/claude-code-guide.git
+
+# main 브랜치로 변경
+git branch -M main
+
+# GitHub에 푸시
+git push -u origin main
+
+# 만약 인증이 필요하다면:
+# 1. GitHub Personal Access Token을 만드세요 (Settings > Developer settings > Personal access tokens)
+# 2. 비밀번호 대신 토큰을 사용하세요

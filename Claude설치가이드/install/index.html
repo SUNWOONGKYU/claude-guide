@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 4종 & VS Code 완벽 설치 가이드 v1.2</title>
+    <meta name="description" content="Claude 모바일 앱, 웹, 데스크탑, Claude Code 설치부터 MCP 설정까지 완벽 가이드">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc > ul > li {
+            margin-bottom: 15px;
+        }
+
+        .toc li {
+            padding: 5px 0;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        .toc > ul > li > a {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .toc ul ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .toc ul ul li {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #667eea;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin: 35px 0 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #333;
+            margin: 30px 0 15px;
+            font-size: 1.5em;
+        }
+
+        h4 {
+            color: #555;
+            margin: 25px 0 15px;
+            font-size: 1.3em;
+        }
+
+        h5 {
+            color: #666;
+            margin: 20px 0 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        .tip {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .important {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media print {
+            .back-to-top,
+            .header {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .content {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Claude 4종 & VS Code 완벽 설치 가이드</h1>
+        <p>실제 경험을 토대로 작성된 누구나 따라할 수 있는 실전 가이드</p>
+        <span class="version-badge">Version 1.2</span>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h2>📚 목차</h2>
+            <ul>
+                <li>
+                    <a href="#step1">1단계: Claude 모바일 앱 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#mobile-intro">Claude 모바일 앱 소개</a></li>
+                        <li><a href="#mobile-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step2">2단계: Claude 웹 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#web-intro">Claude 웹 소개</a></li>
+                        <li><a href="#web-install">PWA 설치 진행</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step3">3단계: Claude 데스크탑 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#desktop-intro">Claude 데스크탑 소개</a></li>
+                        <li><a href="#desktop-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step4">4단계: 기본 프로그램 설치</a>
+                    <ul>
+                        <li><a href="#nodejs">Node.js 설치</a></li>
+                        <li><a href="#git">Git 설치</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step5">5단계: Claude Code 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#code-intro">Claude Code 소개</a></li>
+                        <li><a href="#code-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step6">6단계: MCP 연결하기</a>
+                    <ul>
+                        <li><a href="#mcp-decide">설치할 MCP 결정</a></li>
+                        <li><a href="#gdrive">Google Drive 설치</a></li>
+                        <li><a href="#api-key">API 키 발급</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step7">7단계: VS Code 설치</a>
+                    <ul>
+                        <li><a href="#vscode-intro">VS Code 소개</a></li>
+                        <li><a href="#vscode-install">설치 및 설정</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#summary">종합 정리</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- 여기에 Markdown 변환된 내용이 들어갑니다 -->
+            <div id="main-content">
+                <p>로딩 중...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Claude 완벽 설치 가이드. All rights reserved.</p>
+        <p>
+            문의: <a href="mailto:claude.guide.kr@gmail.com">claude.guide.kr@gmail.com</a> |
+            GitHub: <a href="https://github.com/SUNWOONGKYU/claude-guide">@SUNWOONGKYU</a>
+        </p>
+        <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9em;">
+            이 가이드는 Anthropic의 공식 문서가 아닙니다.
+        </p>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Markdown 내용 로드 (GitHub Pages에서는 자동 변환)
+        fetch('./Claude_설치_가이드_v1.2.md')
+            .then(response => response.text())
+            .then(markdown => {
+                // 간단한 Markdown to HTML 변환
+                let html = convertMarkdown(markdown);
+                document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => {
+                // 실제 변환된 내용 직접 삽입
+                document.getElementById('main-content').innerHTML = getFullContent();
+            });
+
+        // Back to top 버튼
+        window.onscroll = function() {
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        };
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function convertMarkdown(md) {
+            // 기본적인 Markdown 변환
+            let html = md;
+
+            // 제목 변환
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // 강조
+            html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+
+            // 코드
+            html = html.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // 링크
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+            // 이미지
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+
+            // 팁과 경고
+            html = html.replace(/💡 \*\*([^:]+):\*\*/g, '<div class="tip"><strong>💡 $1:</strong>');
+            html = html.replace(/⚠️ \*\*([^:]+):\*\*/g, '<div class="warning"><strong>⚠️ $1:</strong>');
+
+            return html;
+        }
+
+        function getFullContent() {
+            // 여기에 실제 내용을 반환하는 함수 구현
+            return `<p>가이드 내용을 불러오는 중입니다...</p>`;
+        }
+    </script>
+</body>
+</html>
