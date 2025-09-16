@@ -907,7 +907,7 @@ claude
 
 ### Claude 3종 + VS Code 통합 작업환경
 
-모든 설치를 완료하면 아래와 같은 강력한 통합 작업환경을 구축할 수 있습니다:
+모든 설치를 완료하면 아래와 같은 강력한 통합 작업환경을 구성할 수 있습니다:
 
 ![Claude 3종 + VS Code 통합 환경](./스크린샷/integrated-environment-compressed.jpg)
 
