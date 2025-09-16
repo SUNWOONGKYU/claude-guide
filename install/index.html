@@ -2972,18 +2972,8 @@ VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기�
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script>
-        // Markdown 내용 로드 (GitHub Pages에서는 자동 변환)
-        fetch('./Claude_설치_가이드_v1.2.md')
-            .then(response => response.text())
-            .then(markdown => {
-                // 간단한 Markdown to HTML 변환
-                let html = convertMarkdown(markdown);
-                document.getElementById('main-content').innerHTML = html;
-            })
-            .catch(error => {
-                // 실제 변환된 내용 직접 삽입
-                document.getElementById('main-content').innerHTML = getFullContent();
-            });
+        // 내용은 이미 HTML에 포함되어 있으므로 JavaScript로 덮어쓰지 않음
+        // Content is already in HTML, no need to overwrite with JavaScript
 
         // Back to top 버튼
         window.onscroll = function() {
@@ -3009,40 +2999,7 @@ VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기�
             });
         });
 
-        function convertMarkdown(md) {
-            // 기본적인 Markdown 변환
-            let html = md;
 
-            // 제목 변환
-            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-
-            // 강조
-            html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
-
-            // 코드
-            html = html.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
-            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-            // 링크
-            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-
-            // 이미지
-            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
-
-            // 팁과 경고
-            html = html.replace(/💡 \*\*([^:]+):\*\*/g, '<div class="tip"><strong>💡 $1:</strong>');
-            html = html.replace(/⚠️ \*\*([^:]+):\*\*/g, '<div class="warning"><strong>⚠️ $1:</strong>');
-
-            return html;
-        }
-
-        function getFullContent() {
-            // 여기에 실제 내용을 반환하는 함수 구현
-            return `<p>가이드 내용을 불러오는 중입니다...</p>`;
-        }
     </script>
 </body>
 </html>
