@@ -309,12 +309,25 @@ Select login method:
 ╰───────────────────────────────────────────────────╯
 
 시작하기 위한 팁:
-  /init 실행으로 Claude를 위한 CLAUDE.md 파일 생성
-  파일 분석, 편집, bash 명령어, git
+    /init 실행으로 Claude를 위한 CLAUDE.md 파일 생성
+    파일 분석, 편집, bash 명령어, git 작업에 Claude 활용
+    최상의 결과를 위해 다른 엔지니어에게 하듯 구체적으로 요청하세요
+
+💡 **참고**: 홈 디렉토리에서 Claude를 실행했습니다. 최상의 경험을 위해
+     프로젝트 디렉토리에서 실행하는 것을 권장합니다.
+- cwd: C:\Users\home - 현재 작업 디렉토리 (Current Working Directory)    
+
+
+#### 6. 작업 디렉토리 이동
+
+##### 이동 명령어
+
+cd G:\내 드라이브
+
 ##### 이동 성공 확인
 
-  ● Bash(cd "G:\내 드라이브" && pwd)
-  ● Successfully changed to the 내 드라이브 directory.
+● Bash(cd "G:\내 드라이브" && pwd)
+● Successfully changed to the 내 드라이브 directory.
 
 💡 **참고**: 프로젝트 작업을 시작하기 전에 해당 프로젝트 폴더로 이동하는 것이 좋습니다. Claude Code는 현재 디렉토리를 기준으로 파일을 생성하고 수정합니다.
 
@@ -327,10 +340,44 @@ Select login method:
 - "이 CSV 파일의 데이터 요약해줘"
 - "폴더 안의 이미지 파일만 새 폴더로 정리해줘"
 - "React 컴포넌트 기본 구조 만들어줘"
-- "이 코드에서 버그 찾아서 수정해줘"
-- "API 연동 테스트 코드 작성해줘"
+- "테스트 코드 작성해줘"
+- "오류 메시지를 분석하고 해결방법 제시해줘"
 
 💡 **팁**: 구체적이고 명확한 요청일수록 더 정확한 결과를 얻을 수 있습니다.
+
+##### 주요 명령어 소개
+
+###### 시스템 명령어
+- `/help` - 사용 가능한 모든 명령어와 사용법 표시
+- `/status` - 현재 설정 및 연결 상태 확인
+- `/init` - CLAUDE.md 파일 생성 (프로젝트 초기 설정)
+- `/exit` 또는 `Ctrl+C` - Claude Code 종료
+- `/clear` - 화면 지우기
+
+###### 파일 작업 명령어
+- `ls` 또는 `dir` - 현재 폴더의 파일 목록 보기
+- `cd [폴더명]` - 다른 폴더로 이동
+- `pwd` - 현재 작업 중인 폴더 경로 확인
+- `cat [파일명]` - 파일 내용 표시
+
+💡 **참고**: Claude Code는 자연어로 대화하듯 명령할 수 있어서, 복잡한 명령어를 외울 필요가 없습니다.
+
+##### 주요 도구 목록
+
+Claude Code가 사용하는 주요 도구들 (`/tools` 명령어로 확인 가능):
+- **Bash** - 시스템 명령어 실행 (프로그램 설치, 파일 작업 등)
+- **Read** - 파일 읽기 (텍스트, 이미지, PDF 등 모든 파일)
+- **Write** - 새 파일 생성 및 작성
+- **Edit** - 기존 파일 수정
+- **MultiEdit** - 파일의 여러 부분 동시 수정
+- **Grep** - 파일 내용 검색 (정규식 지원)
+- **Glob** - 파일 이름 패턴 검색 (예: *.txt, **/*.js)
+- **WebSearch** - 웹 검색 및 최신 정보 가져오기
+- **WebFetch** - 특정 웹페이지 내용 가져오기
+- **TodoWrite** - 작업 목록 관리 및 진행 상황 추적
+- **Task** - 복잡한 작업을 위한 서브 에이전트 실행
+
+💡 **팁**: 이러한 도구들은 Claude Code가 자동으로 선택하여 사용하므로, 사용자가 직접 지정할 필요는 없습니다.
 
 ---
 
@@ -459,7 +506,7 @@ Claude Code에게 설정 작업 지시를 합니다.
     }
   }
 }
-
+```
 
 4. **Claude Desktop 재시작 및 3개 MCP 연결 확인**
 
@@ -511,121 +558,137 @@ Microsoft가 제공하는 무료 오픈소스 텍스트 편집기로, 문서 작
 
 ### VS Code 설치 등 진행 순서
 
-VS Code 설치
-1. **VS Code 다운로드**: https://code.visualstudio.com 접속
-2. **Windows x64** 버전 다운로드
-3. 설치 파일 실행
-4. **라이선스 계약서**: "동의합니다(A)" 선택
-5. **설치 옵션 선택** (모두 체크 권장):
-   - ✅ "바탕 화면에 바로가기 만들기"
-   - ✅ "'Code(으)로 열기' 작업을 Windows 탐색기 파일의 상황에 맞는 메뉴에 추가"
-   - ✅ "'Code(으)로 열기' 작업을 Windows 탐색기 디렉터리의 상황에 맞는 메뉴에 추가"
-   - ✅ "Code를 지원되는 파일 형식에 대한 편집기로 등록"
-   - ✅ "PATH에 추가(다시 시작한 후 사용 가능)" - **중요: 터미널에서 `code` 명령어 사용**
-6. 설치 완료 후 VS Code 자동 실행
+#### 1. VS Code 설치
 
-초기 설정
-1. **Copilot 설정 건너뛰기** (유료 서비스)
-2. **테마 선택**: "Browse Color Themes" → 파란색 테마 선택
-3. VS Code 시작 화면 확인
-4. 자동저장 설정 필수
+VS Code 다운로드 및 설치:
+- **VS Code 다운로드 사이트**: https://code.visualstudio.com 접속
+- **Windows x64** 버전 다운로드
+- **설치 파일 실행**
+- **라이선스 계약서**: "동의합니다(A)" 선택
+- **설치 옵션 선택** (모두 체크 권장):
+  - ✅ "바탕 화면에 바로가기 만들기"
+  - ✅ "'Code(으)로 열기' 작업을 Windows 탐색기 파일의 상황에 맞는 메뉴에 추가"
+  - ✅ "'Code(으)로 열기' 작업을 Windows 탐색기 디렉터리의 상황에 맞는 메뉴에 추가"
+  - ✅ "Code를 지원되는 파일 형식에 대한 편집기로 등록"
+  - ✅ "PATH에 추가(다시 시작한 후 사용 가능)"
+- **설치 완료 후 VS Code 자동 실행** : 마침 버튼 클릭과 동시에 
 
-확장 프로그램 설치
+💡 **참고**: PATH에 추가 옵션은 터미널에서 `code` 명령어를 사용하기 위해 필수입니다.
+
+#### 2. 초기 설정
+
+VS Code 최초 실행 시 설정:
+- **Copilot 설정**: 건너뛰기 (유료 서비스)
+- **테마 선택**: "Browse Color Themes" → 원하는 바탕 색상 선택
+- **Welcome 탭 닫기**: 시작 화면 탭 X 버튼 클릭
+- **자동저장 설정** (권장):
+  - 좌측 상단 메뉴에서, 파일 → 자동저장 선택(자동저장을 설정해놓으면 파일 수정 후 자동으로 저장되어 작업 손실을 방지함)
+- **한국어 설정**: 확장 프로그램에서 Korean Language Pack 설치 후 재시작
+
+#### 3. 확장 프로그램 설치
 
 **확장 프로그램이란?**
 VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기능을 추가하는 플러그인입니다. 마치 스마트폰에 앱을 설치하듯이, VS Code에 필요한 기능들을 추가로 설치하여 더 강력하고 편리한 작업 환경을 만들 수 있습니다.
 
 **확장 프로그램의 역할:**
-- **언어 지원**: Python, JavaScript 등 특정 프로그래밍 언어를 위한 문법 강조, 자동완성
-- **파일 처리**: Excel 파일 보기, PDF 변환, 마크다운 미리보기 등
-- **작업 효율**: Git 연동, 코드 포맷팅, 파일 경로 자동완성
-- **시각적 개선**: 테마, 아이콘, 들여쓰기 시각화 등
-- **AI 기능**: Claude Code, Copilot 등 AI 도우미 연결
+- **프로그래밍 언어별 도움**: 파이썬, 자바스크립트 등 프로그래밍을 돕기
+- **파일 작업 지원**: 엑셀 파일 보기, PDF로 저장하기
+- **편리한 기능**: 자동 저장, 파일 정리, 경로 찾기
+- **예쁘게 꾸미기**: 색상 테마, 아이콘 변경
+- **AI와 연결**: Claude나 Copilot과 대화하기
 
 **설치 방법**: 왼쪽 사이드바 확장 프로그램 아이콘(네모 4개) 클릭 후 검색하여 설치
 
-#### **한국어 지원**
-• **ms-ceintl.vscode-language-pack-ko** - VS Code 메뉴와 설정을 한국어로 변경
-• **moonkorea.vscode-korean-grammar-checker** - 한국어 맞춤법과 띄어쓰기 자동 검사
+##### **확장 프로그램 목록(추천)**
 
-#### **AI 어시스턴트**
+###### **한국어 지원**
+• **ms-ceintl.vscode-language-pack-ko** - VS Code 메뉴와 설정을 한국어로 변경
+
+###### **AI 어시스턴트**
 • **anthropic.claude-code** - Claude와 대화하며 코드 작성 및 문서 편집
-• **continue.continue** - 여러 AI 모델을 연결하여 코딩 도움
-• **cursor.cursor** - AI 기반 자동 코드 완성 및 제안
+• **continue.continue** - 여러 AI를 동시에 사용하여 코드 작성 지원
+• **cursor.cursor** - 코드 작성 시 AI가 자동으로 다음 내용 제안
 • **github.copilot** - GitHub의 AI 코드 자동 완성 (유료)
 • **github.copilot-chat** - Copilot과 대화형 코딩 지원 (유료)
 • **ms-vscode.vscode-speech** - 음성으로 코드 작성 및 명령 실행
 
-#### **공통 도구** (비개발/개발 모두 필요)
+###### **공통 도구** (비개발/개발 모두 필요)
 • **pkief.material-icon-theme** - 파일 종류별로 아이콘을 표시하여 한눈에 구분
-• **gruntfuggly.todo-tree** - TODO, FIXME 등 작업 목록을 트리 형태로 관리
-• **alefragnani.project-manager** - 여러 프로젝트 폴더를 빠르게 전환
-• **aaron-bond.better-comments** - 중요도에 따라 주석을 색상으로 구분
+• **gruntfuggly.todo-tree** - '할 일' 목록을 한눈에 정리해서 보여줌
+• **alefragnani.project-manager** - 여러 작업 폴더를 빠르게 전환
+• **aaron-bond.better-comments** - 메모를 중요도별로 다른 색으로 표시
 • **eamodio.gitlens** - 파일 변경 이력과 작성자를 한눈에 확인
+• **zeitnergmbh.auto-git** - 설정한 시간마다 자동으로 Git 커밋 및 푸시 (파일 자동 백업)
 • **yzhang.markdown-all-in-one** - 마크다운 문서 작성 시 자동완성과 미리보기
 • **hediet.vscode-drawio** - 순서도와 다이어그램을 VS Code에서 직접 그리기
 • **tomoki1207.pdf** - PDF 파일을 VS Code에서 바로 열어보기
-• **humao.rest-client** - API 요청을 보내고 응답 확인
+• **humao.rest-client** - 웹 서비스 테스트 도구
 
-#### **비개발업무 전용 도구**
+###### **비개발업무 전용 도구**
 • **grapecity.gc-excelviewer** - Excel 파일을 표 형태로 보기
 • **mechatroner.rainbow-csv** - CSV 파일의 각 열을 다른 색으로 표시
-• **janisdd.vscode-edit-csv** - CSV 파일을 엑셀처럼 편집
-• **RandomFractalsInc.vscode-data-preview** - JSON, XML, CSV 데이터를 시각적으로 표시
-• **shd101wyy.markdown-preview-enhanced** - 마크다운 문서를 실시간으로 미리보기
+• **RandomFractalsInc.vscode-data-preview** - 데이터 파일을 보기 쉽게 표시
 • **yzane.markdown-pdf** - 마크다운 문서를 PDF로 즉시 변환
-• **darkriszty.markdown-table-prettify** - 마크다운 표를 자동으로 정렬
 • **james-yu.latex-workshop** - 논문이나 보고서를 LaTeX로 작성
 • **wayou.vscode-todo-highlight** - TODO 메모를 형광펜처럼 강조
 • **fabiospampinato.vscode-projects-plus** - 여러 프로젝트를 효율적으로 관리
 • **patbenatar.advanced-new-file** - 단축키로 새 파일을 빠르게 생성
 
-#### **개발업무 전용 도구 - 기본**
-• **esbenp.prettier-vscode** - 코드를 자동으로 정리하고 포맷팅
+###### **개발업무 전용 도구 - 기본**
 • **christian-kohler.path-intellisense** - 파일 경로 입력 시 자동완성 제공
 • **coenraads.bracket-pair-colorizer-2** - 여는 괄호와 닫는 괄호를 색상으로 매칭
 • **oderwat.indent-rainbow** - 들여쓰기 깊이를 무지개색으로 표시
 
-#### **개발업무 전용 도구 - Python**
+###### **개발업무 전용 도구 - Python**
 • **ms-python.python** - Python 코드 실행과 디버깅 지원
 • **ms-python.vscode-pylance** - Python 코드 자동완성과 오류 검사
 • **ms-python.debugpy** - Python 코드의 버그를 찾고 수정
 • **ms-python.vscode-python-envs** - Python 가상환경을 쉽게 전환
 
-#### **개발업무 전용 도구 - 웹**
+###### **개발업무 전용 도구 - 웹**
 • **formulahendry.auto-rename-tag** - HTML 여는 태그 수정 시 닫는 태그도 자동 변경
 • **ritwickdey.liveserver** - HTML 파일을 실시간으로 브라우저에서 확인
 • **timocodes.web-browser-preview** - Browser Preview (웹 브라우저 미리보기)
 • **xabikos.javascriptsnippets** - JavaScript (ES6) code snippets (JS 스니펫)
 • **ecmel.vscode-html-css** - HTML CSS Support (CSS 자동완성)
 
-VS Code와 Claude Code 결합 확인
 
-**연동 테스트**:
-1. VS Code 내장 터미널(Ctrl+`) 열기
-2. `claude` 명령어 실행 가능 여부 확인
-3. Claude Code로 VS Code 프로젝트 작업 테스트
+#### 4. 사용 준비 완료
 
-**권장 워크플로우**:
-1. VS Code에서 코드/문서 작성
-2. 내장 터미널에서 `claude` 실행
-3. Claude Code로 코드 리뷰, 최적화, 문서 작성 지원
-4. 수정된 내용을 VS Code에서 확인
-
-구축 완료
-
-- VS Code 정상 실행
+- VS Code 정상 작동
 - 한국어 인터페이스 적용
-- 필수 확장 프로그램 29개 설치 완료
+- 필요한 확장 프로그램 설치 완료
+- Git 작동 확인: 좌측 사이드바에 소스제어(나무가지 모양) 아이콘을 클릭했을 때 "리포지토리 초기화" 또는 "폴더 열기" 버튼이 보이면 Git이 정상적으로 설치된 것입니다
 - 터미널에서 `code .` 명령어 작동
-- Git 연동 (좌측 Source Control 탭)
 - Claude Code 연동 테스트 완료
 
-**최종 구축된 환경:**
+#### 5. 사용자가 원하는 작업 시작
+
+##### VS Code에서 작업 시작하기
+```
+code .
+```
+현재 폴더를 VS Code에서 열기
+
+##### Claude Code와 함께 사용하기
+1. VS Code 터미널 열기: **Ctrl + `**
+2. Claude Code 실행:
+```
+claude
+```
+3. 자연어로 요청:
+- "이 파일의 코드를 분석해줘"
+- "README.md 파일 작성해줘"
+- "버그 찾아서 수정해줘"
+- "테스트 코드 작성해줘"
+
+💡 **팁**: VS Code에서 파일을 편집하면서 동시에 터미널에서 Claude Code의 도움을 받으면 작업 효율이 크게 향상됩니다.
+
+**최종 설치된 환경:**
 - **웹 버전**: 브라우저에서 Claude 사용 (채팅, 문서 작업)
 - **데스크탑 버전**: MCP 서버 3개 연결 (filesystem, memory, anthropic) - 파일 관리 및 고급 기능
 - **Claude Code**: 터미널 기반 AI 업무 도우미 - 개발업무와 비개발업무 모두 지원
-- **VS Code**: 29개 확장 프로그램 포함 - 코드 작성, 문서 편집, Excel 파일 처리, 마크다운 작업 등
-- **통합 워크플로우**: 모든 도구가 유기적으로 연결되어 개발업무부터 일반 사무업무까지 AI 기반으로 처리 가능
+- **VS Code**: 필수 확장 프로그램 포함 - 코드 작성, 문서 편집, Excel 파일 처리, 마크다운 작업 등
+- **통합 작업 환경**: 모든 도구가 유기적으로 연결되어 개발업무부터 일반 사무업무까지 AI 기반으로 처리 가능
 
 ---

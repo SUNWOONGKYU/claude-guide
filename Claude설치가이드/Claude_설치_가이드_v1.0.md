@@ -1,5 +1,6 @@
 # Claude 4가지 & VS Code의 설치 및 시작방법
 ## 실제 경험을 토대로 작성된 누구나 따라할 수 있는 실전 가이드
+### v1.0
 
 
 ## 1단계: Claude 모바일 앱 설치 및 시작
@@ -16,9 +17,9 @@
 - **파일 처리**: PDF, TXT, 코드 파일 등 처리
 - **프로젝트 관리**: 주제별로 대화를 그룹화하여 체계적 관리
 - **대화 히스토리**: 모든 대화 자동 저장 및 검색 기능
-- **Artifacts**: 코드, 문서, 다이어그램을 실시간 미리보기 창에서 편집
+- **Artifacts**: 코드, 문서, 다이어그램을 실시간 미리보기 창에서 표시
 - **모델 전환**: Haiku, Sonnet, Opus 모델 실시간 전환
-- **실시간 동기화**: 웹/데스크탑과 모든 대화 내용 자동 동기화
+- **실시간 동기화**: 웹, 데스크탑과 모든 대화 내용 자동 동기화
 
 모바일 특화 기능:
 - **음성 입력**: 마이크 버튼으로 음성 질문 및 명령
@@ -26,7 +27,6 @@
 
 **제약사항**:
 - 파일 크기 제한 (개당 10MB)
-- Artifacts 내 코드 직접 수정 불가
 - 모바일 기기 내부 파일 접근 불가
 - 화면 크기의 한계로 인한 긴 텍스트 작업 불편
 
@@ -43,27 +43,43 @@
 
 ---
 
-### Claude 모바일 앱 등 설치 진행 순서
+### Claude 모바일 앱 설치 등 진행 순서
 
-#### Android:
-1. **Google Play 스토어** 열기
-2. **검색창에 "Claude" 입력**
-3. **"Claude by Anthropic" 앱 찾기** (개발자: Anthropic 확인)
-4. **"설치" 버튼 터치**
-5. **설치 완료 후 "열기" 터치**
-6. **이메일로 로그인** (웹 버전과 동일한 계정 사용 가능)
-7. **인증 코드 6자리 입력**
-8. **모바일 앱 사용 시작**
+#### 1. 앱 스토어 접속
 
-#### iOS:
-1. **App Store** 열기
-2. **검색 탭에서 "Claude" 검색**
-3. **"Claude" 앱 찾기** (Anthropic, Inc. 제작 확인)
-4. **"받기" 버튼 터치** (Face ID/Touch ID/암호 인증)
-5. **설치 완료 후 앱 실행**
-6. **이메일로 로그인** (웹 버전과 동일한 곈4정 사용 가능)
-7. **인증 코드 6자리 입력**
-8. **모바일 앱 사용 시작**
+**Android:**
+- Google Play 스토어 앱 열기
+
+**iOS:**
+- App Store 앱 열기
+
+#### 2. 앱 검색 및 설치
+
+**Android:**
+1) 검색창에 "Claude" 입력
+2) "Claude by Anthropic" 앱 찾기 (개발자: Anthropic 확인)
+3) "설치" 버튼 터치
+4) 설치 완료 후 "열기" 터치
+
+**iOS:**
+1) 검색 탭에서 "Claude" 검색
+2) "Claude" 앱 찾기 (Anthropic, Inc. 제작 확인)
+3) "받기" 버튼 터치 (Face ID/Touch ID/암호 인증)
+4) 설치 완료 후 앱 실행
+
+#### 3. 계정 로그인
+
+1) **이메일 주소 입력**: 로그인을 위한 이메일 입력
+2) **"이메일로 계속하기"** 터치
+3) **인증 코드 확인**: 이메일에서 6자리 코드 확인
+4) **인증 코드 입력**: 받은 코드 입력
+5) **로그인 완료**: 채팅 화면 자동 열림
+
+#### 4. 사용자가 원하는 작업 시작
+
+이제 Claude 모바일 앱에서 자유롭게 대화를 시작할 수 있습니다.
+
+💡 **참고**: 모바일 앱, 웹, 데스크탑에서 동일한 계정으로 로그인하면 모든 대화 기록이 자동으로 동기화되어 어느 기기에서든 이전 대화를 이어서 진행할 수 있습니다.
 
 ---
 
@@ -77,14 +93,14 @@
 기본 기능: 모바일 앱과 동일
 
 웹 추가 기능:
-- **파일 생성 및 분석** (2024년 9월 9일 출시):
+- **파일 생성 및 분석** (2025년 9월 9일 출시):
   - Excel(.xlsx): 수식, 차트, 다중 시트 포함 스프레드시트 자동 생성
   - PowerPoint(.pptx): 전문 디자인의 프레젠테이션 즉시 제작
   - Word(.docx): 완성된 보고서 및 문서 작성
   - PDF: 최종 배포용 문서 생성
   - Python 기반 고급 데이터 분석 및 시각화
   - 파일 간 자동 변환 (PDF→PPT, Excel→차트 등)
-- **PWA(Progressive Web App) 설치**: 웹앱을 네이티브 앱처럼 사용
+- **PWA(Progressive Web App) 지원**: 웹사이트를 독립적인 앱처럼 설치하여 사용할 수 있게 해주는 기술. 설치 후에는 일반 프로그램처럼 작업 표시줄에서 바로 실행 가능
 
 **제약사항**:
 - 인터넷 연결 필수
@@ -105,16 +121,31 @@
 ---
 
 ### Claude 웹 설치 등 진행 순서
-1. **구글에서 '클로드' 검색**
-2. **https://claude.ai 사이트 찾아서 접속**
-3. **"앱 설치"** 클릭 (웹 앱 PWA 설치)
-4. **"작업 표시줄에 Claude를 고정하시겠습니까?"** 팝업
-5. **"예"** 선택 (작업 표시줄 바로가기 생성)
-6. **이메일 주소 입력** (로그인을 위한 이메일 입력창)
-7. **"이메일로 계속하기"** 클릭
-8. 이메일에서 인증 코드 6자리 확인
-9. 인증 코드 입력
-10. **로그인 완료, 채팅 화면 열림**
+
+#### 1. Claude 웹 접속
+1) **네이버나 구글에서 '클로드' 검색** 또는
+2) **사이트에 직접 접속**: https://claude.ai
+
+#### 2. PWA 웹 앱 설치
+
+1) **브라우저별 설치 방법**:
+   - **Chrome**: 주소창 우측에 "앱에서 열기" 아이콘 클릭
+   - **Edge**: 주소창 우측에 "Claude 앱 설치" 클릭
+2) **설치 확인 팝업**:
+   - "작업 표시줄에 Claude를 고정하시겠습니까?" 표시
+   - **"예"** 선택 → 작업 표시줄에 바로가기 생성
+3) **설치 완료**: 독립 창으로 Claude 실행 가능
+
+#### 3. 계정 로그인
+1) **이메일 주소 입력**: 로그인을 위한 이메일 입력
+2) **"이메일로 계속하기"** 클릭
+3) **인증 코드 확인**: 이메일에서 6자리 코드 확인
+4) **인증 코드 입력**: 받은 코드 입력
+5) **로그인 완료**: 채팅 화면 자동 열림
+
+#### 4. 사용자가 원하는 작업 시작
+
+이제 Claude 웹에서 자유롭게 대화를 시작하고 파일을 생성할 수 있습니다.
 
 ---
 
@@ -122,7 +153,7 @@
 
 ### Claude 데스크탑 소개
 
-PC에 설치하는 독립 실행형 Claude 애플리케이션으로, 웹 버전보다 더 강력하고 다양한 기능을 제공하며 MCP(Model Context Protocol) 서버 연동을 통해서 로컬 파일에도 접근하여 읽고 쓰기를 할 수 있습니다.
+PC에 설치하는 독립 실행형 Claude 애플리케이션으로, 웹보다 더 강력하고 다양한 기능을 제공하며 MCP(Model Context Protocol) 서버 연동을 통해서 로컬 파일에도 접근하여 읽고 쓰기를 할 수 있습니다.
 
 **기능**:
 기본 기능: 모바일 앱과 동일
@@ -148,42 +179,79 @@ PC에 설치하는 독립 실행형 Claude 애플리케이션으로, 웹 버전�
 - Anthropic MCP의 vision 도구로 스크린샷 즉시 분석
 - 여러개의 외부 MCP 서버를 연동시켜서 나만의 AI 워크스테이션 구축
 - PostgreSQL MCP로 데이터베이스를 직접 쿼리하고 분석
-- GitHub MCP로 문서와 코드의 모든 수정 과정을 버전별로 저장하고 복원찾아봐
-- 
+- GitHub MCP로 문서와 코드의 모든 수정 과정을 버전별로 저장하고 복원
 ---
 
 ### Claude 데스크탑 설치 등 진행 순서
-1. **구글에서 "클로드 데스크탑" 검색**
-2. **https://claude.ai/download 접속**
-3. **다운로드 페이지 확인**: "데스크톱에서 Claude를 만나보세요 BETA"
-4. **다운로드 옵션**: Windows / Windows (arm64) / macOS 선택 가능
-5. **Windows** 클릭 (일반 Windows PC용)
-6. 설치 파일 다운로드
-7. 설치 파일 실행
-8. **바탕화면에 바로가기 자동 생성**
-9. **Claude Desktop 자동 실행**
-10. **채팅 화면 바로 열림** (별도 로그인 과정 없음)
-11. **Desktop 버전으로 이동 완료**
+
+#### 1. 다운로드 페이지 접속
+1) **네이버나 구글에서 "클로드 데스크탑" 검색** 또는
+2) **직접 다운로드 사이트 접속**: https://claude.ai/download
+
+#### 2. 설치 파일 다운로드
+1) **페이지 확인**: "데스크톱에서 Claude를 만나보세요 BETA" 문구 확인
+2) **운영체제 선택**:
+   - **Windows** - 일반 Windows PC용
+   - **Windows (arm64)** - ARM 프로세서 Windows용
+3) **다운로드 시작**: 선택한 운영체제 버튼 클릭
+
+#### 3. 설치 및 실행
+1) **설치 파일 실행**: 다운로드 폴더에서 설치 파일 더블클릭
+2) **설치 진행**: 자동으로 설치 진행 (별도 옵션 선택 불필요)
+3) **설치 완료**:
+   - 바탕화면에 바로가기 자동 생성
+   - Claude 데스크탑 자동 실행
+   - 채팅 화면 바로 열림 (로그인 자동 연동)
+
+#### 4. 사용자가 원하는 작업 시작
+
+이제 Claude 데스크탑에서 자유롭게 대화를 시작할 수 있습니다.
+
+💡 **참고**: 웹에 이미 로그인되어 있다면 데스크탑도 자동으로 로그인됩니다.
 
 ---
 
 ## 4단계: 기본적인 공통 프로그램의 설치
 
-### 4-1단계: Node.js 설치
-1. **Node.js 다운로드**: https://nodejs.org
-2. **Node.js v22.19.0 (LTS)** 확인
-3. **Windows 설치 프로그램 (.msi)** 다운로드
-4. **설치 완료**
-5. **PowerShell 터미널 자동 실행**
+### 4-1. Node.js 설치
 
-### 4-32단계: Git 설치
-1. **Git 다운로드**: https://git-scm.com/downloads/win 접속 완료
-2. **다운로드 옵션 확인**: Git for Windows v2.51.0 x64 버전 확인
-3. **"Click here to download"** 클릭하여 Git 다운로드
-4. Git 설치 실행 (Git Bash 포함)
-5. 설치 완료 확인
+**Node.js가 필요한 이유**: Claude Code와 MCP 서버들이 실행되기 위해 필수적인 JavaScript 런타임(프로그램을 실행시켜주는 환경)입니다.
 
-💡 **Git이 필요한 이유**: Claude Code가 Git을 의존성으로 사용하므로 미리 설치해두면 다음 단계가 더 매끄럽게 진행됩니다.
+#### 설치 과정:
+1. **Node.js 공식 사이트**: https://nodejs.org 접속
+2. **LTS 버전 선택**: Node.js v22.19.0 (LTS) 확인
+3. **Windows 설치 프로그램** (.msi) 다운로드
+4. **설치 실행**:
+   - 라이선스 동의
+   - 설치 경로 확인 (기본값 권장)
+   - 모든 컴포넌트 선택 (npm 포함)
+5. **설치 완료 확인**:
+   ```
+   node --version
+   npm --version
+   ```
+
+### 4-2. Git 설치
+
+**Git이 필요한 이유**: Claude Code가 Git 명령어(커밋, 푸시 등)를 자동으로 실행해주고, 많은 npm 패키지들이 Git을 의존성(실행에 필요한 필수 프로그램)으로 요구합니다.
+
+#### 설치 과정:
+1. **Git 공식 사이트**: https://git-scm.com/downloads/win 접속
+2. **다운로드 버전 확인**: Git for Windows v2.51.0 x64
+3. **"Click here to download"** 클릭
+4. **설치 실행**:
+   - 컴포넌트 선택 (Git Bash 포함 확인)
+   - 기본 에디터 선택 (VS Code 권장)
+   - PATH 환경 설정 (Git from the command line 선택)
+   - 나머지 기본값 유지
+5. **설치 완료 확인**:
+   ```
+   git --version
+   ```
+
+💡 **팁**: Node.js와 Git을 설치한 후 컴퓨터를 재시작하면 환경 변수가 확실하게 적용됩니다.
+
+💡 **참고**: Claude Code에게 "Node.js와 Git 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.
 
 ---
 
@@ -240,7 +308,7 @@ Claude Code 특화 기능:
 - 모든 Windows 버전에서 사용 가능
 
 ##### 방법 2: PowerShell
-- **Windows 키 + X** → **Windows PowerShell** 선택
+- **Windows 키 + X** → **터미널(관리자)** 선택
 - 더 강력한 명령어와 스크립팅 지원
 - Windows 10/11에서 기본 터미널
 
@@ -282,19 +350,19 @@ Select login method:
 - **권장**: `1` 선택 (기존 Claude 계정 연동)
 
 ##### 4-3. 인증 과정
-1. **1번 선택 후 엔터**
-2. **웹 브라우저 자동 열림**: `claude.ai/oauth/authorize` 페이지
-3. **Claude Code 연결 화면 표시**:
+1) **1번 선택 후 엔터**
+2) **웹 브라우저 자동 열림**: `claude.ai/oauth/authorize` 페이지
+3) **Claude Code 연결 화면 표시**:
    - "Claude Code가 귀하의 Claude chat account에 연결을 요청했습니다"
    - 권한 정보 표시:
      - Anthropic 프로필 접근
      - Claude 구독 사용량 기록
      - 개인정보 보호 설정 적용
-4. **"승인" 버튼 클릭**
-5. **로그인 성공**:
+4) **"승인" 버튼 클릭**
+5) **로그인 성공**:
    Logged in as [your-email]
    Login successful. Press Enter to continue…
-6. **Enter 키 누르기** (다음 단계로 진행)
+6) **Enter 키 누르기** (다음 단계로 진행)
 
 💡 **참고**: 평소 사용 시에는 이러한 인증 과정이 생략됩니다. 최초 설치 시에만 한 번 진행합니다.
 
@@ -322,19 +390,19 @@ Select login method:
 
 ##### 이동 명령어
 
-cd G:\내 드라이브
+cd G:\내 드라이브\MyTask (사용자가 지정한 드라이버 및 폴더)
 
 ##### 이동 성공 확인
 
-● Bash(cd "G:\내 드라이브" && pwd)
-● Successfully changed to the 내 드라이브 directory.
+● Bash(cd "G:\내 드라이브\MyTask" && pwd)
+● Successfully changed to the MyTask directory.
 
 💡 **참고**: 프로젝트 작업을 시작하기 전에 해당 프로젝트 폴더로 이동하는 것이 좋습니다. Claude Code는 현재 디렉토리를 기준으로 파일을 생성하고 수정합니다.
 
 #### 7. 사용자가 원하는 작업 시작
 
 ##### 자연어로 명령하기
-이제 Claude Code에게 자연어로 원하는 작업을 아래와 같이 요청할 수 있습니다:
+이제 Claude Code에게 자연어로 표현하여 원하는 작업을 아래와 같이 요청할 수 있습니다:
 
 - "오늘 업무일지 텍스트 파일 만들어줘"
 - "이 CSV 파일의 데이터 요약해줘"
@@ -369,6 +437,7 @@ Claude Code가 사용하는 주요 도구들 (`/tools` 명령어로 확인 가�
 - **Read** - 파일 읽기 (텍스트, 이미지, PDF 등 모든 파일)
 - **Write** - 새 파일 생성 및 작성
 - **Edit** - 기존 파일 수정
+- **Update** - 파일 내용 업데이트 및 갱신
 - **MultiEdit** - 파일의 여러 부분 동시 수정
 - **Grep** - 파일 내용 검색 (정규식 지원)
 - **Glob** - 파일 이름 패턴 검색 (예: *.txt, **/*.js)
@@ -381,118 +450,154 @@ Claude Code가 사용하는 주요 도구들 (`/tools` 명령어로 확인 가�
 
 ---
 
-## 6단계: Claude 데스크탑에 MCP 연결하기(Claude Code를 통해서)
+## 6단계: Claude 데스크탑에 MCP 연결하기 (Claude Code 활용)
 
-### 6-1단계 MCP 서버 구성 계획**
+### 1. 설치할 MCP(Model Context Protocol) 결정
 
-아래와 같은 내부 MCP 서버 3개를 설치합니다:
-  - **filesystem**: 로컬 파일 시스템 읽기/쓰기 접근 (컴퓨터 파일을 읽고 쓸 수 있게 해줌)
-  - **memory**: 대화 기록 및 컨텍스트 메모리 관리 (이전 대화 내용을 기억할 수 있게 해줌)
-  - **anthropic**: 6개 도구 연결 (추가 기능들을 사용할 수 있게 해줌)
+💡 **MCP란?** Claude 데스크탑이 컴퓨터의 파일과 프로그램에 접근할 수 있게 해주는 연결 도구입니다.
+- 마치 스마트폰에 앱을 설치하듯이, Claude 데스크탑에 추가 기능을 설치하는 것입니다.
 
-### 6-2단계: Google Drive Desktop 설치
+#### 설치할 MCP 서버
+아래와 같은 Claude 내부의 MCP 서버 3개를 설치합니다:
+ 1) **filesystem**: 로컬 파일 검색, 읽기/쓰기, 문서 자동 생성 및 편집
+ 2) **memory**: 이전 대화 내용 기억, 중요 정보 저장, 컨텍스트 유지
+ 3) **anthropic**: 6종의 특수 작업 도구 사용
 
-1. **Google Drive Desktop 다운로드**: https://www.google.com/drive/download/
-2. 설치 및 로그인 완료
-3. `G:\내 드라이브` 마운트 확인
-4. **ClaudeMCP 폴더 생성하고 MCP 연결 준비 완료**
+---
 
-**Google Drive 사용 이유:**
+### 2. 사전 준비: Google Drive Desktop 설치 (선택사항)
+
+💡 **참고**: 이 가이드는 Google Drive를 설치한 경우를 기준으로 작성되었습니다. Google Drive를 사용하지 않는 경우, `G:\내 드라이브\MyTask` 대신 `C:\MyTask` 등 원하는 경로를 지정해서 사용하실 수 있습니다.
+
+💡 **Google Drive를 설치해서 사용하는 이유**
 - **다중 컴퓨터 동기화**: 여러 컴퓨터에서 동일한 MCP 환경 접근
 - **접근성**: 웹 브라우저만 있으면 전 세계 어디서든 접근
 - **자동 백업**: 클라우드 자동 백업으로 데이터 손실 방지
 - **Google 생태계 통합**: Gmail, Docs 등과 연동
-- **실시간 협업**: 공유 및 공동 편집 기능
-- **무료 15GB**: 개인 사용에 충분한 용량
+- **실시간 협업**: 공유 및 공동 편집 가능
 
-### 6-3단계: Claude Code를 통한 MCP 설정**
+**설치 과정:**
+1) https://www.google.com/drive/download/ 접속
+2) "PC용 드라이브" 다운로드 및 설치
+3) Google 계정으로 로그인
+4) `G:\내 드라이브` 폴더 생성 확인 (내 드라이브는 명칭 변경을 할 수가 없음) 
+5) `MyTask` 작업 폴더 생성
+---
 
-💡 **이 단계의 목적**: Claude Desktop이 더 똑똑하게 작동하도록 도와주는 도구들을 설치하는 것입니다.
+### 3. API 키 발급
 
-Claude Code에게 설정 작업 지시를 합니다.
-💡 **사용자가 할 일**: Claude Code에게 "MCP 서버 설정해줘"라고 요청하면 됩니다.
+💡 **API 키가 필요한 이유:** Anthropic MCP 서버를 연결시키기 위해서 필요(무료로 발급)
 
-1. **Claude Code 6단계 설정 계획 제시** (Claude Code가 이런 순서로 작업합니다):
-   ```
-   ● 단계 1: Claude Desktop 설정 위치 확인 (설정 파일이 어디 있는지 찾기)
-   ● 단계 2: 필요한 npm 패키지 설치 (MCP 서버 프로그램들 다운로드)
-   ● 단계 3: Filesystem MCP 서버 테스트 (파일 접근 기능 확인)
-   ● 단계 4: Memory MCP 서버 테스트 (메모리 기능 확인)
-   ● 단계 5: Anthropic MCP 서버 확인 및 설정 (추가 도구들 설정)
-   ● 단계 6: 최종 설정 파일 생성 (모든 것을 연결하는 설정 파일 만들기)
-   ```
-2. **Anthropic API 키 요청받음** (Anthropic MCP 서버 설정에 필요)
+**발급 순서:**
+1) **https://console.anthropic.com** 접속
+2) Claude 계정으로 로그인
+3) 좌측 메뉴에서 **"API Keys"** 클릭
+4) **"Create Key"** 버튼 클릭
+5) 키 이름 입력 (예: "MyMCP")
+6) 생성된 키 복사 (`sk-ant-api03-`로 시작)
+7) 안전한 곳에 보관 (메모장이나 비밀번호 관리자에 저장)
 
-💡 **왜 API 키가 필요한가요?** Anthropic의 추가 기능을 사용하려면 본인 인증이 필요합니다. 무료로 발급받을 수 있습니다.
+⚠️ **주의:** API 키는 비밀번호처럼 관리하세요. 다른 사람과 공유하지 마시고, 공개된 장소(GitHub, 블로그 등)에 노출되지 않도록 주의하세요.
 
-**API 키 발급 방법:**
+---
 
-1. https://console.anthropic.com 접속
-2. 로그인
-3. "API Keys" 메뉴 클릭
-4. "Create Key" 버튼 클릭
-5. 키 이름 입력 후 생성
-6. 생성된 API 키 복사 (sk-ant-api03-로 시작)
-  
-3. **API 키 발급 후 Claude Code에 제공**
+### 4. Claude Code로 자동 설치하기
 
-**MCP 패키지 설치 (Claude Code에게 시키면 모든 설치를 스스로 해줍니다)**
+💡 **가장 간단한 방법:** Claude Code에게 모든 설치를 맡기기
 
-💡 **이 단계의 목적**: MCP 서버 프로그램들을 컴퓨터에 설치하는 과정입니다. Claude Code가 자동으로 처리하므로 이해만 하시면 됩니다.
+#### 자동 설치 명령어
 
+Claude Code 터미널에서 다음과 같이 요청:
+```
+"내부 MCP 서버 3종을 설치하고 설정해줘"
+```
 
-1. 전역 MCP 패키지 설치 (컴퓨터 전체에서 사용할 수 있도록 설치)
-   npm install -g @modelcontextprotocol/server-filesystem
-   → 파일 시스템 접근 기능을 설치합니다
-   npm install -g @modelcontextprotocol/server-memory  
-   → 메모리 관리 기능을 설치합니다
-   
-   💡 -g 옵션은 "전역(global)" 설치를 의미합니다
+#### Claude Code가 자동으로 처리하는 작업들
+
+1) **필요한 패키지 설치**
+   - Filesystem MCP 서버
+   - Memory MCP 서버
+   - Anthropic MCP 서버와 의존성 패키지
+
+2) **설정 파일 생성**
+   - 위치: `C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\`
+   - 파일명: `claude_desktop_config.json`
+
+3) **테스트 및 검증**
+   - 각 서버의 정상 작동 여부 테스트
+   - 설정 파일 문법 검증
+
+---
+
+### 4-1. 수동 설치 방법 (선택사항)
+
+💡 **직접 설치하고 싶은 경우:** 아래 단계를 따라하세요.
+
+#### Step 1: MCP 서버 패키지 설치
+
+터미널에서 실행:
+```bash
+# Filesystem 서버 설치
+npm install -g @modelcontextprotocol/server-filesystem
+
+# Memory 서버 설치
+npm install -g @modelcontextprotocol/server-memory
+```
+
+💡 -g 옵션은 "전역(global)" 설치를 의미합니다
    → 컴퓨터 어디서든 이 패키지를 사용할 수 있게 됩니다
 
-2. AnthropicMCP 폴더 생성 및 패키지 설치
-   mkdir C:\AnthropicMCP
-   → C드라이브에 AnthropicMCP 폴더를 새로 만듭니다 (작업 공간 생성)
-   
-   cd C:\AnthropicMCP
-   → 방금 만든 AnthropicMCP 폴더로 이동합니다
-   
-   npm init -y
-   → 이 폴더를 npm 프로젝트로 만듭니다 (package.json 파일이 자동 생성됨)
-   → package.json은 프로젝트 정보를 담는 파일입니다
-   
-   npm install @modelcontextprotocol/sdk@1.0.3 @anthropic-ai/sdk
-   → Anthropic MCP 서버에 필요한 핵심 패키지 2개를 설치합니다
 
-🎯 Node.js는 3단계에서 이미 설치 완료 (npm은 Node.js에 포함되어 함께 설치됨)
+#### Step 2: Anthropic MCP 설정
+
+```bash
+# 작업 폴더 생성
+mkdir C:\AnthropicMCP
+ → C드라이브에 AnthropicMCP 폴더를 새로 만듭니다. (작업 공간 생성)
+
+cd C:\AnthropicMCP
+→ 방금 만든 AnthropicMCP 폴더로 이동합니다.
+
+# 프로젝트 초기화
+npm init -y
+→ 이 폴더를 npm 프로젝트로 만듭니다 (package.json 파일이 자동 생성됨)
+→ package.json은 프로젝트 정보를 담는 파일입니다.
 
 
-**설정 파일 생성 및 저장**
+# 필요 패키지 설치
+npm install @modelcontextprotocol/sdk@1.0.3 @anthropic-ai/sdk
+→ Anthropic MCP 서버에 필요한 핵심 패키지 2개를 설치합니다
+```
 
-💡 **이 단계의 목적**: Claude Desktop과 MCP 서버들을 연결하는 다리 역할을 하는 설정 파일을 만드는 것입니다.
+#### Step 2-1: Anthropic MCP 서버 파일 생성
 
-- 위치: `C:\Users\home\AppData\Roaming\Claude\claude_desktop_config.json`
-- **이 설정을 그대로 적용하면 됩니다 (Claude Code에게 시키면 스스로 생성해서 저장해줍니다)**
+💡 **중요**: Anthropic MCP 서버를 작동시키려면 index.js 파일을 생성해야 합니다.
 
-💡 **설정 파일 구조 설명**:
-- **filesystem**: 컴퓨터 파일을 읽고 쓸 수 있게 해주는 서버
-- **memory**: 대화 내용을 기억할 수 있게 해주는 서버  
-- **anthropic**: 추가 기능들을 제공하는 서버 (API 키 필요)
+1) `C:\AnthropicMCP` 폴더에 `index.js` 파일 생성
+2) Claude Code에게 다음과 같이 요청:
+   ```
+   "Anthropic MCP 서버용 index.js 파일을 생성해줘"
+   ```
 
+#### Step 3: 설정 파일 작성
+
+**파일 위치:** `C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\claude_desktop_config.json`
+
+**설정 내용:**
 ```json
 {
   "mcpServers": {
     "filesystem": {
       "command": "node.exe",
       "args": [
-        "C:\\Users\\home\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
-        "G:\\내 드라이브\\ClaudeMCP"
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "G:\\내 드라이브\\MyTask"
       ]
     },
     "memory": {
       "command": "node.exe",
       "args": [
-        "C:\\Users\\home\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-memory\\dist\\index.js"
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-memory\\dist\\index.js"
       ]
     },
     "anthropic": {
@@ -501,26 +606,51 @@ Claude Code에게 설정 작업 지시를 합니다.
         "C:\\AnthropicMCP\\dist\\index.js"
       ],
       "env": {
-        "ANTHROPIC_API_KEY": "사용자의 KEY값을 여기에 입력"
+        "ANTHROPIC_API_KEY": "여기에_API키_입력"
       }
     }
   }
 }
 ```
 
-4. **Claude Desktop 재시작 및 3개 MCP 연결 확인**
-
-💡 **왜 재시작이 필요한가요?** 새로운 설정 파일을 Claude Desktop이 인식하도록 하기 위해서입니다.
-
-  - **재시작 방법**: 데스크탑 버전 다운로드한 설치 파일을 다시 실행
-  - **주의**: 일반적인 앱 재시작이 아닌 설치 파일 재실행 방식
-  - **확인 방법**: 
-    1. Claude Desktop 좌측 상단 메뉴 클릭
-    2. **파일 > 설정 > 개발자** 순서로 이동
-    3. **로컬 MCP 서버** 섹션에서 3개 서버 연결 상태 확인
-    4. filesystem, memory, anthropic 서버가 모두 "running" 상태로 표시되어야 함
+⚠️ **주의사항:**
+- `[사용자 컴퓨터 명칭]`을 실제 Windows용 사용자 컴퓨터 명칭으로 변경
+- `여기에_API키_입력`을 실제 API 키로 변경
+- 경로의 백슬래시는 반드시 이중(`\\`)으로 입력
 
 ---
+
+### 5. Claude 데스크탑 재시작 및 확인
+
+**왜 재시작이 필요한가?** 새로운 설정 파일을 Claude 데스크탑이 인식하도록 하기 위해서입니다.
+
+#### 재시작 방법
+
+1. **Claude 데스크탑 완전 종료**
+   - 시스템 트레이 아이콘 우클릭 → 종료
+
+2. **설치 파일로 재실행**
+   - 처음 다운로드한 설치 파일 다시 실행
+
+#### MCP 연결 확인
+
+1) Claude 데스크탑 열기
+2) 좌측 상단 **☰** 메뉴 클릭
+3) **파일 → 설정 → 개발자** 이동
+4) **"MCP 서버 3종"** 서버 연결 상태 확인
+
+**정상 연결 시 표시:**
+- ✅ filesystem (running)
+- ✅ memory (running)
+- ✅ anthropic (running)
+
+#### 도움이 필요한 경우
+
+Claude Code에게 다음과 같이 요청:
+```
+"MCP 서버 연결 상태를 진단하고 문제를 해결해줘"
+```
+
 
 ## 7단계: VS Code 설치 및 시작
 
@@ -560,6 +690,8 @@ Microsoft가 제공하는 무료 오픈소스 텍스트 편집기로, 문서 작
 
 #### 1. VS Code 설치
 
+💡 **참고**: Claude Code에게 "VS Code 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.
+
 VS Code 다운로드 및 설치:
 - **VS Code 다운로드 사이트**: https://code.visualstudio.com 접속
 - **Windows x64** 버전 다운로드
@@ -573,7 +705,7 @@ VS Code 다운로드 및 설치:
   - ✅ "PATH에 추가(다시 시작한 후 사용 가능)"
 - **설치 완료 후 VS Code 자동 실행** : 마침 버튼 클릭과 동시에 
 
-💡 **참고**: PATH에 추가 옵션은 터미널에서 `code` 명령어를 사용하기 위해 필수입니다.
+💡 **참고**: PATH에 추가 옵션은 일반 터미널에서 `code` 명령어를 사용하기 위해 필수입니다.
 
 #### 2. 초기 설정
 
@@ -590,105 +722,112 @@ VS Code 최초 실행 시 설정:
 **확장 프로그램이란?**
 VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기능을 추가하는 플러그인입니다. 마치 스마트폰에 앱을 설치하듯이, VS Code에 필요한 기능들을 추가로 설치하여 더 강력하고 편리한 작업 환경을 만들 수 있습니다.
 
-**확장 프로그램이 할 수 있는 일:**
+**확장 프로그램의 역할:**
 - **프로그래밍 언어별 도움**: 파이썬, 자바스크립트 등 프로그래밍을 돕기
 - **파일 작업 지원**: 엑셀 파일 보기, PDF로 저장하기
 - **편리한 기능**: 자동 저장, 파일 정리, 경로 찾기
 - **예쁘게 꾸미기**: 색상 테마, 아이콘 변경
 - **AI와 연결**: Claude나 Copilot과 대화하기
 
-**설치 방법**: 왼쪽 사이드바 확장 프로그램 아이콘(네모 4개) 클릭 후 검색하여 설치
+**설치 방법**: 왼쪽 사이드바에 있는 확장 프로그램 아이콘(네모 4개) 클릭 후 검색하여 설치하면 됩니다.
 
-**확장 프로그램의 종류**
+💡 **참고**: Claude Code에게 "VS Code 확장 프로그램 설치해줘"라고 요청하면 필요한 확장 프로그램들을 자동으로 설치해줍니다.
 
-#### **한국어 지원**
-• **Korean Language Pack** - VS Code를 한국어로 사용하기
+##### **확장 프로그램 목록(추천)**
 
-#### **AI 도우미**
-• **Claude Code** - Claude와 대화하며 작업하기
-• **Continue** - 여러 AI를 함께 사용하기
-• **Cursor** - AI가 다음 코드를 추천해줌
-• **GitHub Copilot** - 코드를 자동으로 완성해줌 (유료)
-• **Copilot Chat** - AI와 대화하며 코딩하기 (유료)
-• **Voice Coding** - 음성으로 코드 작성하기
+###### **한국어 지원**
+• **ms-ceintl.vscode-language-pack-ko** - VS Code 메뉴와 설정을 한국어로 변경
 
-#### **기본 도구** (모두에게 유용)
-• **파일 아이콘** - 파일 종류를 아이콘으로 구분
-• **할 일 관리** - TODO 메모를 정리해서 보여줌
-• **프로젝트 전환** - 여러 폴더를 빠르게 이동
-• **주석 색상** - 중요한 메모를 색으로 구분
-• **변경 이력** - 누가 언제 수정했는지 확인
-• **자동 백업** - 정해진 시간마다 자동 저장
-• **마크다운 도구** - 문서 작성 도우미
-• **그림 그리기** - 순서도와 다이어그램 제작
-• **PDF 뷰어** - PDF 파일 바로 보기
-• **API 테스트** - 웹 서비스 테스트
+###### **AI 어시스턴트**
+• **anthropic.claude-code** - Claude와 대화하며 코드 작성 및 문서 편집
+• **continue.continue** - 여러 AI를 동시에 사용하여 코드 작성 지원
+• **cursor.cursor** - 코드 작성 시 AI가 자동으로 다음 내용 제안
+• **github.copilot** - GitHub의 AI 코드 자동 완성 (유료)
+• **github.copilot-chat** - Copilot과 대화형 코딩 지원 (유료)
+• **ms-vscode.vscode-speech** - 음성으로 코드 작성 및 명령 실행
 
-#### **문서 작업 도구**
-• **Excel 뷰어** - 엑셀 파일 바로 보기
-• **CSV 색상** - CSV 파일을 보기 쉽게 표시
-• **데이터 미리보기** - 데이터 파일 시각화
-• **PDF 변환** - 문서를 PDF로 저장
-• **논문 작성** - LaTeX 문서 편집기
-• **할 일 강조** - TODO를 형광펜 표시
-• **프로젝트 관리** - 여러 작업을 체계적으로 관리
-• **빠른 파일 생성** - 단축키로 새 파일 만들기
+###### **공통 도구** (비개발/개발 모두 필요)
+• **pkief.material-icon-theme** - 파일 종류별로 아이콘을 표시하여 한눈에 구분
+• **gruntfuggly.todo-tree** - '할 일' 목록을 한눈에 정리해서 보여줌
+• **alefragnani.project-manager** - 여러 작업 폴더를 빠르게 전환
+• **aaron-bond.better-comments** - 메모를 중요도별로 다른 색으로 표시
+• **eamodio.gitlens** - 파일 변경 이력과 작성자를 한눈에 확인
+• **yzhang.markdown-all-in-one** - 마크다운 문서 작성 시 자동완성과 미리보기
+• **hediet.vscode-drawio** - 순서도와 다이어그램을 VS Code에서 직접 그리기
+• **tomoki1207.pdf** - PDF 파일을 VS Code에서 바로 열어보기
+• **humao.rest-client** - 웹 서비스 테스트 도구
 
-#### **코딩 기본 도구**
-• **경로 자동완성** - 파일 위치를 자동으로 찾아줌
-• **괄호 색상** - 짝이 맞는 괄호를 색으로 연결
-• **들여쓰기 색상** - 코드 깊이를 색으로 표시
+###### **비개발업무 전용 도구**
+• **grapecity.gc-excelviewer** - Excel 파일을 표 형태로 보기
+• **mechatroner.rainbow-csv** - CSV 파일의 각 열을 다른 색으로 표시
+• **RandomFractalsInc.vscode-data-preview** - 데이터 파일을 보기 쉽게 표시
+• **yzane.markdown-pdf** - 마크다운 문서를 PDF로 즉시 변환
+• **james-yu.latex-workshop** - 논문이나 보고서를 LaTeX로 작성
+• **wayou.vscode-todo-highlight** - TODO 메모를 형광펜처럼 강조
+• **fabiospampinato.vscode-projects-plus** - 여러 프로젝트를 효율적으로 관리
+• **patbenatar.advanced-new-file** - 단축키로 새 파일을 빠르게 생성
 
-#### **Python 프로그래밍**
-• **Python 기본** - 파이썬 코드 실행하기
-• **코드 도우미** - 자동완성과 오류 찾기
-• **버그 찾기** - 문제점 찾고 고치기
-• **환경 전환** - 가상환경 쉽게 바꾸기
+###### **개발업무 전용 도구 - 기본**
+• **christian-kohler.path-intellisense** - 파일 경로 입력 시 자동완성 제공
+• **coenraads.bracket-pair-colorizer-2** - 여는 괄호와 닫는 괄호를 색상으로 매칭
+• **oderwat.indent-rainbow** - 들여쓰기 깊이를 무지개색으로 표시
 
-#### **웹 개발 도구**
-• **태그 자동 수정** - HTML 태그를 한 번에 변경
-• **실시간 미리보기** - 웹페이지 즉시 확인
-• **브라우저 미리보기** - VS Code 안에서 웹 확인
+###### **개발업무 전용 도구 - Python**
+• **ms-python.python** - Python 코드 실행과 디버깅 지원
+• **ms-python.vscode-pylance** - Python 코드 자동완성과 오류 검사
+• **ms-python.debugpy** - Python 코드의 버그를 찾고 수정
+• **ms-python.vscode-python-envs** - Python 가상환경을 쉽게 전환
+
+###### **개발업무 전용 도구 - 웹**
+• **formulahendry.auto-rename-tag** - HTML 여는 태그 수정 시 닫는 태그도 자동 변경
+• **ritwickdey.liveserver** - HTML 파일을 실시간으로 브라우저에서 확인
+• **timocodes.web-browser-preview** - Browser Preview (웹 브라우저 미리보기)
 • **xabikos.javascriptsnippets** - JavaScript (ES6) code snippets (JS 스니펫)
 • **ecmel.vscode-html-css** - HTML CSS Support (CSS 자동완성)
 
 
 #### 4. 사용 준비 완료
 
-- VS Code 정상 작동
-- 한국어 인터페이스 적용
+- VS Code 정상 작동 확인
+- 한국어 인터페이스 적용 확인
 - 필요한 확장 프로그램 설치 완료
-- 터미널에서 `code .` 명령어 작동
-- Git 연동 (좌측 Source Control 탭)
-- Claude Code 연동 테스트 완료
+- Git 작동 확인: 좌측 사이드바에 소스제어(나무가지 모양) 아이콘이 표시되면 Git이 정상적으로 설치된 것임
+- Claude Code 결합 확인: 내장 터미널에서 `claude` 명령어로 Claude Code를 실행하여 테스트
 
 #### 5. 사용자가 원하는 작업 시작
 
 ##### VS Code에서 작업 시작하기
-```
-code .
-```
-현재 폴더를 VS Code에서 열기
+1) VS Code 실행
+2) 좌측 상단 메뉴에서, **파일 > 폴더 열기** 선택
+3) 작업할 폴더 선택 후 확인
+
+💡 **팁**: 일반 터미널에서 원하는 폴더로 이동한 후 `code .` 명령어를 입력하면 현재 폴더를 VS Code에서 바로 열 수 있습니다. (점(.)은 현재 폴더를 의미)
 
 ##### Claude Code와 함께 사용하기
-1. VS Code 터미널 열기: **Ctrl + `**
-2. Claude Code 실행:
+1) VS Code 내장 터미널 열기: **Ctrl + ` (백틱)**
+   - 또는 좌측 상단 메뉴에서, **터미널 > 새 터미널** 선택
+   - VS Code 하단에 터미널 창이 열림
+2) Claude Code 실행:
 ```
 claude
 ```
-3. 자연어로 요청:
-- "이 파일의 코드를 분석해줘"
-- "README.md 파일 작성해줘"
-- "버그 찾아서 수정해줘"
-- "테스트 코드 작성해줘"
 
-💡 **팁**: VS Code에서 파일을 편집하면서 동시에 터미널에서 Claude Code의 도움을 받으면 작업 효율이 크게 향상됩니다.
+💡 **팁**: VS Code에서 파일을 편집하면서 동시에 터미널에서 Claude Code의 도움을 받으면 작업 효율이 향상됩니다.
 
-**최종 설치된 환경:**
-- **웹 버전**: 브라우저에서 Claude 사용 (채팅, 문서 작업)
-- **데스크탑 버전**: MCP 서버 3개 연결 (filesystem, memory, anthropic) - 파일 관리 및 고급 기능
+---
+
+## 최종 설치된 환경
+- **웹**: 브라우저에서 Claude 사용 (채팅, 문서 작업)
+- **데스크탑**: MCP 서버 3개 연결 (filesystem, memory, anthropic) - 파일 관리 및 고급 기능
 - **Claude Code**: 터미널 기반 AI 업무 도우미 - 개발업무와 비개발업무 모두 지원
 - **VS Code**: 필수 확장 프로그램 포함 - 코드 작성, 문서 편집, Excel 파일 처리, 마크다운 작업 등
 - **통합 작업 환경**: 모든 도구가 유기적으로 연결되어 개발업무부터 일반 사무업무까지 AI 기반으로 처리 가능
 
 ---
+
+## 문서 정보
+
+- **작성일자**: 2025년 9월 16일
+- **글자수**: 20,186자
+- **작성자**: Claude
+- **프롬프터**: 써니
