@@ -938,7 +938,7 @@ claude
   - PowerShell 섹션 제거 (안정성 이슈)
   - Claude 데스크탑 단축키 설명 추가 (Control+Alt+Space)
   - Google Drive 및 API 키 발급 스크린샷 추가
-- **글자수**: 20,186자
+- **글자수**: 23,830자
 - **작성자**: Claude
 - **프롬프터**: 써니
 
@@ -950,7 +950,7 @@ claude
 
 모든 설치를 완료하면 아래와 같은 강력한 통합 개발 환경을 구축할 수 있습니다:
 
-![Claude 3종 + VS Code 통합 환경](./screenshots/통합환경 사진_20250916_134341.jpg)
+![Claude 3종 + VS Code 통합 환경](./screenshots/integrated-environment-compressed.jpg)
 
 #### 🎭 Claude 3종 활용
 1. **Claude Code** (좌측 모니터 화면) - 코드 작성 및 실행
