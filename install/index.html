@@ -1,0 +1,3048 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 4종 & VS Code 완벽 설치 가이드 v1.2</title>
+    <meta name="description" content="Claude 모바일 앱, 웹, 데스크탑, Claude Code 설치부터 MCP 설정까지 완벽 가이드">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc > ul > li {
+            margin-bottom: 15px;
+        }
+
+        .toc li {
+            padding: 5px 0;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        .toc > ul > li > a {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .toc ul ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .toc ul ul li {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #667eea;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        h2 {
+            color: #764ba2;
+            margin: 35px 0 20px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: #333;
+            margin: 30px 0 15px;
+            font-size: 1.5em;
+        }
+
+        h4 {
+            color: #555;
+            margin: 25px 0 15px;
+            font-size: 1.3em;
+        }
+
+        h5 {
+            color: #666;
+            margin: 20px 0 10px;
+            font-size: 1.1em;
+        }
+
+        p {
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Monaco", monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        .tip {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .important {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: none;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+        }
+
+        @media print {
+            .back-to-top,
+            .header {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .content {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Claude 4종 & VS Code 완벽 설치 가이드</h1>
+        <p>실제 경험을 토대로 작성된 누구나 따라할 수 있는 실전 가이드</p>
+        <span class="version-badge">Version 1.2</span>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h2>📚 목차</h2>
+            <ul>
+                <li>
+                    <a href="#step1">1단계: Claude 모바일 앱 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#mobile-intro">Claude 모바일 앱 소개</a></li>
+                        <li><a href="#mobile-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step2">2단계: Claude 웹 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#web-intro">Claude 웹 소개</a></li>
+                        <li><a href="#web-install">PWA 설치 진행</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step3">3단계: Claude 데스크탑 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#desktop-intro">Claude 데스크탑 소개</a></li>
+                        <li><a href="#desktop-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step4">4단계: 기본 프로그램 설치</a>
+                    <ul>
+                        <li><a href="#nodejs">Node.js 설치</a></li>
+                        <li><a href="#git">Git 설치</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step5">5단계: Claude Code 설치 및 시작</a>
+                    <ul>
+                        <li><a href="#code-intro">Claude Code 소개</a></li>
+                        <li><a href="#code-install">설치 진행 순서</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step6">6단계: MCP 연결하기</a>
+                    <ul>
+                        <li><a href="#mcp-decide">설치할 MCP 결정</a></li>
+                        <li><a href="#gdrive">Google Drive 설치</a></li>
+                        <li><a href="#api-key">API 키 발급</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#step7">7단계: VS Code 설치</a>
+                    <ul>
+                        <li><a href="#vscode-intro">VS Code 소개</a></li>
+                        <li><a href="#vscode-install">설치 및 설정</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#summary">종합 정리</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- 여기에 Markdown 변환된 내용이 들어갑니다 -->
+            <div id="main-content">
+<!-- Claude 설치 가이드 HTML 컨텐츠 -->
+<h1>Claude 4종 &amp; VS Code의 설치 및 시작방법</h1>
+<h2>실제 경험을 토대로 작성된 누구나 따라할 수 있는 실전 가이드</h2>
+<h3>v1.2</h3>
+
+<hr>
+
+<h2>📚 목차</h2>
+
+<p><strong><a href="#1단계-claude-모바일-앱-설치-및-시작">1단계: Claude 모바일 앱 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 모바일 앱 소개</li>
+<li>Claude 모바일 앱 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#2단계-claude-웹-설치-및-시작">2단계: Claude 웹 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 웹 소개</li>
+<li>Claude 웹 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#3단계-claude-데스크탑-설치-및-시작">3단계: Claude 데스크탑 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 데스크탑 소개</li>
+<li>Claude 데스크탑 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#4단계-기본적인-공통-프로그램의-설치">4단계: 기본적인 공통 프로그램의 설치</a></strong></p>
+<ul>
+<li>Node.js 설치</li>
+<li>Git 설치</li>
+</ul>
+
+<p><strong><a href="#5단계-claude-code-설치-및-시작">5단계: Claude Code 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude Code 소개</li>
+<li>Claude Code 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#6단계-claude-데스크탑에-mcp-연결하기-claude-code-활용">6단계: Claude 데스크탑에 MCP 연결하기</a></strong></p>
+<ul>
+<li>설치할 MCP 결정</li>
+<li>Google Drive Desktop 설치 (선택사항)</li>
+<li>API 키 발급</li>
+<li>Claude Code로 자동 설치하기</li>
+</ul>
+
+<p><strong><a href="#7단계-vs-code-설치-및-시작">7단계: VS Code 설치 및 시작</a></strong></p>
+<ul>
+<li>VS Code 소개</li>
+<li>VS Code 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#최종-정리">종합 정리</a></strong></p>
+
+<p><strong><a href="#문서-정보">문서 정보</a></strong></p>
+
+<hr>
+
+<h2 id="1단계-claude-모바일-앱-설치-및-시작">1단계: Claude 모바일 앱 설치 및 시작</h2>
+
+<h3>Claude 모바일 앱 소개</h3>
+
+<p>스마트폰과 태블릿에서 사용하는 Claude 전용 모바일 애플리케이션으로, 다운로드를 받은 후에 복잡한 설정 없이 바로 대화를 시작할 수 있으며 언제 어디서나 이동하면서도 접속할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능:</p>
+<ul>
+<li><strong>AI 대화</strong>: 질문-답변을 통한 정보 제공</li>
+<li><strong>이미지 분석</strong>: 이미지 업로드 및 해석</li>
+<li><strong>코드 생성 및 분석</strong>: 프로그래밍 코드 작성, 분석 및 설명</li>
+<li><strong>파일 처리</strong>: PDF, TXT, 코드 파일 등 처리</li>
+<li><strong>프로젝트 관리</strong>: 주제별로 대화를 그룹화하여 체계적 관리</li>
+<li><strong>대화 히스토리</strong>: 모든 대화 자동 저장 및 검색 기능</li>
+<li><strong>Artifacts</strong>: 코드, 문서, 다이어그램을 실시간 미리보기 창에서 표시</li>
+<li><strong>모델 전환</strong>: Haiku, Sonnet, Opus 모델 실시간 전환</li>
+<li><strong>실시간 동기화</strong>: 웹, 데스크탑과 모든 대화 내용 자동 동기화</li>
+</ul>
+
+<p>모바일 특화 기능:</p>
+<ul>
+<li><strong>음성 입력</strong>: 마이크 버튼으로 음성 질문 및 명령</li>
+<li><strong>카메라 연동</strong>: 실시간 사진 촬영 후 즉시 분석</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>파일 크기 제한 (개당 10MB)</li>
+<li>모바일 기기 내부 파일 접근 불가</li>
+<li>화면 크기의 한계로 인한 긴 텍스트 작업 불편</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: 모바일(터치) 입력 방식</li>
+<li><strong>운영체제</strong>: iOS/Android 스마트폰 및 태블릿</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>회의록이나 화이트보드를 사진으로 찍어 즉시 요약</li>
+<li>운전 중 음성으로 아이디어 정리 및 메모</li>
+<li>외부에서 급한 데이터 분석이나 계산 처리</li>
+<li>이동 중 문서 검토 및 피드백 작성</li>
+<li>여러 언어 실시간 번역 (해외 출장 시 유용)</li>
+</ul>
+
+<hr>
+
+<h3>Claude 모바일 앱 설치 등 진행 순서</h3>
+
+<h4>1. 앱 스토어 접속</h4>
+
+<p><strong>Android:</strong></p>
+<ul>
+<li>Google Play 스토어 앱 열기</li>
+</ul>
+
+<p><strong>iOS:</strong></p>
+<ul>
+<li>App Store 앱 열기</li>
+</ul>
+
+<h4>2. 앱 검색 및 설치</h4>
+
+<p><strong>Android:</strong></p>
+<ol>
+<li>검색창에 "Claude" 입력</li>
+<li>"Claude by Anthropic" 앱 찾기 (개발자: Anthropic 확인)</li>
+<li>"설치" 버튼 터치</li>
+<li>설치 완료 후 "열기" 터치</li>
+</ol>
+
+<p><strong>iOS:</strong></p>
+<ol>
+<li>검색 탭에서 "Claude" 검색</li>
+<li>"Claude" 앱 찾기 (Anthropic, Inc. 제작 확인)</li>
+<li>"받기" 버튼 터치 (Face ID/Touch ID/암호 인증)</li>
+<li>설치 완료 후 앱 실행</li>
+</ol>
+
+<h4>3. 계정 로그인</h4>
+
+<ol>
+<li><strong>이메일 주소 입력</strong>: 로그인을 위한 이메일 입력</li>
+<li><strong>"이메일로 계속하기"</strong> 터치</li>
+<li><strong>인증 코드 확인</strong>: 이메일에서 6자리 코드 확인</li>
+<li><strong>인증 코드 입력</strong>: 받은 코드 입력</li>
+<li><strong>로그인 완료</strong>: 채팅 화면 자동 열림</li>
+</ol>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 모바일 앱에서 자유롭게 대화를 시작할 수 있습니다.</p>
+
+<p>💡 <strong>참고</strong>: 모바일 앱, 웹, 데스크탑에서 동일한 계정으로 로그인하면 모든 대화 기록이 자동으로 동기화되어 어느 기기에서든 이전 대화를 이어서 진행할 수 있습니다.</p>
+
+<hr>
+
+<h2 id="2단계-claude-웹-설치-및-시작">2단계: Claude 웹 설치 및 시작</h2>
+
+<h3>Claude 웹 소개</h3>
+
+<p>웹 브라우저에서 사용하는 Claude 온라인 서비스로, 설치나 다운로드 없이 바로 접속할 수 있으며 PC와 모바일 모두에서 동일한 방식으로 대화를 할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일</p>
+
+<p>웹 추가 기능:</p>
+<ul>
+<li><strong>파일 생성 및 분석</strong> (2025년 9월 9일 출시):
+<ul>
+<li>Excel(.xlsx): 수식, 차트, 다중 시트 포함 스프레드시트 자동 생성</li>
+<li>PowerPoint(.pptx): 전문 디자인의 프레젠테이션 즉시 제작</li>
+<li>Word(.docx): 완성된 보고서 및 문서 작성</li>
+<li>PDF: 최종 배포용 문서 생성</li>
+<li>Python 기반 고급 데이터 분석 및 시각화</li>
+<li>파일 간 자동 변환 (PDF→PPT, Excel→차트 등)</li>
+</ul>
+</li>
+<li><strong>PWA(Progressive Web App) 지원</strong>: 웹사이트를 독립적인 앱처럼 설치하여 사용할 수 있게 해주는 기술. 설치 후에는 일반 프로그램처럼 작업 표시줄에서 바로 실행 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>인터넷 연결 필수</li>
+<li>웹 브라우저의 성능 차이에 따른 영향 발생</li>
+<li>모바일 기기 및 PC 내부의 파일 접근 불가</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 및 모바일(터치) 입력 방식</li>
+<li><strong>운영체제</strong>: 모든 운영체제의 최신 웹 브라우저</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>설치 없이 어떤 PC에서도 즉시 사용 시작</li>
+<li>보고서나 프레젠테이션 자료를 즉시 만들어서 다운로드</li>
+<li>CSV 데이터를 업로드하여 즉시 차트와 분석자료 생성</li>
+<li>마우스로 대화 내용을 복사하여 바로 활용</li>
+<li>여러 탭을 동시에 열어서 각각 다른 주제 작업 진행</li>
+</ul>
+
+<hr>
+
+<h3>Claude 웹 설치 등 진행 순서</h3>
+
+<h4>1. Claude 웹 접속</h4>
+<ol>
+<li><strong>네이버나 구글에서 '클로드' 검색</strong> 또는</li>
+<li><strong>사이트에 직접 접속</strong>: https://claude.ai</li>
+</ol>
+
+<h4>2. PWA 웹 앱 설치</h4>
+
+<ol>
+<li><strong>브라우저별 설치 방법</strong>:
+<ul>
+<li><strong>Chrome</strong>: 주소창 우측에 "앱에서 열기" 아이콘 클릭</li>
+<li><strong>Edge</strong>: 주소창 우측에 "앱 설치" 클릭</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치.png" alt="웹 최초 설치" /></p>
+
+<ol start="2">
+<li><strong>설치 확인 팝업</strong>:
+<ul>
+<li>"작업 표시줄에 Claude를 고정하시겠습니까?" 표시</li>
+<li><strong>"예"</strong> 선택 → 작업 표시줄에 바로가기 생성</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치2.png" alt="웹 최초 설치2" /></p>
+
+<ol start="3">
+<li><strong>설치 완료</strong>: 독립 창으로 Claude 실행 가능</li>
+</ol>
+
+<h4>3. 계정 로그인</h4>
+<ol>
+<li><strong>이메일 주소 입력</strong>: 로그인을 위한 이메일 입력</li>
+<li><strong>"이메일로 계속하기"</strong> 클릭</li>
+<li><strong>인증 코드 확인</strong>: 이메일에서 6자리 코드 확인</li>
+<li><strong>인증 코드 입력</strong>: 받은 코드 입력</li>
+<li><strong>로그인 완료</strong>: 채팅 화면 자동 열림</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치3.png" alt="웹 최초 설치3" /></p>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 웹에서 자유롭게 대화를 시작하고 파일을 생성할 수 있습니다.</p>
+
+<hr>
+
+<h2 id="3단계-claude-데스크탑-설치-및-시작">3단계: Claude 데스크탑 설치 및 시작</h2>
+
+<h3>Claude 데스크탑 소개</h3>
+
+<p>PC에 설치하는 독립 실행형 Claude 애플리케이션으로, 웹보다 더 강력하고 다양한 기능을 제공하며 MCP(Model Context Protocol) 서버 연동을 통해서 로컬 파일에도 접근하여 읽고 쓰기를 할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일<br>
+웹 추가 기능: 웹과 동일</p>
+
+<p>데스크탑 추가 기능:</p>
+<ul>
+<li><strong>내부 MCP 서버 3개 연동</strong>:
+<ul>
+<li>Filesystem MCP: 로컬 파일에 접근하여 읽기/쓰기/관리</li>
+<li>Memory MCP: 대화 간 정보를 저장하고 학습</li>
+<li>Anthropic MCP: 6가지 특화 도구(ask, stream, vision, multi_turn, count_tokens, tools)</li>
+</ul>
+</li>
+<li><strong>외부 MCP 서버 추가 연동</strong>: GitHub, Google Drive, Slack, PostgreSQL, Docker, Puppeteer 등</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>PC에서만 사용 가능</li>
+<li>MCP 설정하는 과정 복잡</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>filesystem MCP로 내 PC 내의 특정 파일을 직접 찾아서 편집</li>
+<li>Anthropic MCP의 vision 도구로 스크린샷 즉시 분석</li>
+<li>여러개의 외부 MCP 서버를 연동시켜서 나만의 AI 워크스테이션 구축</li>
+<li>PostgreSQL MCP로 데이터베이스를 직접 쿼리하고 분석</li>
+<li>GitHub MCP로 문서와 코드의 모든 수정 과정을 버전별로 저장하고 복원</li>
+</ul>
+
+<hr>
+
+<h3>Claude 데스크탑 설치 등 진행 순서</h3>
+
+<h4>1. 다운로드 페이지 접속</h4>
+<ol>
+<li><strong>네이버나 구글에서 "클로드 데스크탑" 검색</strong> 또는</li>
+<li><strong>직접 다운로드 사이트 접속</strong>: https://claude.ai/download</li>
+</ol>
+
+<h4>2. 설치 파일 다운로드</h4>
+<ol>
+<li><strong>페이지 확인</strong>: "데스크톱에서 Claude를 만나보세요 BETA" 문구 확인</li>
+</ol>
+
+<p><img src="./screenshots/데스크탑%20버번1.png" alt="데스크탑 버번1" /></p>
+
+<ol start="2">
+<li><strong>운영체제 선택</strong>:
+<ul>
+<li><strong>Windows</strong> - 일반 Windows PC용</li>
+<li><strong>Windows (arm64)</strong> - ARM 프로세서 Windows용</li>
+</ul>
+</li>
+<li><strong>다운로드 시작</strong>: 선택한 운영체제 버튼 클릭</li>
+</ol>
+
+<h4>3. 설치 및 실행</h4>
+<ol>
+<li><strong>설치 파일 실행</strong>: 다운로드 폴더에서 설치 파일 더블클릭</li>
+<li><strong>설치 진행</strong>: 자동으로 설치 진행 (별도 옵션 선택 불필요)</li>
+<li><strong>설치 완료</strong>:
+<ul>
+<li>바탕화면에 바로가기 자동 생성</li>
+<li>Claude 데스크탑 자동 실행</li>
+<li>채팅 화면 바로 열림 (로그인 자동 연동)</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/테스크탑%20최조%20실행화면%20스크린샷%202025-09-16%20102742.png" alt="데스크탑 최초 실행화면" /></p>
+
+<p>💡 <strong>참고</strong>: 데스크탑 화면 제일 위쪽에 "Claude―Control+Alt+Space" 문구가 표시됩니다. 이는 Claude 데스크탑을 빠르게 호출할 수 있는 단축키를 안내하는 것으로, <strong>Control+Alt+Space</strong>를 누르면 어떤 프로그램을 사용 중이어도 Claude 창이 즉시 열립니다. 예를 들어, 엑셀 작업 중이거나 웹 브라우징 중에도 이 단축키를 누르면 Claude 창이 바로 나타나 질문할 수 있습니다.</p>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 데스크탑에서 자유롭게 대화를 시작할 수 있습니다.</p>
+
+<p>💡 <strong>참고</strong>: 웹에 이미 로그인되어 있다면 데스크탑도 자동으로 로그인됩니다.</p>
+
+<hr>
+
+<h2 id="4단계-기본적인-공통-프로그램의-설치">4단계: 기본적인 공통 프로그램의 설치</h2>
+
+<h3>4-1. Node.js 설치</h3>
+
+<p><strong>Node.js가 필요한 이유</strong>: Claude Code와 MCP 서버들이 실행되기 위해 필수적인 JavaScript 런타임(프로그램을 실행시켜주는 환경)입니다.</p>
+
+<h4>설치 과정:</h4>
+<ol>
+<li><strong>Node.js 공식 사이트</strong>: https://nodejs.org 접속</li>
+</ol>
+
+<p><img src="./screenshots/Node.js%20다운로드.png" alt="Node.js 다운로드 페이지" /></p>
+
+<ol start="2">
+<li><strong>LTS 버전 선택</strong>: Node.js v22 LTS (Jod) 다운로드 - 2025년 1월 기준 최신 LTS</li>
+<li><strong>Windows 설치 프로그램</strong> (.msi) 다운로드</li>
+<li><strong>설치 실행</strong>:
+<ul>
+<li>라이선스 동의</li>
+<li>설치 경로 확인 (기본값 권장)</li>
+<li>모든 컴포넌트 선택 (npm 포함)</li>
+</ul>
+</li>
+<li><strong>설치 완료 확인</strong>:
+<pre><code class="language-bash">node --version
+npm --version
+</code></pre>
+</li>
+</ol>
+
+<h3>4-2. Git 설치</h3>
+
+<p><strong>Git이 필요한 이유</strong>: Claude Code가 Git 명령어(커밋, 푸시 등)를 자동으로 실행해주고, 많은 npm 패키지들이 Git을 의존성(실행에 필요한 필수 프로그램)으로 요구합니다.</p>
+
+<h4>설치 과정:</h4>
+<ol>
+<li><strong>Git 공식 사이트</strong>: https://git-scm.com/downloads/win 접속</li>
+</ol>
+
+<p><img src="./screenshots/스크린샷%202025-09-11%20194223.png" alt="Git 다운로드 페이지" /></p>
+
+<ol start="2">
+<li><strong>다운로드 버전 확인</strong>: Git for Windows v2.51.0 x64</li>
+<li><strong>"Click here to download"</strong> 클릭</li>
+<li><strong>설치 실행</strong>:
+<ul>
+<li>컴포넌트 선택 (Git Bash 포함 확인)</li>
+<li>기본 에디터 선택 (VS Code 권장)</li>
+<li>PATH 환경 설정 (Git from the command line 선택)</li>
+<li>나머지 기본값 유지</li>
+</ul>
+</li>
+<li><strong>설치 완료 확인</strong>:
+<pre><code class="language-bash">git --version
+</code></pre>
+</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: Node.js와 Git을 설치한 후 컴퓨터를 재시작하면 환경 변수가 확실하게 적용됩니다.</p>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "Node.js와 Git 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.</p>
+
+<hr>
+
+<h2 id="5단계-claude-code-설치-및-시작">5단계: Claude Code 설치 및 시작</h2>
+
+<h3>Claude Code 소개</h3>
+
+<p>터미널에서 가동되는 AI 어시스턴트로, 시스템 명령을 실행하여 복잡한 업무를 자동으로 처리하고 파일도 직접 편집할 수 있는 비개발자와 개발자 모두를 위한 강력한 도구입니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일 (단, Artifacts 미지원, 이미지는 파일 경로로 제공)</p>
+
+<p>Claude Code 특화 기능:</p>
+<ul>
+<li><strong>파일 생성 및 편집</strong>: Excel, Word, PowerPoint, PDF 등 모든 형식의 파일을 생성/편집하여 로컬에 저장</li>
+<li><strong>기술 문서 생성</strong>: README.md, API 연결 및 용법 문서, 설치 가이드, 사용자 매뉴얼 자동 작성</li>
+<li><strong>외부 MCP 서버 연동</strong>: Google Drive, Slack, Jira 등 외부 서비스와 통합</li>
+<li><strong>시스템 명령 실행</strong>: Git, npm, 파일 작업 등 모든 터미널 명령 실행</li>
+<li><strong>프로젝트 관리</strong>: 파일 구조 분석 및 재구성</li>
+<li><strong>자동화 작업</strong>: 프로그램 설치, 환경 변수 설정, 필요한 패키지 자동 설치, 빌드 및 배포 과정 자동화</li>
+<li><strong>코드 작성</strong>: 전체 프로그램을 처음부터 작성</li>
+<li><strong>디버깅 지원</strong>: 오류 메시지 분석 및 수정</li>
+<li><strong>테스트 실행</strong>: 자동으로 테스트 작성 및 실행</li>
+<li><strong>Git 워크플로우 처리</strong>: 커밋 생성, 병합 충돌 해결, 릴리스 노트 작성</li>
+<li><strong>CI/CD 통합</strong>: 지속적 통합 파이프라인에서 자동 실행</li>
+<li><strong>로그 모니터링</strong>: 실시간 로그 감시 및 이상 탐지</li>
+<li><strong>기타</strong>: 프로그램으로 할 수 있는 거의 모든 작업 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>마우스 없이 키보드 입력을 통한 텍스트 명령어로만 조작</li>
+<li>터미널 사용 경험이 없으면 진입 장벽 존재</li>
+<li>짧은 시간에 많은 것을 익히려는 노력 필요</li>
+<li>이미지나 그래프 등 시각적 결과물 직접 표시 불가</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>"VS Code 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 진행</li>
+<li>"Git 저장소들 일괄 업데이트하고 상태를 확인하라"는 git 명령 실행</li>
+<li>ChatGPT와 Gemini API를 통해 동일한 주제로 시장분석을 요청하고, 각 AI의 분석 결과를 수집한 후 Claude Code가 이를 종합하여 시장분석 보고서 만들기</li>
+<li>여러 개의 전문화된 서브 에이전트를 투입하여 각자의 전문 영역에서 협업하여 책 만들기</li>
+<li>프론트엔드, 백엔드, 데이터베이스, API, 결제 시스템, 보안, 테스트 전문 서브 에이전트들이 병렬로 작업하여 완전한 온라인 쇼핑몰 개발하기</li>
+</ul>
+
+<hr>
+
+<h3>Claude Code 설치 등 진행 순서</h3>
+
+<h4>1. 터미널 접속</h4>
+
+<h5>명령 프롬프트 (CMD) 실행 방법</h5>
+<ul>
+<li><strong>Windows 키 + R</strong> → <code>cmd</code> 입력 → 엔터</li>
+<li>또는 <strong>Windows 시작 버튼 클릭</strong> → <strong>"명령 프롬프트" 검색</strong> → 엔터</li>
+<li>전통적인 Windows 명령줄 인터페이스(CLI, Command Line Interface)</li>
+<li>모든 Windows 버전에서 사용 가능</li>
+</ul>
+
+<p>💡 <strong>초보자 팁</strong>: 아래와 같은 화면(처음에는 검정색 바탕화면)이 나타나면 성공! 이제 명령어를 입력할 수 있습니다.</p>
+
+<p><img src="./screenshots/터미널%20열림%20스크린샷%202025-09-16%20104220.png" alt="터미널 열림" /></p>
+
+<h4>2. Claude Code 설치</h4>
+
+<p>아래 명령어 입력:</p>
+<pre><code class="language-bash">npm install -g @anthropic-ai/claude-code
+</code></pre>
+
+<ul>
+<li>설치 시간: 약 1-2분 소요</li>
+<li>설치 완료 확인: <code>claude --version</code></li>
+</ul>
+
+<p><img src="./screenshots/Claude%20Code%20설치%20스크린샷%202025-09-16%20103949.png" alt="Claude Code 설치" /></p>
+
+<p>💡 <strong>참고</strong>: <code>-g</code> 옵션은 global(전역) 설치를 의미하며, 모든 디렉토리에서 Claude Code를 실행할 수 있게 합니다.</p>
+
+<h4>3. Claude Code 실행</h4>
+
+<p>아래 명령어 입력:</p>
+<pre><code>claude
+</code></pre>
+
+<ul>
+<li>Claude Code 터미널이 열림</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: 어느 디렉토리에서든 실행 가능합니다.</p>
+
+<h4>4. Claude Code 계정 연결 및 로그인</h4>
+
+<h5>4-1. 바탕화면 색 선택</h5>
+<ul>
+<li>6가지 옵션 중 선택</li>
+</ul>
+
+<h5>4-2. 로그인 방식 선택</h5>
+
+<pre><code>Select login method:
+ &gt; 1. Claude account with subscription
+    Pro, Max, Team, or Enterprise
+   2. Anthropic Console account
+    API usage billing
+</code></pre>
+
+<ul>
+<li><strong>권장</strong>: <code>1</code> 선택 (기존 Claude 계정 연동)</li>
+</ul>
+
+<h5>4-3. 인증 과정</h5>
+<ol>
+<li><strong>1번 선택 후 엔터</strong></li>
+<li><strong>웹 브라우저 자동 열림</strong>: <code>claude.ai/oauth/authorize</code> 페이지</li>
+<li><strong>Claude Code 연결 화면 표시</strong>:</li>
+</ol>
+
+<p><img src="./screenshots/클로드%20코드%20승인%20.png" alt="클로드 코드 승인" /></p>
+
+<ul>
+<li>"Claude Code가 귀하의 Claude chat account에 연결을 요청했습니다"</li>
+<li>권한 정보 표시:
+<ul>
+<li>Anthropic 프로필 접근</li>
+<li>Claude 구독 사용량 기록</li>
+<li>개인정보 보호 설정 적용</li>
+</ul>
+</li>
+</ul>
+
+<ol start="4">
+<li><strong>"승인" 버튼 클릭</strong></li>
+<li><strong>로그인 성공</strong>:<br>
+Logged in as [your-email]<br>
+Login successful. Press Enter to continue…</li>
+<li><strong>Enter 키 누르기</strong> (다음 단계로 진행)</li>
+</ol>
+
+<p>💡 <strong>참고</strong>: 평소 사용 시에는 이러한 인증 과정이 생략됩니다. 최초 설치 시에만 한 번 진행합니다.</p>
+
+<h4>5. Claude Code 시작 화면 표시</h4>
+
+<pre><code>╭───────────────────────────────────────────────────╮
+│ ✻ Welcome to Claude Code!                         │
+│                                                   │
+│   /help for help, /status for your current setup  │
+│                                                   │
+│   cwd: C:\Users\home                              │
+╰───────────────────────────────────────────────────╯
+
+시작하기 위한 팁:
+    /init 실행으로 Claude를 위한 CLAUDE.md 파일 생성
+    파일 분석, 편집, bash 명령어, git 작업에 Claude 활용
+    최상의 결과를 위해 다른 엔지니어에게 하듯 구체적으로 요청하세요
+
+💡 **참고**: 홈 디렉토리에서 Claude를 실행했습니다. 최상의 경험을 위해
+     프로젝트 디렉토리에서 실행하는 것을 권장합니다.
+</code></pre>
+
+<ul>
+<li>cwd: C:\Users\home - 현재 작업 디렉토리 (Current Working Directory)</li>
+</ul>
+
+<h4>6. 작업 디렉토리 이동</h4>
+
+<h5>이동 명령어</h5>
+
+<pre><code>cd G:\내 드라이브\MyTask (사용자가 지정한 드라이버 및 폴더)
+</code></pre>
+
+<h5>이동 성공 확인</h5>
+
+<pre><code>● Bash(cd "G:\내 드라이브\MyTask" &amp;&amp; pwd)
+● Successfully changed to the MyTask directory.
+</code></pre>
+
+<p>💡 <strong>참고</strong>: 프로젝트 작업을 시작하기 전에 해당 프로젝트 폴더로 이동하는 것이 좋습니다. Claude Code는 현재 디렉토리를 기준으로 파일을 생성하고 수정합니다.</p>
+
+<h4>7. 사용자가 원하는 작업 시작</h4>
+
+<h5>자연어로 명령하기</h5>
+<p>이제 Claude Code에게 자연어로 표현하여 원하는 작업을 아래와 같이 요청할 수 있습니다:</p>
+
+<ul>
+<li>"오늘 업무일지 텍스트 파일 만들어줘"</li>
+<li>"이 CSV 파일의 데이터 요약해줘"</li>
+<li>"폴더 안의 이미지 파일만 새 폴더로 정리해줘"</li>
+<li>"React 컴포넌트 기본 구조 만들어줘"</li>
+<li>"테스트 코드 작성해줘"</li>
+<li>"오류 메시지를 분석하고 해결방법 제시해줘"</li>
+</ul>
+
+<p>💡 <strong>팁</strong>: 구체적이고 명확한 요청일수록 더 정확한 결과를 얻을 수 있습니다.</p>
+
+<h5>주요 명령어 소개</h5>
+
+<h6>시스템 명령어</h6>
+<ul>
+<li><code>/help</code> - 사용 가능한 모든 명령어와 사용법 표시</li>
+<li><code>/status</code> - 현재 설정 및 연결 상태 확인</li>
+<li><code>/init</code> - CLAUDE.md 파일 생성 (프로젝트 초기 설정)</li>
+<li><code>/exit</code> 또는 <code>Ctrl+C</code> - Claude Code 종료</li>
+<li><code>/clear</code> - 화면 지우기</li>
+</ul>
+
+<h6>파일 작업 명령어</h6>
+<ul>
+<li><code>ls</code> 또는 <code>dir</code> - 현재 폴더의 파일 목록 보기</li>
+<li><code>cd [폴더명]</code> - 다른 폴더로 이동</li>
+<li><code>pwd</code> - 현재 작업 중인 폴더 경로 확인</li>
+<li><code>cat [파일명]</code> - 파일 내용 표시</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: Claude Code는 자연어로 대화하듯 명령할 수 있어서, 복잡한 명령어를 외울 필요가 없습니다.</p>
+
+<h5>주요 도구 목록</h5>
+
+<p>Claude Code가 사용하는 주요 도구들 (<code>/tools</code> 명령어로 확인 가능):</p>
+<ul>
+<li><strong>Bash</strong> - 시스템 명령어 실행 (프로그램 설치, 파일 작업 등)</li>
+<li><strong>Read</strong> - 파일 읽기 (텍스트, 이미지, PDF 등 모든 파일)</li>
+<li><strong>Write</strong> - 새 파일 생성 및 작성</li>
+<li><strong>Edit</strong> - 기존 파일 수정</li>
+<li><strong>Update</strong> - 파일 내용 업데이트 및 갱신</li>
+<li><strong>MultiEdit</strong> - 파일의 여러 부분 동시 수정</li>
+<li><strong>Grep</strong> - 파일 내용 검색 (정규식 지원)</li>
+<li><strong>Glob</strong> - 파일 이름 패턴 검색 (예: *.txt, **/*.js)</li>
+<li><strong>WebSearch</strong> - 웹 검색 및 최신 정보 가져오기</li>
+<li><strong>WebFetch</strong> - 특정 웹페이지 내용 가져오기</li>
+<li><strong>TodoWrite</strong> - 작업 목록 관리 및 진행 상황 추적</li>
+<li><strong>Task</strong> - 복잡한 작업을 위한 서브 에이전트 실행</li>
+</ul>
+
+<p>💡 <strong>팁</strong>: 이러한 도구들은 Claude Code가 자동으로 선택하여 사용하므로, 사용자가 직접 지정할 필요는 없습니다.</p>
+
+<hr>
+
+<h2 id="6단계-claude-데스크탑에-mcp-연결하기-claude-code-활용">6단계: Claude 데스크탑에 MCP 연결하기 (Claude Code 활용)</h2>
+
+<h3>1. 설치할 MCP(Model Context Protocol) 결정</h3>
+
+<p>💡 <strong>MCP란?</strong> Claude 데스크탑이 컴퓨터의 파일과 프로그램에 접근할 수 있게 해주는 연결 도구입니다.</p>
+<ul>
+<li>마치 스마트폰에 앱을 설치하듯이, Claude 데스크탑에 추가 기능을 설치하는 것입니다.</li>
+</ul>
+
+<h4>설치할 MCP 서버</h4>
+<p>아래와 같은 Claude 내부의 MCP 서버 3개를 설치합니다:</p>
+<ol>
+<li><strong>filesystem</strong>: 로컬 파일 검색, 읽기/쓰기, 문서 자동 생성 및 편집</li>
+<li><strong>memory</strong>: 이전 대화 내용 기억, 중요 정보 저장, 컨텍스트 유지</li>
+<li><strong>anthropic</strong>: 6종의 특수 작업 도구 사용</li>
+</ol>
+
+<hr>
+
+<h3>2. 사전 준비: Google Drive Desktop 설치 (선택사항)</h3>
+
+<p>💡 <strong>참고</strong>: 이 가이드는 Google Drive를 설치한 경우를 기준으로 작성되었습니다. Google Drive를 사용하지 않는 경우, <code>G:\내 드라이브\MyTask</code> 대신 <code>C:\MyTask</code> 등 원하는 경로를 지정해서 사용하실 수 있습니다.</p>
+
+<p>💡 <strong>Google Drive를 설치해서 사용하는 이유</strong></p>
+<ul>
+<li><strong>다중 컴퓨터 동기화</strong>: 여러 컴퓨터에서 동일한 MCP 환경 접근</li>
+<li><strong>접근성</strong>: 웹 브라우저만 있으면 전 세계 어디서든 접근</li>
+<li><strong>자동 백업</strong>: 클라우드 자동 백업으로 데이터 손실 방지</li>
+<li><strong>Google 생태계 통합</strong>: Gmail, Docs 등과 연동</li>
+<li><strong>실시간 협업</strong>: 공유 및 공동 편집 가능</li>
+</ul>
+
+<p><strong>설치 과정:</strong></p>
+<ol>
+<li>https://www.google.com/drive/download/ 접속</li>
+<li>"PC용 드라이브" 다운로드 및 설치</li>
+</ol>
+
+<p><img src="./screenshots/구들%20드라이브%20다운로드%20스크린샷%202025-09-16%20104712.png" alt="구글 드라이브 다운로드" /></p>
+
+<ol start="3">
+<li>Google 계정으로 로그인</li>
+<li><code>G:\내 드라이브</code> 폴더 생성 확인 (내 드라이브는 명칭 변경을 할 수가 없음)</li>
+</ol>
+
+<p><img src="./screenshots/내%20드라이브%20폴더%20생성%20스크린샷%202025-09-16%20105134.png" alt="내 드라이브 폴더 생성" /></p>
+
+<ol start="5">
+<li><code>MyTask</code> 작업 폴더 생성</li>
+</ol>
+
+<hr>
+
+<h3>3. API 키 발급</h3>
+
+<p>💡 <strong>API 키가 필요한 이유:</strong> Anthropic MCP 서버를 연결시키기 위해서 필요(무료로 발급)</p>
+
+<p><strong>발급 순서:</strong></p>
+<ol>
+<li><strong>https://console.anthropic.com</strong> 접속</li>
+<li>Claude 계정으로 로그인</li>
+<li>좌측 메뉴에서 <strong>"API Keys"</strong> 클릭</li>
+<li><strong>"Create Key"</strong> 버튼 클릭</li>
+<li>키 이름 입력 (예: "MyMCP")</li>
+<li>생성된 키 복사 (<code>sk-ant-api03-</code>로 시작)</li>
+<li>안전한 곳에 보관 (메모장이나 비밀번호 관리자에 저장)</li>
+</ol>
+
+<p><img src="./screenshots/API%20키%20발급%20스크린샷%202025-09-16%20105431.png" alt="API 키 발급" /></p>
+
+<p>⚠️ <strong>주의:</strong> API 키는 비밀번호처럼 관리하세요. 다른 사람과 공유하지 마시고, 공개된 장소(GitHub, 블로그 등)에 노출되지 않도록 주의하세요.</p>
+
+<hr>
+
+<h3>4. Claude Code로 자동 설치하기</h3>
+
+<p>💡 <strong>가장 간단한 방법:</strong> Claude Code에게 모든 설치를 맡기기</p>
+
+<h4>자동 설치 명령어</h4>
+
+<p>Claude Code 터미널에서 다음과 같이 요청:</p>
+<pre><code class="language-text">"내부 MCP 서버 3종을 설치하고 설정해줘"
+</code></pre>
+
+<h4>Claude Code가 자동으로 처리하는 작업들</h4>
+
+<ol>
+<li><strong>필요한 패키지 설치</strong>
+<ul>
+<li>Filesystem MCP 서버</li>
+<li>Memory MCP 서버</li>
+<li>Anthropic MCP 서버와 의존성 패키지</li>
+</ul>
+</li>
+<li><strong>설정 파일 생성</strong>
+<ul>
+<li>위치: <code>C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\</code></li>
+<li>파일명: <code>claude_desktop_config.json</code></li>
+</ul>
+</li>
+<li><strong>테스트 및 검증</strong>
+<ul>
+<li>각 서버의 정상 작동 여부 테스트</li>
+<li>설정 파일 문법 검증</li>
+</ul>
+</li>
+</ol>
+
+<hr>
+
+<h3>4-1. 수동 설치 방법 (선택사항)</h3>
+
+<p>💡 <strong>직접 설치하고 싶은 경우:</strong> 아래 단계를 따라하세요.</p>
+
+<h4>Step 1: MCP 서버 패키지 설치</h4>
+
+<p>터미널에서 실행:</p>
+<pre><code class="language-bash"># Filesystem 서버 설치
+npm install -g @modelcontextprotocol/server-filesystem
+
+# Memory 서버 설치
+npm install -g @modelcontextprotocol/server-memory
+</code></pre>
+
+<p>💡 -g 옵션은 "전역(global)" 설치를 의미합니다<br>
+   → 컴퓨터 어디서든 이 패키지를 사용할 수 있게 됩니다</p>
+
+<h4>Step 2: Anthropic MCP 설정</h4>
+
+<pre><code class="language-bash"># 작업 폴더 생성
+mkdir C:\AnthropicMCP
+ → C드라이브에 AnthropicMCP 폴더를 새로 만듭니다. (작업 공간 생성)
+
+cd C:\AnthropicMCP
+→ 방금 만든 AnthropicMCP 폴더로 이동합니다.
+
+# 프로젝트 초기화
+npm init -y
+→ 이 폴더를 npm 프로젝트로 만듭니다 (package.json 파일이 자동 생성됨)
+→ package.json은 프로젝트 정보를 담는 파일입니다.
+
+
+# 필요 패키지 설치
+npm install @modelcontextprotocol/sdk@1.0.3 @anthropic-ai/sdk
+→ Anthropic MCP 서버에 필요한 핵심 패키지 2개를 설치합니다
+</code></pre>
+
+<h4>Step 2-1: Anthropic MCP 서버 파일 생성</h4>
+
+<p>💡 <strong>중요</strong>: Anthropic MCP 서버를 작동시키려면 index.js 파일을 생성해야 합니다.</p>
+
+<ol>
+<li><code>C:\AnthropicMCP</code> 폴더에 <code>index.js</code> 파일 생성</li>
+<li>Claude Code에게 다음과 같이 요청:
+<pre><code>"Anthropic MCP 서버용 index.js 파일을 생성해줘"
+</code></pre>
+</li>
+</ol>
+
+<h4>Step 3: 설정 파일 작성</h4>
+
+<p><strong>파일 위치:</strong> <code>C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\claude_desktop_config.json</code></p>
+
+<p><strong>설정 내용:</strong></p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node.exe",
+      "args": [
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "G:\\내 드라이브\\MyTask"
+      ]
+    },
+    "memory": {
+      "command": "node.exe",
+      "args": [
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-memory\\dist\\index.js"
+      ]
+    },
+    "anthropic": {
+      "command": "node.exe",
+      "args": [
+        "C:\\AnthropicMCP\\dist\\index.js"
+      ],
+      "env": {
+        "ANTHROPIC_API_KEY": "여기에_API키_입력"
+      }
+    }
+  }
+}
+</code></pre>
+
+<p>⚠️ <strong>주의사항:</strong></p>
+<ul>
+<li><code>[사용자 컴퓨터 명칭]</code>을 실제 Windows용 사용자 컴퓨터 명칭으로 변경</li>
+<li><code>여기에_API키_입력</code>을 실제 API 키로 변경</li>
+<li>경로의 백슬래시는 반드시 이중(<code>\\</code>)으로 입력</li>
+</ul>
+
+<hr>
+
+<h3>5. Claude 데스크탑 재시작 및 확인</h3>
+
+<p><strong>왜 재시작이 필요한가?</strong> 새로운 설정 파일을 Claude 데스크탑이 인식하도록 하기 위해서입니다.</p>
+
+<h4>재시작 방법</h4>
+
+<ol>
+<li><strong>Claude 데스크탑 완전 종료</strong>
+<ul>
+<li>시스템 트레이 아이콘 우클릭 → 종료</li>
+</ul>
+</li>
+<li><strong>설치 파일로 재실행</strong>
+<ul>
+<li>처음 다운로드한 설치 파일 다시 실행</li>
+</ul>
+</li>
+</ol>
+
+<h4>MCP 연결 확인</h4>
+
+<ol>
+<li>Claude 데스크탑 열기</li>
+<li>좌측 상단 <strong>☰</strong> 메뉴 클릭</li>
+<li><strong>파일 → 설정 → 개발자</strong> 이동</li>
+<li><strong>"로컬 MCP 서버"</strong> 3종 연결 상태 확인</li>
+</ol>
+
+<p><strong>정상 연결 시 표시:</strong></p>
+<ul>
+<li>✅ filesystem (running)</li>
+<li>✅ memory (running)</li>
+<li>✅ anthropic (running)</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20011320.png" alt="MCP 설정 화면" /></p>
+
+<h4>도움이 필요한 경우</h4>
+
+<p>Claude Code에게 다음과 같이 요청:</p>
+<pre><code class="language-text">"MCP 서버 연결 상태를 진단하고 문제를 해결해줘"
+</code></pre>
+
+<h2 id="7단계-vs-code-설치-및-시작">7단계: VS Code 설치 및 시작</h2>
+
+<h3>VS Code 소개</h3>
+
+<p>Microsoft가 제공하는 무료 오픈소스 텍스트 편집기로, 문서 작성부터 코딩까지 모든 텍스트 작성 작업을 지원하며 수많은 확장 프로그램을 설치하여 활용할 수 있고 Claude Code와 결합을 통해 AI 지원 통합 작업 환경을 제공합니다.</p>
+
+<p><strong>기능</strong>:</p>
+<ul>
+<li><strong>파일 관리</strong>: 프로젝트 탐색기, 전역 검색, 다중 창 분할</li>
+<li><strong>코드 편집</strong>: 문법 강조, 자동 완성, 오류 검출, 리팩토링</li>
+<li><strong>IntelliSense</strong>: 스마트 코드 완성</li>
+<li><strong>멀티 커서</strong>: 여러 위치 동시 편집</li>
+<li><strong>Git 통합</strong>: 버전 관리 기본 지원</li>
+<li><strong>통합 터미널</strong>: 내장 터미널로 명령어 실행</li>
+<li><strong>Claude Code 결합</strong>: 터미널에서 바로 AI 도우미 실행</li>
+<li><strong>확장 프로그램</strong>: 4만 개 이상의 플러그인으로 필요한 기능 추가 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>Claude Code와 동일한 제약사항 4가지</li>
+<li>확장 프로그램 과다 설치 시 성능 저하</li>
+<li>대용량 파일(50MB+) 생성 및 편집 시 성능 저하</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>마크다운 문서를 실시간으로 미리보기 하면서 편집하기</li>
+<li>통합 터미널에서 Claude Code를 바로 실행하여 AI 지원받기</li>
+<li>여러 파일을 동시에 열어 화면 분할로 비교하며 작업하기</li>
+<li>Alt+클릭으로 여러 위치에 커서를 놓고 동시에 똑같은 내용 편집하기</li>
+<li>REST Client로 API 테스트를 VS Code 안에서 바로 실행하기</li>
+</ul>
+
+<hr>
+
+<h3>VS Code 설치 등 진행 순서</h3>
+
+<h4>1. VS Code 설치</h4>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "VS Code 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.</p>
+
+<p>VS Code 다운로드 및 설치:</p>
+<ul>
+<li><strong>VS Code 다운로드 사이트</strong>: https://code.visualstudio.com 접속</li>
+<li><strong>Windows x64</strong> 버전 다운로드</li>
+<li><strong>설치 파일 실행</strong></li>
+<li><strong>라이선스 계약서</strong>: "동의합니다(A)" 선택</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141407.png" alt="VS Code 설치 화면" /></p>
+
+<ul>
+<li><strong>설치 옵션 선택</strong> (모두 체크 권장):
+<ul>
+<li>✅ "바탕 화면에 바로가기 만들기"</li>
+<li>✅ "'Code(으)로 열기' 작업을 Windows 탐색기 파일의 상황에 맞는 메뉴에 추가"</li>
+<li>✅ "'Code(으)로 열기' 작업을 Windows 탐색기 디렉터리의 상황에 맞는 메뉴에 추가"</li>
+<li>✅ "Code를 지원되는 파일 형식에 대한 편집기로 등록"</li>
+<li>✅ "PATH에 추가(다시 시작한 후 사용 가능)"</li>
+</ul>
+</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141512.png" alt="VS Code 설치 옵션" /></p>
+
+<ul>
+<li><strong>설치 완료 후 VS Code 자동 실행</strong> : 마침 버튼 클릭과 동시에</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: PATH에 추가 옵션은 일반 터미널에서 <code>code</code> 명령어를 사용하기 위해 필수입니다.</p>
+
+<h4>2. 초기 설정</h4>
+
+<p>VS Code 최초 실행 시 설정:</p>
+<ul>
+<li><strong>Copilot 설정</strong>: 건너뛰기 (유료 서비스)</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141807.png" alt="VS Code Welcome 화면" /></p>
+
+<ul>
+<li><strong>테마 선택</strong>: "Browse Color Themes" → 원하는 바탕 색상 선택</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20142707.png" alt="VS Code 테마 선택" /></p>
+
+<ul>
+<li><strong>Welcome 탭 닫기</strong>: 시작 화면 탭 X 버튼 클릭</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20142931.png" alt="VS Code 시작 화면" /></p>
+
+<ul>
+<li><strong>자동저장 설정</strong> (권장):
+<ul>
+<li>좌측 상단 메뉴에서, 파일 → 자동저장 선택(자동저장을 설정해놓으면 파일 수정 후 자동으로 저장되어 작업 손실을 방지함)</li>
+</ul>
+</li>
+<li><strong>한국어 설정</strong>: 확장 프로그램에서 Korean Language Pack 설치 후 재시작</li>
+</ul>
+
+<h4>3. 확장 프로그램 설치</h4>
+
+<p><strong>확장 프로그램이란?</strong><br>
+VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기능을 추가하는 플러그인입니다. 마치 스마트폰에 앱을 설치하듯이, VS Code에 필요한 기능들을 추가로 설치하여 더 강력하고 편리한 작업 환경을 만들 수 있습니다.</p>
+
+<p><strong>확장 프로그램의 역할:</strong></p>
+<ul>
+<li><strong>프로그래밍 언어별 도움</strong>: 파이썬, 자바스크립트 등 프로그래밍을 돕기</li>
+<li><strong>파일 작업 지원</strong>: 엑셀 파일 보기, PDF로 저장하기</li>
+<li><strong>편리한 기능</strong>: 자동 저장, 파일 정리, 경로 찾기</li>
+<li><strong>예쁘게 꾸미기</strong>: 색상 테마, 아이콘 변경</li>
+<li><strong>AI와 연결</strong>: Claude나 Copilot과 대화하기</li>
+</ul>
+
+<p><strong>설치 방법</strong>: 왼쪽 사이드바에 있는 확장 프로그램 아이콘(네모 4개) 클릭 후 검색하여 설치하면 됩니다.</p>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "VS Code 확장 프로그램 설치해줘"라고 요청하면 필요한 확장 프로그램들을 자동으로 설치해줍니다.</p>
+
+<h5><strong>유용한 확장 프로그램 목록</strong></h5>
+
+<h6><strong>한국어 지원</strong></h6>
+<ul>
+<li><strong>ms-ceintl.vscode-language-pack-ko</strong> - VS Code 메뉴와 설정을 한국어로 변경</li>
+</ul>
+
+<h6><strong>AI 어시스턴트</strong></h6>
+<ul>
+<li><strong>Claude Code</strong> - 터미널 기반 AI 코딩 어시스턴트 (VS Code 터미널에서 실행)</li>
+<li><strong>continue.continue</strong> - 여러 AI를 동시에 사용하여 코드 작성 지원</li>
+<li><strong>Cursor</strong> - AI 기반 코드 에디터 (VS Code 포크, 별도 설치 권장)</li>
+<li><strong>github.copilot</strong> - GitHub의 AI 코드 자동 완성 (유료)</li>
+<li><strong>github.copilot-chat</strong> - Copilot과 대화형 코딩 지원 (유료)</li>
+<li><strong>ms-vscode.vscode-speech</strong> - 음성으로 코드 작성 및 명령 실행</li>
+</ul>
+
+<h6><strong>공통 도구</strong> (비개발/개발 모두 필요)</h6>
+<ul>
+<li><strong>pkief.material-icon-theme</strong> - 파일 종류별로 아이콘을 표시하여 한눈에 구분</li>
+<li><strong>gruntfuggly.todo-tree</strong> - '할 일' 목록을 한눈에 정리해서 보여줌</li>
+<li><strong>alefragnani.project-manager</strong> - 여러 작업 폴더를 빠르게 전환</li>
+<li><strong>aaron-bond.better-comments</strong> - 메모를 중요도별로 다른 색으로 표시</li>
+<li><strong>eamodio.gitlens</strong> - 파일 변경 이력과 작성자를 한눈에 확인</li>
+<li><strong>yzhang.markdown-all-in-one</strong> - 마크다운 문서 작성 시 자동완성과 미리보기</li>
+<li><strong>shd101wyy.markdown-preview-enhanced</strong> - 고급 마크다운 미리보기 (수식, 그래프, 다이어그램 지원)</li>
+<li><strong>bierner.markdown-mermaid</strong> - 마크다운에서 플로우차트와 다이어그램 그리기</li>
+<li><strong>hediet.vscode-drawio</strong> - 순서도와 다이어그램을 VS Code에서 직접 그리기</li>
+<li><strong>tomoki1207.pdf</strong> - PDF 파일을 VS Code에서 바로 열어보기</li>
+<li><strong>humao.rest-client</strong> - 웹 서비스 테스트 도구</li>
+</ul>
+
+<h6><strong>비개발업무 전용 도구</strong></h6>
+<ul>
+<li><strong>grapecity.gc-excelviewer</strong> - Excel 파일을 표 형태로 보기</li>
+<li><strong>mechatroner.rainbow-csv</strong> - CSV 파일의 각 열을 다른 색으로 표시</li>
+<li><strong>RandomFractalsInc.vscode-data-preview</strong> - 데이터 파일을 보기 쉽게 표시</li>
+<li><strong>yzane.markdown-pdf</strong> - 마크다운 문서를 PDF로 즉시 변환</li>
+<li><strong>james-yu.latex-workshop</strong> - 논문이나 보고서를 LaTeX로 작성</li>
+<li><strong>wayou.vscode-todo-highlight</strong> - TODO 메모를 형광펜처럼 강조</li>
+<li><strong>fabiospampinato.vscode-projects-plus</strong> - 여러 프로젝트를 효율적으로 관리</li>
+<li><strong>patbenatar.advanced-new-file</strong> - 단축키로 새 파일을 빠르게 생성</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - 기본</strong></h6>
+<ul>
+<li><strong>christian-kohler.path-intellisense</strong> - 파일 경로 입력 시 자동완성 제공</li>
+<li><strong>괄호 색상 매칭</strong> - VS Code 내장 기능 사용 (설정 → editor.bracketPairColorization.enabled: true)</li>
+<li><strong>oderwat.indent-rainbow</strong> - 들여쓰기 깊이를 무지개색으로 표시</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - Python</strong></h6>
+<ul>
+<li><strong>ms-python.python</strong> - Python 코드 실행과 디버깅 지원</li>
+<li><strong>ms-python.vscode-pylance</strong> - Python 코드 자동완성과 오류 검사</li>
+<li><strong>ms-python.debugpy</strong> - Python 코드의 버그를 찾고 수정</li>
+<li><strong>ms-python.vscode-python-envs</strong> - Python 가상환경을 쉽게 전환</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - 웹</strong></h6>
+<ul>
+<li><strong>formulahendry.auto-rename-tag</strong> - HTML 여는 태그 수정 시 닫는 태그도 자동 변경</li>
+<li><strong>ritwickdey.liveserver</strong> - HTML 파일을 실시간으로 브라우저에서 확인</li>
+<li><strong>timocodes.web-browser-preview</strong> - Browser Preview (웹 브라우저 미리보기)</li>
+<li><strong>xabikos.javascriptsnippets</strong> - JavaScript (ES6) code snippets (JS 스니펫)</li>
+<li><strong>ecmel.vscode-html-css</strong> - HTML CSS Support (CSS 자동완성)</li>
+</ul>
+
+<h4>4. 사용 준비 완료</h4>
+
+<ul>
+<li>VS Code 정상 작동 확인</li>
+<li>한국어 인터페이스 적용 확인</li>
+<li>필요한 확장 프로그램 설치 완료</li>
+<li>Git 작동 확인: 좌측 사이드바에 소스제어(나무가지 모양) 아이콘이 표시되면 Git이 정상적으로 설치된 것임</li>
+<li>Claude Code 결합 확인: 내장 터미널에서 <code>claude</code> 명령어로 Claude Code를 실행하여 테스트</li>
+</ul>
+
+<h4>5. 사용자가 원하는 작업 시작</h4>
+
+<h5>VS Code에서 작업 시작하기</h5>
+<ol>
+<li>VS Code 실행</li>
+<li>좌측 상단 메뉴에서, <strong>파일 &gt; 폴더 열기</strong> 선택</li>
+<li>작업할 폴더 선택 후 확인</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: 일반 터미널에서 원하는 폴더로 이동한 후 <code>code .</code> 명령어를 입력하면 현재 폴더를 VS Code에서 바로 열 수 있습니다. (점(.)은 현재 폴더를 의미)</p>
+
+<h5>Claude Code와 함께 사용하기</h5>
+<ol>
+<li>VS Code 내장 터미널 열기: <strong>Ctrl + ` (백틱)</strong>
+<ul>
+<li>또는 좌측 상단 메뉴에서, <strong>터미널 &gt; 새 터미널</strong> 선택</li>
+<li>VS Code 하단에 터미널 창이 열림</li>
+</ul>
+</li>
+<li>Claude Code 실행:
+<pre><code class="language-bash">claude
+</code></pre>
+</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: VS Code에서 파일을 편집하면서 동시에 터미널에서 Claude Code의 도움을 받으면 작업 효율이 향상됩니다.</p>
+
+<hr>
+
+<h2 id="최종-정리">종합 정리</h2>
+
+<h3>Claude 플랫폼별 기능 비교표</h3>
+
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>모바일 앱</th>
+<th>웹</th>
+<th>데스크탑</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기본 AI 대화</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>대화 기록 동기화</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>이미지 분석</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>파일 업로드</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>음성 입력</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>카메라 연동</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Artifacts 표시</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>파일 생성 및 다운로드</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>로컬 파일 접근</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ (MCP)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>시스템 명령 실행</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>프로그램 자동 설치</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Git 명령 실행</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>일부 가능</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>다운로드 필요</strong></td>
+<td>✅</td>
+<td>❌ (PWA 선택)</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+
+<h3>최종 설치된 환경</h3>
+<ul>
+<li><strong>웹</strong>: 브라우저에서 Claude 사용 (채팅, 문서 작업)</li>
+<li><strong>데스크탑</strong>: MCP 서버 3개 연결 (filesystem, memory, anthropic) - 파일 관리 및 고급 기능</li>
+<li><strong>Claude Code</strong>: 터미널 기반 AI 업무 도우미 - 개발업무와 비개발업무 모두 지원</li>
+<li><strong>VS Code</strong>: 필수 확장 프로그램 포함 - 코드 작성, 문서 편집, Excel 파일 처리, 마크다운 작업 등</li>
+<li><strong>통합 작업 환경</strong>: 모든 도구가 유기적으로 연결되어 개발업무부터 일반 사무업무까지 AI 기반으로 처리 가능</li>
+</ul>
+
+<hr>
+
+<h2 id="문서-정보">문서 정보</h2>
+
+<ul>
+<li><strong>버전</strong>: v1.2</li>
+<li><strong>업데이트</strong>: 2025년 9월 16일</li>
+<li><strong>주요 변경사항</strong>:
+<ul>
+<li>스크린샷 19개 추가 (설치 과정별 상세 화면)</li>
+<li>PowerShell 섹션 제거 (안정성 이슈)</li>
+<li>Claude 데스크탑 단축키 설명 추가 (Control+Alt+Space)</li>
+<li>Google Drive 및 API 키 발급 스크린샷 추가</li>
+</ul>
+</li>
+<li><strong>글자수</strong>: 20,186자</li>
+<li><strong>작성자</strong>: Claude</li>
+<li><strong>프롬프터</strong>: 써니</li>
+</ul>                <!-- Claude 설치 가이드 HTML 컨텐츠 -->
+<h1>Claude 4종 &amp; VS Code의 설치 및 시작방법</h1>
+<h2>실제 경험을 토대로 작성된 누구나 따라할 수 있는 실전 가이드</h2>
+<h3>v1.2</h3>
+
+<hr>
+
+<h2>📚 목차</h2>
+
+<p><strong><a href="#1단계-claude-모바일-앱-설치-및-시작">1단계: Claude 모바일 앱 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 모바일 앱 소개</li>
+<li>Claude 모바일 앱 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#2단계-claude-웹-설치-및-시작">2단계: Claude 웹 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 웹 소개</li>
+<li>Claude 웹 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#3단계-claude-데스크탑-설치-및-시작">3단계: Claude 데스크탑 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude 데스크탑 소개</li>
+<li>Claude 데스크탑 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#4단계-기본적인-공통-프로그램의-설치">4단계: 기본적인 공통 프로그램의 설치</a></strong></p>
+<ul>
+<li>Node.js 설치</li>
+<li>Git 설치</li>
+</ul>
+
+<p><strong><a href="#5단계-claude-code-설치-및-시작">5단계: Claude Code 설치 및 시작</a></strong></p>
+<ul>
+<li>Claude Code 소개</li>
+<li>Claude Code 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#6단계-claude-데스크탑에-mcp-연결하기-claude-code-활용">6단계: Claude 데스크탑에 MCP 연결하기</a></strong></p>
+<ul>
+<li>설치할 MCP 결정</li>
+<li>Google Drive Desktop 설치 (선택사항)</li>
+<li>API 키 발급</li>
+<li>Claude Code로 자동 설치하기</li>
+</ul>
+
+<p><strong><a href="#7단계-vs-code-설치-및-시작">7단계: VS Code 설치 및 시작</a></strong></p>
+<ul>
+<li>VS Code 소개</li>
+<li>VS Code 설치 등 진행 순서</li>
+</ul>
+
+<p><strong><a href="#최종-정리">종합 정리</a></strong></p>
+
+<p><strong><a href="#문서-정보">문서 정보</a></strong></p>
+
+<hr>
+
+<h2 id="1단계-claude-모바일-앱-설치-및-시작">1단계: Claude 모바일 앱 설치 및 시작</h2>
+
+<h3>Claude 모바일 앱 소개</h3>
+
+<p>스마트폰과 태블릿에서 사용하는 Claude 전용 모바일 애플리케이션으로, 다운로드를 받은 후에 복잡한 설정 없이 바로 대화를 시작할 수 있으며 언제 어디서나 이동하면서도 접속할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능:</p>
+<ul>
+<li><strong>AI 대화</strong>: 질문-답변을 통한 정보 제공</li>
+<li><strong>이미지 분석</strong>: 이미지 업로드 및 해석</li>
+<li><strong>코드 생성 및 분석</strong>: 프로그래밍 코드 작성, 분석 및 설명</li>
+<li><strong>파일 처리</strong>: PDF, TXT, 코드 파일 등 처리</li>
+<li><strong>프로젝트 관리</strong>: 주제별로 대화를 그룹화하여 체계적 관리</li>
+<li><strong>대화 히스토리</strong>: 모든 대화 자동 저장 및 검색 기능</li>
+<li><strong>Artifacts</strong>: 코드, 문서, 다이어그램을 실시간 미리보기 창에서 표시</li>
+<li><strong>모델 전환</strong>: Haiku, Sonnet, Opus 모델 실시간 전환</li>
+<li><strong>실시간 동기화</strong>: 웹, 데스크탑과 모든 대화 내용 자동 동기화</li>
+</ul>
+
+<p>모바일 특화 기능:</p>
+<ul>
+<li><strong>음성 입력</strong>: 마이크 버튼으로 음성 질문 및 명령</li>
+<li><strong>카메라 연동</strong>: 실시간 사진 촬영 후 즉시 분석</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>파일 크기 제한 (개당 10MB)</li>
+<li>모바일 기기 내부 파일 접근 불가</li>
+<li>화면 크기의 한계로 인한 긴 텍스트 작업 불편</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: 모바일(터치) 입력 방식</li>
+<li><strong>운영체제</strong>: iOS/Android 스마트폰 및 태블릿</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>회의록이나 화이트보드를 사진으로 찍어 즉시 요약</li>
+<li>운전 중 음성으로 아이디어 정리 및 메모</li>
+<li>외부에서 급한 데이터 분석이나 계산 처리</li>
+<li>이동 중 문서 검토 및 피드백 작성</li>
+<li>여러 언어 실시간 번역 (해외 출장 시 유용)</li>
+</ul>
+
+<hr>
+
+<h3>Claude 모바일 앱 설치 등 진행 순서</h3>
+
+<h4>1. 앱 스토어 접속</h4>
+
+<p><strong>Android:</strong></p>
+<ul>
+<li>Google Play 스토어 앱 열기</li>
+</ul>
+
+<p><strong>iOS:</strong></p>
+<ul>
+<li>App Store 앱 열기</li>
+</ul>
+
+<h4>2. 앱 검색 및 설치</h4>
+
+<p><strong>Android:</strong></p>
+<ol>
+<li>검색창에 "Claude" 입력</li>
+<li>"Claude by Anthropic" 앱 찾기 (개발자: Anthropic 확인)</li>
+<li>"설치" 버튼 터치</li>
+<li>설치 완료 후 "열기" 터치</li>
+</ol>
+
+<p><strong>iOS:</strong></p>
+<ol>
+<li>검색 탭에서 "Claude" 검색</li>
+<li>"Claude" 앱 찾기 (Anthropic, Inc. 제작 확인)</li>
+<li>"받기" 버튼 터치 (Face ID/Touch ID/암호 인증)</li>
+<li>설치 완료 후 앱 실행</li>
+</ol>
+
+<h4>3. 계정 로그인</h4>
+
+<ol>
+<li><strong>이메일 주소 입력</strong>: 로그인을 위한 이메일 입력</li>
+<li><strong>"이메일로 계속하기"</strong> 터치</li>
+<li><strong>인증 코드 확인</strong>: 이메일에서 6자리 코드 확인</li>
+<li><strong>인증 코드 입력</strong>: 받은 코드 입력</li>
+<li><strong>로그인 완료</strong>: 채팅 화면 자동 열림</li>
+</ol>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 모바일 앱에서 자유롭게 대화를 시작할 수 있습니다.</p>
+
+<p>💡 <strong>참고</strong>: 모바일 앱, 웹, 데스크탑에서 동일한 계정으로 로그인하면 모든 대화 기록이 자동으로 동기화되어 어느 기기에서든 이전 대화를 이어서 진행할 수 있습니다.</p>
+
+<hr>
+
+<h2 id="2단계-claude-웹-설치-및-시작">2단계: Claude 웹 설치 및 시작</h2>
+
+<h3>Claude 웹 소개</h3>
+
+<p>웹 브라우저에서 사용하는 Claude 온라인 서비스로, 설치나 다운로드 없이 바로 접속할 수 있으며 PC와 모바일 모두에서 동일한 방식으로 대화를 할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일</p>
+
+<p>웹 추가 기능:</p>
+<ul>
+<li><strong>파일 생성 및 분석</strong> (2025년 9월 9일 출시):
+<ul>
+<li>Excel(.xlsx): 수식, 차트, 다중 시트 포함 스프레드시트 자동 생성</li>
+<li>PowerPoint(.pptx): 전문 디자인의 프레젠테이션 즉시 제작</li>
+<li>Word(.docx): 완성된 보고서 및 문서 작성</li>
+<li>PDF: 최종 배포용 문서 생성</li>
+<li>Python 기반 고급 데이터 분석 및 시각화</li>
+<li>파일 간 자동 변환 (PDF→PPT, Excel→차트 등)</li>
+</ul>
+</li>
+<li><strong>PWA(Progressive Web App) 지원</strong>: 웹사이트를 독립적인 앱처럼 설치하여 사용할 수 있게 해주는 기술. 설치 후에는 일반 프로그램처럼 작업 표시줄에서 바로 실행 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>인터넷 연결 필수</li>
+<li>웹 브라우저의 성능 차이에 따른 영향 발생</li>
+<li>모바일 기기 및 PC 내부의 파일 접근 불가</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 및 모바일(터치) 입력 방식</li>
+<li><strong>운영체제</strong>: 모든 운영체제의 최신 웹 브라우저</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>설치 없이 어떤 PC에서도 즉시 사용 시작</li>
+<li>보고서나 프레젠테이션 자료를 즉시 만들어서 다운로드</li>
+<li>CSV 데이터를 업로드하여 즉시 차트와 분석자료 생성</li>
+<li>마우스로 대화 내용을 복사하여 바로 활용</li>
+<li>여러 탭을 동시에 열어서 각각 다른 주제 작업 진행</li>
+</ul>
+
+<hr>
+
+<h3>Claude 웹 설치 등 진행 순서</h3>
+
+<h4>1. Claude 웹 접속</h4>
+<ol>
+<li><strong>네이버나 구글에서 '클로드' 검색</strong> 또는</li>
+<li><strong>사이트에 직접 접속</strong>: https://claude.ai</li>
+</ol>
+
+<h4>2. PWA 웹 앱 설치</h4>
+
+<ol>
+<li><strong>브라우저별 설치 방법</strong>:
+<ul>
+<li><strong>Chrome</strong>: 주소창 우측에 "앱에서 열기" 아이콘 클릭</li>
+<li><strong>Edge</strong>: 주소창 우측에 "앱 설치" 클릭</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치.png" alt="웹 최초 설치" /></p>
+
+<ol start="2">
+<li><strong>설치 확인 팝업</strong>:
+<ul>
+<li>"작업 표시줄에 Claude를 고정하시겠습니까?" 표시</li>
+<li><strong>"예"</strong> 선택 → 작업 표시줄에 바로가기 생성</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치2.png" alt="웹 최초 설치2" /></p>
+
+<ol start="3">
+<li><strong>설치 완료</strong>: 독립 창으로 Claude 실행 가능</li>
+</ol>
+
+<h4>3. 계정 로그인</h4>
+<ol>
+<li><strong>이메일 주소 입력</strong>: 로그인을 위한 이메일 입력</li>
+<li><strong>"이메일로 계속하기"</strong> 클릭</li>
+<li><strong>인증 코드 확인</strong>: 이메일에서 6자리 코드 확인</li>
+<li><strong>인증 코드 입력</strong>: 받은 코드 입력</li>
+<li><strong>로그인 완료</strong>: 채팅 화면 자동 열림</li>
+</ol>
+
+<p><img src="./screenshots/웹버전%20최초%20설치3.png" alt="웹 최초 설치3" /></p>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 웹에서 자유롭게 대화를 시작하고 파일을 생성할 수 있습니다.</p>
+
+<hr>
+
+<h2 id="3단계-claude-데스크탑-설치-및-시작">3단계: Claude 데스크탑 설치 및 시작</h2>
+
+<h3>Claude 데스크탑 소개</h3>
+
+<p>PC에 설치하는 독립 실행형 Claude 애플리케이션으로, 웹보다 더 강력하고 다양한 기능을 제공하며 MCP(Model Context Protocol) 서버 연동을 통해서 로컬 파일에도 접근하여 읽고 쓰기를 할 수 있습니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일<br>
+웹 추가 기능: 웹과 동일</p>
+
+<p>데스크탑 추가 기능:</p>
+<ul>
+<li><strong>내부 MCP 서버 3개 연동</strong>:
+<ul>
+<li>Filesystem MCP: 로컬 파일에 접근하여 읽기/쓰기/관리</li>
+<li>Memory MCP: 대화 간 정보를 저장하고 학습</li>
+<li>Anthropic MCP: 6가지 특화 도구(ask, stream, vision, multi_turn, count_tokens, tools)</li>
+</ul>
+</li>
+<li><strong>외부 MCP 서버 추가 연동</strong>: GitHub, Google Drive, Slack, PostgreSQL, Docker, Puppeteer 등</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>PC에서만 사용 가능</li>
+<li>MCP 설정하는 과정 복잡</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>filesystem MCP로 내 PC 내의 특정 파일을 직접 찾아서 편집</li>
+<li>Anthropic MCP의 vision 도구로 스크린샷 즉시 분석</li>
+<li>여러개의 외부 MCP 서버를 연동시켜서 나만의 AI 워크스테이션 구축</li>
+<li>PostgreSQL MCP로 데이터베이스를 직접 쿼리하고 분석</li>
+<li>GitHub MCP로 문서와 코드의 모든 수정 과정을 버전별로 저장하고 복원</li>
+</ul>
+
+<hr>
+
+<h3>Claude 데스크탑 설치 등 진행 순서</h3>
+
+<h4>1. 다운로드 페이지 접속</h4>
+<ol>
+<li><strong>네이버나 구글에서 "클로드 데스크탑" 검색</strong> 또는</li>
+<li><strong>직접 다운로드 사이트 접속</strong>: https://claude.ai/download</li>
+</ol>
+
+<h4>2. 설치 파일 다운로드</h4>
+<ol>
+<li><strong>페이지 확인</strong>: "데스크톱에서 Claude를 만나보세요 BETA" 문구 확인</li>
+</ol>
+
+<p><img src="./screenshots/데스크탑%20버번1.png" alt="데스크탑 버번1" /></p>
+
+<ol start="2">
+<li><strong>운영체제 선택</strong>:
+<ul>
+<li><strong>Windows</strong> - 일반 Windows PC용</li>
+<li><strong>Windows (arm64)</strong> - ARM 프로세서 Windows용</li>
+</ul>
+</li>
+<li><strong>다운로드 시작</strong>: 선택한 운영체제 버튼 클릭</li>
+</ol>
+
+<h4>3. 설치 및 실행</h4>
+<ol>
+<li><strong>설치 파일 실행</strong>: 다운로드 폴더에서 설치 파일 더블클릭</li>
+<li><strong>설치 진행</strong>: 자동으로 설치 진행 (별도 옵션 선택 불필요)</li>
+<li><strong>설치 완료</strong>:
+<ul>
+<li>바탕화면에 바로가기 자동 생성</li>
+<li>Claude 데스크탑 자동 실행</li>
+<li>채팅 화면 바로 열림 (로그인 자동 연동)</li>
+</ul>
+</li>
+</ol>
+
+<p><img src="./screenshots/테스크탑%20최조%20실행화면%20스크린샷%202025-09-16%20102742.png" alt="데스크탑 최초 실행화면" /></p>
+
+<p>💡 <strong>참고</strong>: 데스크탑 화면 제일 위쪽에 "Claude―Control+Alt+Space" 문구가 표시됩니다. 이는 Claude 데스크탑을 빠르게 호출할 수 있는 단축키를 안내하는 것으로, <strong>Control+Alt+Space</strong>를 누르면 어떤 프로그램을 사용 중이어도 Claude 창이 즉시 열립니다. 예를 들어, 엑셀 작업 중이거나 웹 브라우징 중에도 이 단축키를 누르면 Claude 창이 바로 나타나 질문할 수 있습니다.</p>
+
+<h4>4. 사용자가 원하는 작업 시작</h4>
+
+<p>이제 Claude 데스크탑에서 자유롭게 대화를 시작할 수 있습니다.</p>
+
+<p>💡 <strong>참고</strong>: 웹에 이미 로그인되어 있다면 데스크탑도 자동으로 로그인됩니다.</p>
+
+<hr>
+
+<h2 id="4단계-기본적인-공통-프로그램의-설치">4단계: 기본적인 공통 프로그램의 설치</h2>
+
+<h3>4-1. Node.js 설치</h3>
+
+<p><strong>Node.js가 필요한 이유</strong>: Claude Code와 MCP 서버들이 실행되기 위해 필수적인 JavaScript 런타임(프로그램을 실행시켜주는 환경)입니다.</p>
+
+<h4>설치 과정:</h4>
+<ol>
+<li><strong>Node.js 공식 사이트</strong>: https://nodejs.org 접속</li>
+</ol>
+
+<p><img src="./screenshots/Node.js%20다운로드.png" alt="Node.js 다운로드 페이지" /></p>
+
+<ol start="2">
+<li><strong>LTS 버전 선택</strong>: Node.js v22 LTS (Jod) 다운로드 - 2025년 1월 기준 최신 LTS</li>
+<li><strong>Windows 설치 프로그램</strong> (.msi) 다운로드</li>
+<li><strong>설치 실행</strong>:
+<ul>
+<li>라이선스 동의</li>
+<li>설치 경로 확인 (기본값 권장)</li>
+<li>모든 컴포넌트 선택 (npm 포함)</li>
+</ul>
+</li>
+<li><strong>설치 완료 확인</strong>:
+<pre><code class="language-bash">node --version
+npm --version
+</code></pre>
+</li>
+</ol>
+
+<h3>4-2. Git 설치</h3>
+
+<p><strong>Git이 필요한 이유</strong>: Claude Code가 Git 명령어(커밋, 푸시 등)를 자동으로 실행해주고, 많은 npm 패키지들이 Git을 의존성(실행에 필요한 필수 프로그램)으로 요구합니다.</p>
+
+<h4>설치 과정:</h4>
+<ol>
+<li><strong>Git 공식 사이트</strong>: https://git-scm.com/downloads/win 접속</li>
+</ol>
+
+<p><img src="./screenshots/스크린샷%202025-09-11%20194223.png" alt="Git 다운로드 페이지" /></p>
+
+<ol start="2">
+<li><strong>다운로드 버전 확인</strong>: Git for Windows v2.51.0 x64</li>
+<li><strong>"Click here to download"</strong> 클릭</li>
+<li><strong>설치 실행</strong>:
+<ul>
+<li>컴포넌트 선택 (Git Bash 포함 확인)</li>
+<li>기본 에디터 선택 (VS Code 권장)</li>
+<li>PATH 환경 설정 (Git from the command line 선택)</li>
+<li>나머지 기본값 유지</li>
+</ul>
+</li>
+<li><strong>설치 완료 확인</strong>:
+<pre><code class="language-bash">git --version
+</code></pre>
+</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: Node.js와 Git을 설치한 후 컴퓨터를 재시작하면 환경 변수가 확실하게 적용됩니다.</p>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "Node.js와 Git 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.</p>
+
+<hr>
+
+<h2 id="5단계-claude-code-설치-및-시작">5단계: Claude Code 설치 및 시작</h2>
+
+<h3>Claude Code 소개</h3>
+
+<p>터미널에서 가동되는 AI 어시스턴트로, 시스템 명령을 실행하여 복잡한 업무를 자동으로 처리하고 파일도 직접 편집할 수 있는 비개발자와 개발자 모두를 위한 강력한 도구입니다.</p>
+
+<p><strong>기능</strong>:<br>
+기본 기능: 모바일 앱과 동일 (단, Artifacts 미지원, 이미지는 파일 경로로 제공)</p>
+
+<p>Claude Code 특화 기능:</p>
+<ul>
+<li><strong>파일 생성 및 편집</strong>: Excel, Word, PowerPoint, PDF 등 모든 형식의 파일을 생성/편집하여 로컬에 저장</li>
+<li><strong>기술 문서 생성</strong>: README.md, API 연결 및 용법 문서, 설치 가이드, 사용자 매뉴얼 자동 작성</li>
+<li><strong>외부 MCP 서버 연동</strong>: Google Drive, Slack, Jira 등 외부 서비스와 통합</li>
+<li><strong>시스템 명령 실행</strong>: Git, npm, 파일 작업 등 모든 터미널 명령 실행</li>
+<li><strong>프로젝트 관리</strong>: 파일 구조 분석 및 재구성</li>
+<li><strong>자동화 작업</strong>: 프로그램 설치, 환경 변수 설정, 필요한 패키지 자동 설치, 빌드 및 배포 과정 자동화</li>
+<li><strong>코드 작성</strong>: 전체 프로그램을 처음부터 작성</li>
+<li><strong>디버깅 지원</strong>: 오류 메시지 분석 및 수정</li>
+<li><strong>테스트 실행</strong>: 자동으로 테스트 작성 및 실행</li>
+<li><strong>Git 워크플로우 처리</strong>: 커밋 생성, 병합 충돌 해결, 릴리스 노트 작성</li>
+<li><strong>CI/CD 통합</strong>: 지속적 통합 파이프라인에서 자동 실행</li>
+<li><strong>로그 모니터링</strong>: 실시간 로그 감시 및 이상 탐지</li>
+<li><strong>기타</strong>: 프로그램으로 할 수 있는 거의 모든 작업 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>마우스 없이 키보드 입력을 통한 텍스트 명령어로만 조작</li>
+<li>터미널 사용 경험이 없으면 진입 장벽 존재</li>
+<li>짧은 시간에 많은 것을 익히려는 노력 필요</li>
+<li>이미지나 그래프 등 시각적 결과물 직접 표시 불가</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>"VS Code 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 진행</li>
+<li>"Git 저장소들 일괄 업데이트하고 상태를 확인하라"는 git 명령 실행</li>
+<li>ChatGPT와 Gemini API를 통해 동일한 주제로 시장분석을 요청하고, 각 AI의 분석 결과를 수집한 후 Claude Code가 이를 종합하여 시장분석 보고서 만들기</li>
+<li>여러 개의 전문화된 서브 에이전트를 투입하여 각자의 전문 영역에서 협업하여 책 만들기</li>
+<li>프론트엔드, 백엔드, 데이터베이스, API, 결제 시스템, 보안, 테스트 전문 서브 에이전트들이 병렬로 작업하여 완전한 온라인 쇼핑몰 개발하기</li>
+</ul>
+
+<hr>
+
+<h3>Claude Code 설치 등 진행 순서</h3>
+
+<h4>1. 터미널 접속</h4>
+
+<h5>명령 프롬프트 (CMD) 실행 방법</h5>
+<ul>
+<li><strong>Windows 키 + R</strong> → <code>cmd</code> 입력 → 엔터</li>
+<li>또는 <strong>Windows 시작 버튼 클릭</strong> → <strong>"명령 프롬프트" 검색</strong> → 엔터</li>
+<li>전통적인 Windows 명령줄 인터페이스(CLI, Command Line Interface)</li>
+<li>모든 Windows 버전에서 사용 가능</li>
+</ul>
+
+<p>💡 <strong>초보자 팁</strong>: 아래와 같은 화면(처음에는 검정색 바탕화면)이 나타나면 성공! 이제 명령어를 입력할 수 있습니다.</p>
+
+<p><img src="./screenshots/터미널%20열림%20스크린샷%202025-09-16%20104220.png" alt="터미널 열림" /></p>
+
+<h4>2. Claude Code 설치</h4>
+
+<p>아래 명령어 입력:</p>
+<pre><code class="language-bash">npm install -g @anthropic-ai/claude-code
+</code></pre>
+
+<ul>
+<li>설치 시간: 약 1-2분 소요</li>
+<li>설치 완료 확인: <code>claude --version</code></li>
+</ul>
+
+<p><img src="./screenshots/Claude%20Code%20설치%20스크린샷%202025-09-16%20103949.png" alt="Claude Code 설치" /></p>
+
+<p>💡 <strong>참고</strong>: <code>-g</code> 옵션은 global(전역) 설치를 의미하며, 모든 디렉토리에서 Claude Code를 실행할 수 있게 합니다.</p>
+
+<h4>3. Claude Code 실행</h4>
+
+<p>아래 명령어 입력:</p>
+<pre><code>claude
+</code></pre>
+
+<ul>
+<li>Claude Code 터미널이 열림</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: 어느 디렉토리에서든 실행 가능합니다.</p>
+
+<h4>4. Claude Code 계정 연결 및 로그인</h4>
+
+<h5>4-1. 바탕화면 색 선택</h5>
+<ul>
+<li>6가지 옵션 중 선택</li>
+</ul>
+
+<h5>4-2. 로그인 방식 선택</h5>
+
+<pre><code>Select login method:
+ &gt; 1. Claude account with subscription
+    Pro, Max, Team, or Enterprise
+   2. Anthropic Console account
+    API usage billing
+</code></pre>
+
+<ul>
+<li><strong>권장</strong>: <code>1</code> 선택 (기존 Claude 계정 연동)</li>
+</ul>
+
+<h5>4-3. 인증 과정</h5>
+<ol>
+<li><strong>1번 선택 후 엔터</strong></li>
+<li><strong>웹 브라우저 자동 열림</strong>: <code>claude.ai/oauth/authorize</code> 페이지</li>
+<li><strong>Claude Code 연결 화면 표시</strong>:</li>
+</ol>
+
+<p><img src="./screenshots/클로드%20코드%20승인%20.png" alt="클로드 코드 승인" /></p>
+
+<ul>
+<li>"Claude Code가 귀하의 Claude chat account에 연결을 요청했습니다"</li>
+<li>권한 정보 표시:
+<ul>
+<li>Anthropic 프로필 접근</li>
+<li>Claude 구독 사용량 기록</li>
+<li>개인정보 보호 설정 적용</li>
+</ul>
+</li>
+</ul>
+
+<ol start="4">
+<li><strong>"승인" 버튼 클릭</strong></li>
+<li><strong>로그인 성공</strong>:<br>
+Logged in as [your-email]<br>
+Login successful. Press Enter to continue…</li>
+<li><strong>Enter 키 누르기</strong> (다음 단계로 진행)</li>
+</ol>
+
+<p>💡 <strong>참고</strong>: 평소 사용 시에는 이러한 인증 과정이 생략됩니다. 최초 설치 시에만 한 번 진행합니다.</p>
+
+<h4>5. Claude Code 시작 화면 표시</h4>
+
+<pre><code>╭───────────────────────────────────────────────────╮
+│ ✻ Welcome to Claude Code!                         │
+│                                                   │
+│   /help for help, /status for your current setup  │
+│                                                   │
+│   cwd: C:\Users\home                              │
+╰───────────────────────────────────────────────────╯
+
+시작하기 위한 팁:
+    /init 실행으로 Claude를 위한 CLAUDE.md 파일 생성
+    파일 분석, 편집, bash 명령어, git 작업에 Claude 활용
+    최상의 결과를 위해 다른 엔지니어에게 하듯 구체적으로 요청하세요
+
+💡 **참고**: 홈 디렉토리에서 Claude를 실행했습니다. 최상의 경험을 위해
+     프로젝트 디렉토리에서 실행하는 것을 권장합니다.
+</code></pre>
+
+<ul>
+<li>cwd: C:\Users\home - 현재 작업 디렉토리 (Current Working Directory)</li>
+</ul>
+
+<h4>6. 작업 디렉토리 이동</h4>
+
+<h5>이동 명령어</h5>
+
+<pre><code>cd G:\내 드라이브\MyTask (사용자가 지정한 드라이버 및 폴더)
+</code></pre>
+
+<h5>이동 성공 확인</h5>
+
+<pre><code>● Bash(cd "G:\내 드라이브\MyTask" &amp;&amp; pwd)
+● Successfully changed to the MyTask directory.
+</code></pre>
+
+<p>💡 <strong>참고</strong>: 프로젝트 작업을 시작하기 전에 해당 프로젝트 폴더로 이동하는 것이 좋습니다. Claude Code는 현재 디렉토리를 기준으로 파일을 생성하고 수정합니다.</p>
+
+<h4>7. 사용자가 원하는 작업 시작</h4>
+
+<h5>자연어로 명령하기</h5>
+<p>이제 Claude Code에게 자연어로 표현하여 원하는 작업을 아래와 같이 요청할 수 있습니다:</p>
+
+<ul>
+<li>"오늘 업무일지 텍스트 파일 만들어줘"</li>
+<li>"이 CSV 파일의 데이터 요약해줘"</li>
+<li>"폴더 안의 이미지 파일만 새 폴더로 정리해줘"</li>
+<li>"React 컴포넌트 기본 구조 만들어줘"</li>
+<li>"테스트 코드 작성해줘"</li>
+<li>"오류 메시지를 분석하고 해결방법 제시해줘"</li>
+</ul>
+
+<p>💡 <strong>팁</strong>: 구체적이고 명확한 요청일수록 더 정확한 결과를 얻을 수 있습니다.</p>
+
+<h5>주요 명령어 소개</h5>
+
+<h6>시스템 명령어</h6>
+<ul>
+<li><code>/help</code> - 사용 가능한 모든 명령어와 사용법 표시</li>
+<li><code>/status</code> - 현재 설정 및 연결 상태 확인</li>
+<li><code>/init</code> - CLAUDE.md 파일 생성 (프로젝트 초기 설정)</li>
+<li><code>/exit</code> 또는 <code>Ctrl+C</code> - Claude Code 종료</li>
+<li><code>/clear</code> - 화면 지우기</li>
+</ul>
+
+<h6>파일 작업 명령어</h6>
+<ul>
+<li><code>ls</code> 또는 <code>dir</code> - 현재 폴더의 파일 목록 보기</li>
+<li><code>cd [폴더명]</code> - 다른 폴더로 이동</li>
+<li><code>pwd</code> - 현재 작업 중인 폴더 경로 확인</li>
+<li><code>cat [파일명]</code> - 파일 내용 표시</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: Claude Code는 자연어로 대화하듯 명령할 수 있어서, 복잡한 명령어를 외울 필요가 없습니다.</p>
+
+<h5>주요 도구 목록</h5>
+
+<p>Claude Code가 사용하는 주요 도구들 (<code>/tools</code> 명령어로 확인 가능):</p>
+<ul>
+<li><strong>Bash</strong> - 시스템 명령어 실행 (프로그램 설치, 파일 작업 등)</li>
+<li><strong>Read</strong> - 파일 읽기 (텍스트, 이미지, PDF 등 모든 파일)</li>
+<li><strong>Write</strong> - 새 파일 생성 및 작성</li>
+<li><strong>Edit</strong> - 기존 파일 수정</li>
+<li><strong>Update</strong> - 파일 내용 업데이트 및 갱신</li>
+<li><strong>MultiEdit</strong> - 파일의 여러 부분 동시 수정</li>
+<li><strong>Grep</strong> - 파일 내용 검색 (정규식 지원)</li>
+<li><strong>Glob</strong> - 파일 이름 패턴 검색 (예: *.txt, **/*.js)</li>
+<li><strong>WebSearch</strong> - 웹 검색 및 최신 정보 가져오기</li>
+<li><strong>WebFetch</strong> - 특정 웹페이지 내용 가져오기</li>
+<li><strong>TodoWrite</strong> - 작업 목록 관리 및 진행 상황 추적</li>
+<li><strong>Task</strong> - 복잡한 작업을 위한 서브 에이전트 실행</li>
+</ul>
+
+<p>💡 <strong>팁</strong>: 이러한 도구들은 Claude Code가 자동으로 선택하여 사용하므로, 사용자가 직접 지정할 필요는 없습니다.</p>
+
+<hr>
+
+<h2 id="6단계-claude-데스크탑에-mcp-연결하기-claude-code-활용">6단계: Claude 데스크탑에 MCP 연결하기 (Claude Code 활용)</h2>
+
+<h3>1. 설치할 MCP(Model Context Protocol) 결정</h3>
+
+<p>💡 <strong>MCP란?</strong> Claude 데스크탑이 컴퓨터의 파일과 프로그램에 접근할 수 있게 해주는 연결 도구입니다.</p>
+<ul>
+<li>마치 스마트폰에 앱을 설치하듯이, Claude 데스크탑에 추가 기능을 설치하는 것입니다.</li>
+</ul>
+
+<h4>설치할 MCP 서버</h4>
+<p>아래와 같은 Claude 내부의 MCP 서버 3개를 설치합니다:</p>
+<ol>
+<li><strong>filesystem</strong>: 로컬 파일 검색, 읽기/쓰기, 문서 자동 생성 및 편집</li>
+<li><strong>memory</strong>: 이전 대화 내용 기억, 중요 정보 저장, 컨텍스트 유지</li>
+<li><strong>anthropic</strong>: 6종의 특수 작업 도구 사용</li>
+</ol>
+
+<hr>
+
+<h3>2. 사전 준비: Google Drive Desktop 설치 (선택사항)</h3>
+
+<p>💡 <strong>참고</strong>: 이 가이드는 Google Drive를 설치한 경우를 기준으로 작성되었습니다. Google Drive를 사용하지 않는 경우, <code>G:\내 드라이브\MyTask</code> 대신 <code>C:\MyTask</code> 등 원하는 경로를 지정해서 사용하실 수 있습니다.</p>
+
+<p>💡 <strong>Google Drive를 설치해서 사용하는 이유</strong></p>
+<ul>
+<li><strong>다중 컴퓨터 동기화</strong>: 여러 컴퓨터에서 동일한 MCP 환경 접근</li>
+<li><strong>접근성</strong>: 웹 브라우저만 있으면 전 세계 어디서든 접근</li>
+<li><strong>자동 백업</strong>: 클라우드 자동 백업으로 데이터 손실 방지</li>
+<li><strong>Google 생태계 통합</strong>: Gmail, Docs 등과 연동</li>
+<li><strong>실시간 협업</strong>: 공유 및 공동 편집 가능</li>
+</ul>
+
+<p><strong>설치 과정:</strong></p>
+<ol>
+<li>https://www.google.com/drive/download/ 접속</li>
+<li>"PC용 드라이브" 다운로드 및 설치</li>
+</ol>
+
+<p><img src="./screenshots/구들%20드라이브%20다운로드%20스크린샷%202025-09-16%20104712.png" alt="구글 드라이브 다운로드" /></p>
+
+<ol start="3">
+<li>Google 계정으로 로그인</li>
+<li><code>G:\내 드라이브</code> 폴더 생성 확인 (내 드라이브는 명칭 변경을 할 수가 없음)</li>
+</ol>
+
+<p><img src="./screenshots/내%20드라이브%20폴더%20생성%20스크린샷%202025-09-16%20105134.png" alt="내 드라이브 폴더 생성" /></p>
+
+<ol start="5">
+<li><code>MyTask</code> 작업 폴더 생성</li>
+</ol>
+
+<hr>
+
+<h3>3. API 키 발급</h3>
+
+<p>💡 <strong>API 키가 필요한 이유:</strong> Anthropic MCP 서버를 연결시키기 위해서 필요(무료로 발급)</p>
+
+<p><strong>발급 순서:</strong></p>
+<ol>
+<li><strong>https://console.anthropic.com</strong> 접속</li>
+<li>Claude 계정으로 로그인</li>
+<li>좌측 메뉴에서 <strong>"API Keys"</strong> 클릭</li>
+<li><strong>"Create Key"</strong> 버튼 클릭</li>
+<li>키 이름 입력 (예: "MyMCP")</li>
+<li>생성된 키 복사 (<code>sk-ant-api03-</code>로 시작)</li>
+<li>안전한 곳에 보관 (메모장이나 비밀번호 관리자에 저장)</li>
+</ol>
+
+<p><img src="./screenshots/API%20키%20발급%20스크린샷%202025-09-16%20105431.png" alt="API 키 발급" /></p>
+
+<p>⚠️ <strong>주의:</strong> API 키는 비밀번호처럼 관리하세요. 다른 사람과 공유하지 마시고, 공개된 장소(GitHub, 블로그 등)에 노출되지 않도록 주의하세요.</p>
+
+<hr>
+
+<h3>4. Claude Code로 자동 설치하기</h3>
+
+<p>💡 <strong>가장 간단한 방법:</strong> Claude Code에게 모든 설치를 맡기기</p>
+
+<h4>자동 설치 명령어</h4>
+
+<p>Claude Code 터미널에서 다음과 같이 요청:</p>
+<pre><code class="language-text">"내부 MCP 서버 3종을 설치하고 설정해줘"
+</code></pre>
+
+<h4>Claude Code가 자동으로 처리하는 작업들</h4>
+
+<ol>
+<li><strong>필요한 패키지 설치</strong>
+<ul>
+<li>Filesystem MCP 서버</li>
+<li>Memory MCP 서버</li>
+<li>Anthropic MCP 서버와 의존성 패키지</li>
+</ul>
+</li>
+<li><strong>설정 파일 생성</strong>
+<ul>
+<li>위치: <code>C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\</code></li>
+<li>파일명: <code>claude_desktop_config.json</code></li>
+</ul>
+</li>
+<li><strong>테스트 및 검증</strong>
+<ul>
+<li>각 서버의 정상 작동 여부 테스트</li>
+<li>설정 파일 문법 검증</li>
+</ul>
+</li>
+</ol>
+
+<hr>
+
+<h3>4-1. 수동 설치 방법 (선택사항)</h3>
+
+<p>💡 <strong>직접 설치하고 싶은 경우:</strong> 아래 단계를 따라하세요.</p>
+
+<h4>Step 1: MCP 서버 패키지 설치</h4>
+
+<p>터미널에서 실행:</p>
+<pre><code class="language-bash"># Filesystem 서버 설치
+npm install -g @modelcontextprotocol/server-filesystem
+
+# Memory 서버 설치
+npm install -g @modelcontextprotocol/server-memory
+</code></pre>
+
+<p>💡 -g 옵션은 "전역(global)" 설치를 의미합니다<br>
+   → 컴퓨터 어디서든 이 패키지를 사용할 수 있게 됩니다</p>
+
+<h4>Step 2: Anthropic MCP 설정</h4>
+
+<pre><code class="language-bash"># 작업 폴더 생성
+mkdir C:\AnthropicMCP
+ → C드라이브에 AnthropicMCP 폴더를 새로 만듭니다. (작업 공간 생성)
+
+cd C:\AnthropicMCP
+→ 방금 만든 AnthropicMCP 폴더로 이동합니다.
+
+# 프로젝트 초기화
+npm init -y
+→ 이 폴더를 npm 프로젝트로 만듭니다 (package.json 파일이 자동 생성됨)
+→ package.json은 프로젝트 정보를 담는 파일입니다.
+
+
+# 필요 패키지 설치
+npm install @modelcontextprotocol/sdk@1.0.3 @anthropic-ai/sdk
+→ Anthropic MCP 서버에 필요한 핵심 패키지 2개를 설치합니다
+</code></pre>
+
+<h4>Step 2-1: Anthropic MCP 서버 파일 생성</h4>
+
+<p>💡 <strong>중요</strong>: Anthropic MCP 서버를 작동시키려면 index.js 파일을 생성해야 합니다.</p>
+
+<ol>
+<li><code>C:\AnthropicMCP</code> 폴더에 <code>index.js</code> 파일 생성</li>
+<li>Claude Code에게 다음과 같이 요청:
+<pre><code>"Anthropic MCP 서버용 index.js 파일을 생성해줘"
+</code></pre>
+</li>
+</ol>
+
+<h4>Step 3: 설정 파일 작성</h4>
+
+<p><strong>파일 위치:</strong> <code>C:\Users\[사용자 컴퓨터 명칭]\AppData\Roaming\Claude\claude_desktop_config.json</code></p>
+
+<p><strong>설정 내용:</strong></p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node.exe",
+      "args": [
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-filesystem\\dist\\index.js",
+        "G:\\내 드라이브\\MyTask"
+      ]
+    },
+    "memory": {
+      "command": "node.exe",
+      "args": [
+        "C:\\Users\\[사용자 컴퓨터 명칭]\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-memory\\dist\\index.js"
+      ]
+    },
+    "anthropic": {
+      "command": "node.exe",
+      "args": [
+        "C:\\AnthropicMCP\\dist\\index.js"
+      ],
+      "env": {
+        "ANTHROPIC_API_KEY": "여기에_API키_입력"
+      }
+    }
+  }
+}
+</code></pre>
+
+<p>⚠️ <strong>주의사항:</strong></p>
+<ul>
+<li><code>[사용자 컴퓨터 명칭]</code>을 실제 Windows용 사용자 컴퓨터 명칭으로 변경</li>
+<li><code>여기에_API키_입력</code>을 실제 API 키로 변경</li>
+<li>경로의 백슬래시는 반드시 이중(<code>\\</code>)으로 입력</li>
+</ul>
+
+<hr>
+
+<h3>5. Claude 데스크탑 재시작 및 확인</h3>
+
+<p><strong>왜 재시작이 필요한가?</strong> 새로운 설정 파일을 Claude 데스크탑이 인식하도록 하기 위해서입니다.</p>
+
+<h4>재시작 방법</h4>
+
+<ol>
+<li><strong>Claude 데스크탑 완전 종료</strong>
+<ul>
+<li>시스템 트레이 아이콘 우클릭 → 종료</li>
+</ul>
+</li>
+<li><strong>설치 파일로 재실행</strong>
+<ul>
+<li>처음 다운로드한 설치 파일 다시 실행</li>
+</ul>
+</li>
+</ol>
+
+<h4>MCP 연결 확인</h4>
+
+<ol>
+<li>Claude 데스크탑 열기</li>
+<li>좌측 상단 <strong>☰</strong> 메뉴 클릭</li>
+<li><strong>파일 → 설정 → 개발자</strong> 이동</li>
+<li><strong>"로컬 MCP 서버"</strong> 3종 연결 상태 확인</li>
+</ol>
+
+<p><strong>정상 연결 시 표시:</strong></p>
+<ul>
+<li>✅ filesystem (running)</li>
+<li>✅ memory (running)</li>
+<li>✅ anthropic (running)</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20011320.png" alt="MCP 설정 화면" /></p>
+
+<h4>도움이 필요한 경우</h4>
+
+<p>Claude Code에게 다음과 같이 요청:</p>
+<pre><code class="language-text">"MCP 서버 연결 상태를 진단하고 문제를 해결해줘"
+</code></pre>
+
+<h2 id="7단계-vs-code-설치-및-시작">7단계: VS Code 설치 및 시작</h2>
+
+<h3>VS Code 소개</h3>
+
+<p>Microsoft가 제공하는 무료 오픈소스 텍스트 편집기로, 문서 작성부터 코딩까지 모든 텍스트 작성 작업을 지원하며 수많은 확장 프로그램을 설치하여 활용할 수 있고 Claude Code와 결합을 통해 AI 지원 통합 작업 환경을 제공합니다.</p>
+
+<p><strong>기능</strong>:</p>
+<ul>
+<li><strong>파일 관리</strong>: 프로젝트 탐색기, 전역 검색, 다중 창 분할</li>
+<li><strong>코드 편집</strong>: 문법 강조, 자동 완성, 오류 검출, 리팩토링</li>
+<li><strong>IntelliSense</strong>: 스마트 코드 완성</li>
+<li><strong>멀티 커서</strong>: 여러 위치 동시 편집</li>
+<li><strong>Git 통합</strong>: 버전 관리 기본 지원</li>
+<li><strong>통합 터미널</strong>: 내장 터미널로 명령어 실행</li>
+<li><strong>Claude Code 결합</strong>: 터미널에서 바로 AI 도우미 실행</li>
+<li><strong>확장 프로그램</strong>: 4만 개 이상의 플러그인으로 필요한 기능 추가 가능</li>
+</ul>
+
+<p><strong>제약사항</strong>:</p>
+<ul>
+<li>Claude Code와 동일한 제약사항 4가지</li>
+<li>확장 프로그램 과다 설치 시 성능 저하</li>
+<li>대용량 파일(50MB+) 생성 및 편집 시 성능 저하</li>
+</ul>
+
+<p><strong>사용환경</strong>:</p>
+<ul>
+<li><strong>인터페이스</strong>: PC(마우스/키보드) 입력 방식</li>
+<li><strong>운영체제</strong>: Windows, Linux 등 데스크탑 환경</li>
+</ul>
+
+<p><strong>활용 팁</strong>:</p>
+<ul>
+<li>마크다운 문서를 실시간으로 미리보기 하면서 편집하기</li>
+<li>통합 터미널에서 Claude Code를 바로 실행하여 AI 지원받기</li>
+<li>여러 파일을 동시에 열어 화면 분할로 비교하며 작업하기</li>
+<li>Alt+클릭으로 여러 위치에 커서를 놓고 동시에 똑같은 내용 편집하기</li>
+<li>REST Client로 API 테스트를 VS Code 안에서 바로 실행하기</li>
+</ul>
+
+<hr>
+
+<h3>VS Code 설치 등 진행 순서</h3>
+
+<h4>1. VS Code 설치</h4>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "VS Code 설치해줘"라고 요청하면 자동으로 다운로드부터 설치까지 모든 과정을 대신 처리해줍니다.</p>
+
+<p>VS Code 다운로드 및 설치:</p>
+<ul>
+<li><strong>VS Code 다운로드 사이트</strong>: https://code.visualstudio.com 접속</li>
+<li><strong>Windows x64</strong> 버전 다운로드</li>
+<li><strong>설치 파일 실행</strong></li>
+<li><strong>라이선스 계약서</strong>: "동의합니다(A)" 선택</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141407.png" alt="VS Code 설치 화면" /></p>
+
+<ul>
+<li><strong>설치 옵션 선택</strong> (모두 체크 권장):
+<ul>
+<li>✅ "바탕 화면에 바로가기 만들기"</li>
+<li>✅ "'Code(으)로 열기' 작업을 Windows 탐색기 파일의 상황에 맞는 메뉴에 추가"</li>
+<li>✅ "'Code(으)로 열기' 작업을 Windows 탐색기 디렉터리의 상황에 맞는 메뉴에 추가"</li>
+<li>✅ "Code를 지원되는 파일 형식에 대한 편집기로 등록"</li>
+<li>✅ "PATH에 추가(다시 시작한 후 사용 가능)"</li>
+</ul>
+</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141512.png" alt="VS Code 설치 옵션" /></p>
+
+<ul>
+<li><strong>설치 완료 후 VS Code 자동 실행</strong> : 마침 버튼 클릭과 동시에</li>
+</ul>
+
+<p>💡 <strong>참고</strong>: PATH에 추가 옵션은 일반 터미널에서 <code>code</code> 명령어를 사용하기 위해 필수입니다.</p>
+
+<h4>2. 초기 설정</h4>
+
+<p>VS Code 최초 실행 시 설정:</p>
+<ul>
+<li><strong>Copilot 설정</strong>: 건너뛰기 (유료 서비스)</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20141807.png" alt="VS Code Welcome 화면" /></p>
+
+<ul>
+<li><strong>테마 선택</strong>: "Browse Color Themes" → 원하는 바탕 색상 선택</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20142707.png" alt="VS Code 테마 선택" /></p>
+
+<ul>
+<li><strong>Welcome 탭 닫기</strong>: 시작 화면 탭 X 버튼 클릭</li>
+</ul>
+
+<p><img src="./screenshots/스크린샷%202025-09-12%20142931.png" alt="VS Code 시작 화면" /></p>
+
+<ul>
+<li><strong>자동저장 설정</strong> (권장):
+<ul>
+<li>좌측 상단 메뉴에서, 파일 → 자동저장 선택(자동저장을 설정해놓으면 파일 수정 후 자동으로 저장되어 작업 손실을 방지함)</li>
+</ul>
+</li>
+<li><strong>한국어 설정</strong>: 확장 프로그램에서 Korean Language Pack 설치 후 재시작</li>
+</ul>
+
+<h4>3. 확장 프로그램 설치</h4>
+
+<p><strong>확장 프로그램이란?</strong><br>
+VS Code의 확장 프로그램(Extension)은 기본 에디터에 새로운 기능을 추가하는 플러그인입니다. 마치 스마트폰에 앱을 설치하듯이, VS Code에 필요한 기능들을 추가로 설치하여 더 강력하고 편리한 작업 환경을 만들 수 있습니다.</p>
+
+<p><strong>확장 프로그램의 역할:</strong></p>
+<ul>
+<li><strong>프로그래밍 언어별 도움</strong>: 파이썬, 자바스크립트 등 프로그래밍을 돕기</li>
+<li><strong>파일 작업 지원</strong>: 엑셀 파일 보기, PDF로 저장하기</li>
+<li><strong>편리한 기능</strong>: 자동 저장, 파일 정리, 경로 찾기</li>
+<li><strong>예쁘게 꾸미기</strong>: 색상 테마, 아이콘 변경</li>
+<li><strong>AI와 연결</strong>: Claude나 Copilot과 대화하기</li>
+</ul>
+
+<p><strong>설치 방법</strong>: 왼쪽 사이드바에 있는 확장 프로그램 아이콘(네모 4개) 클릭 후 검색하여 설치하면 됩니다.</p>
+
+<p>💡 <strong>참고</strong>: Claude Code에게 "VS Code 확장 프로그램 설치해줘"라고 요청하면 필요한 확장 프로그램들을 자동으로 설치해줍니다.</p>
+
+<h5><strong>유용한 확장 프로그램 목록</strong></h5>
+
+<h6><strong>한국어 지원</strong></h6>
+<ul>
+<li><strong>ms-ceintl.vscode-language-pack-ko</strong> - VS Code 메뉴와 설정을 한국어로 변경</li>
+</ul>
+
+<h6><strong>AI 어시스턴트</strong></h6>
+<ul>
+<li><strong>Claude Code</strong> - 터미널 기반 AI 코딩 어시스턴트 (VS Code 터미널에서 실행)</li>
+<li><strong>continue.continue</strong> - 여러 AI를 동시에 사용하여 코드 작성 지원</li>
+<li><strong>Cursor</strong> - AI 기반 코드 에디터 (VS Code 포크, 별도 설치 권장)</li>
+<li><strong>github.copilot</strong> - GitHub의 AI 코드 자동 완성 (유료)</li>
+<li><strong>github.copilot-chat</strong> - Copilot과 대화형 코딩 지원 (유료)</li>
+<li><strong>ms-vscode.vscode-speech</strong> - 음성으로 코드 작성 및 명령 실행</li>
+</ul>
+
+<h6><strong>공통 도구</strong> (비개발/개발 모두 필요)</h6>
+<ul>
+<li><strong>pkief.material-icon-theme</strong> - 파일 종류별로 아이콘을 표시하여 한눈에 구분</li>
+<li><strong>gruntfuggly.todo-tree</strong> - '할 일' 목록을 한눈에 정리해서 보여줌</li>
+<li><strong>alefragnani.project-manager</strong> - 여러 작업 폴더를 빠르게 전환</li>
+<li><strong>aaron-bond.better-comments</strong> - 메모를 중요도별로 다른 색으로 표시</li>
+<li><strong>eamodio.gitlens</strong> - 파일 변경 이력과 작성자를 한눈에 확인</li>
+<li><strong>yzhang.markdown-all-in-one</strong> - 마크다운 문서 작성 시 자동완성과 미리보기</li>
+<li><strong>shd101wyy.markdown-preview-enhanced</strong> - 고급 마크다운 미리보기 (수식, 그래프, 다이어그램 지원)</li>
+<li><strong>bierner.markdown-mermaid</strong> - 마크다운에서 플로우차트와 다이어그램 그리기</li>
+<li><strong>hediet.vscode-drawio</strong> - 순서도와 다이어그램을 VS Code에서 직접 그리기</li>
+<li><strong>tomoki1207.pdf</strong> - PDF 파일을 VS Code에서 바로 열어보기</li>
+<li><strong>humao.rest-client</strong> - 웹 서비스 테스트 도구</li>
+</ul>
+
+<h6><strong>비개발업무 전용 도구</strong></h6>
+<ul>
+<li><strong>grapecity.gc-excelviewer</strong> - Excel 파일을 표 형태로 보기</li>
+<li><strong>mechatroner.rainbow-csv</strong> - CSV 파일의 각 열을 다른 색으로 표시</li>
+<li><strong>RandomFractalsInc.vscode-data-preview</strong> - 데이터 파일을 보기 쉽게 표시</li>
+<li><strong>yzane.markdown-pdf</strong> - 마크다운 문서를 PDF로 즉시 변환</li>
+<li><strong>james-yu.latex-workshop</strong> - 논문이나 보고서를 LaTeX로 작성</li>
+<li><strong>wayou.vscode-todo-highlight</strong> - TODO 메모를 형광펜처럼 강조</li>
+<li><strong>fabiospampinato.vscode-projects-plus</strong> - 여러 프로젝트를 효율적으로 관리</li>
+<li><strong>patbenatar.advanced-new-file</strong> - 단축키로 새 파일을 빠르게 생성</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - 기본</strong></h6>
+<ul>
+<li><strong>christian-kohler.path-intellisense</strong> - 파일 경로 입력 시 자동완성 제공</li>
+<li><strong>괄호 색상 매칭</strong> - VS Code 내장 기능 사용 (설정 → editor.bracketPairColorization.enabled: true)</li>
+<li><strong>oderwat.indent-rainbow</strong> - 들여쓰기 깊이를 무지개색으로 표시</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - Python</strong></h6>
+<ul>
+<li><strong>ms-python.python</strong> - Python 코드 실행과 디버깅 지원</li>
+<li><strong>ms-python.vscode-pylance</strong> - Python 코드 자동완성과 오류 검사</li>
+<li><strong>ms-python.debugpy</strong> - Python 코드의 버그를 찾고 수정</li>
+<li><strong>ms-python.vscode-python-envs</strong> - Python 가상환경을 쉽게 전환</li>
+</ul>
+
+<h6><strong>개발업무 전용 도구 - 웹</strong></h6>
+<ul>
+<li><strong>formulahendry.auto-rename-tag</strong> - HTML 여는 태그 수정 시 닫는 태그도 자동 변경</li>
+<li><strong>ritwickdey.liveserver</strong> - HTML 파일을 실시간으로 브라우저에서 확인</li>
+<li><strong>timocodes.web-browser-preview</strong> - Browser Preview (웹 브라우저 미리보기)</li>
+<li><strong>xabikos.javascriptsnippets</strong> - JavaScript (ES6) code snippets (JS 스니펫)</li>
+<li><strong>ecmel.vscode-html-css</strong> - HTML CSS Support (CSS 자동완성)</li>
+</ul>
+
+<h4>4. 사용 준비 완료</h4>
+
+<ul>
+<li>VS Code 정상 작동 확인</li>
+<li>한국어 인터페이스 적용 확인</li>
+<li>필요한 확장 프로그램 설치 완료</li>
+<li>Git 작동 확인: 좌측 사이드바에 소스제어(나무가지 모양) 아이콘이 표시되면 Git이 정상적으로 설치된 것임</li>
+<li>Claude Code 결합 확인: 내장 터미널에서 <code>claude</code> 명령어로 Claude Code를 실행하여 테스트</li>
+</ul>
+
+<h4>5. 사용자가 원하는 작업 시작</h4>
+
+<h5>VS Code에서 작업 시작하기</h5>
+<ol>
+<li>VS Code 실행</li>
+<li>좌측 상단 메뉴에서, <strong>파일 &gt; 폴더 열기</strong> 선택</li>
+<li>작업할 폴더 선택 후 확인</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: 일반 터미널에서 원하는 폴더로 이동한 후 <code>code .</code> 명령어를 입력하면 현재 폴더를 VS Code에서 바로 열 수 있습니다. (점(.)은 현재 폴더를 의미)</p>
+
+<h5>Claude Code와 함께 사용하기</h5>
+<ol>
+<li>VS Code 내장 터미널 열기: <strong>Ctrl + ` (백틱)</strong>
+<ul>
+<li>또는 좌측 상단 메뉴에서, <strong>터미널 &gt; 새 터미널</strong> 선택</li>
+<li>VS Code 하단에 터미널 창이 열림</li>
+</ul>
+</li>
+<li>Claude Code 실행:
+<pre><code class="language-bash">claude
+</code></pre>
+</li>
+</ol>
+
+<p>💡 <strong>팁</strong>: VS Code에서 파일을 편집하면서 동시에 터미널에서 Claude Code의 도움을 받으면 작업 효율이 향상됩니다.</p>
+
+<hr>
+
+<h2 id="최종-정리">종합 정리</h2>
+
+<h3>Claude 플랫폼별 기능 비교표</h3>
+
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>모바일 앱</th>
+<th>웹</th>
+<th>데스크탑</th>
+<th>Claude Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기본 AI 대화</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>대화 기록 동기화</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>이미지 분석</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>파일 업로드</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>음성 입력</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>카메라 연동</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Artifacts 표시</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>파일 생성 및 다운로드</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>로컬 파일 접근</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ (MCP)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>시스템 명령 실행</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>프로그램 자동 설치</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Git 명령 실행</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>일부 가능</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>다운로드 필요</strong></td>
+<td>✅</td>
+<td>❌ (PWA 선택)</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+
+<h3>최종 설치된 환경</h3>
+<ul>
+<li><strong>웹</strong>: 브라우저에서 Claude 사용 (채팅, 문서 작업)</li>
+<li><strong>데스크탑</strong>: MCP 서버 3개 연결 (filesystem, memory, anthropic) - 파일 관리 및 고급 기능</li>
+<li><strong>Claude Code</strong>: 터미널 기반 AI 업무 도우미 - 개발업무와 비개발업무 모두 지원</li>
+<li><strong>VS Code</strong>: 필수 확장 프로그램 포함 - 코드 작성, 문서 편집, Excel 파일 처리, 마크다운 작업 등</li>
+<li><strong>통합 작업 환경</strong>: 모든 도구가 유기적으로 연결되어 개발업무부터 일반 사무업무까지 AI 기반으로 처리 가능</li>
+</ul>
+
+<hr>
+
+<h2 id="문서-정보">문서 정보</h2>
+
+<ul>
+<li><strong>버전</strong>: v1.2</li>
+<li><strong>업데이트</strong>: 2025년 9월 16일</li>
+<li><strong>주요 변경사항</strong>:
+<ul>
+<li>스크린샷 19개 추가 (설치 과정별 상세 화면)</li>
+<li>PowerShell 섹션 제거 (안정성 이슈)</li>
+<li>Claude 데스크탑 단축키 설명 추가 (Control+Alt+Space)</li>
+<li>Google Drive 및 API 키 발급 스크린샷 추가</li>
+</ul>
+</li>
+<li><strong>글자수</strong>: 20,186자</li>
+<li><strong>작성자</strong>: Claude</li>
+<li><strong>프롬프터</strong>: 써니</li>
+</ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Claude 완벽 설치 가이드. All rights reserved.</p>
+        <p>
+            문의: <a href="mailto:claude.guide.kr@gmail.com">claude.guide.kr@gmail.com</a> |
+            GitHub: <a href="https://github.com/SUNWOONGKYU/claude-guide">@SUNWOONGKYU</a>
+        </p>
+        <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9em;">
+            이 가이드는 Anthropic의 공식 문서가 아닙니다.
+        </p>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Markdown 내용 로드 (GitHub Pages에서는 자동 변환)
+        fetch('./Claude_설치_가이드_v1.2.md')
+            .then(response => response.text())
+            .then(markdown => {
+                // 간단한 Markdown to HTML 변환
+                let html = convertMarkdown(markdown);
+                document.getElementById('main-content').innerHTML = html;
+            })
+            .catch(error => {
+                // 실제 변환된 내용 직접 삽입
+                document.getElementById('main-content').innerHTML = getFullContent();
+            });
+
+        // Back to top 버튼
+        window.onscroll = function() {
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        };
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        function convertMarkdown(md) {
+            // 기본적인 Markdown 변환
+            let html = md;
+
+            // 제목 변환
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // 강조
+            html = html.replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+
+            // 코드
+            html = html.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // 링크
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+            // 이미지
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+
+            // 팁과 경고
+            html = html.replace(/💡 \*\*([^:]+):\*\*/g, '<div class="tip"><strong>💡 $1:</strong>');
+            html = html.replace(/⚠️ \*\*([^:]+):\*\*/g, '<div class="warning"><strong>⚠️ $1:</strong>');
+
+            return html;
+        }
+
+        function getFullContent() {
+            // 여기에 실제 내용을 반환하는 함수 구현
+            return `<p>가이드 내용을 불러오는 중입니다...</p>`;
+        }
+    </script>
+</body>
+</html>
