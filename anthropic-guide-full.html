@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic과 Claude에 대한 이해</title>
+    <meta name="description" content="AI 안전성과 유용성의 균형을 추구하며 급속한 성장을 이룬 Anthropic과 Claude의 여정">
+    <meta name="author" content="Claude & 써니">
+
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #D97757;
+            --secondary-color: #2D3748;
+            --text-color: #333;
+            --bg-color: #FAFAFA;
+            --border-color: #E2E8F0;
+            --code-bg: #F7FAFC;
+            --max-width: 900px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        #loading {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        #content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: none;
+        }
+
+        #content.loaded {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 50px 0 20px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 35px 0 16px;
+            color: var(--secondary-color);
+        }
+
+        h4, h5 {
+            font-size: 1.2rem;
+            margin: 25px 0 12px;
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 16px 0 16px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        blockquote {
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: linear-gradient(to right, rgba(217, 119, 87, 0.05), transparent);
+            border-left: 4px solid var(--primary-color);
+            font-style: italic;
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--code-bg);
+            font-weight: 600;
+        }
+
+        #toc {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            width: 250px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        #toc.show {
+            display: block;
+        }
+
+        #toc h3 {
+            font-size: 1.1rem;
+            margin: 0 0 15px;
+        }
+
+        #toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #toc li {
+            margin: 5px 0;
+        }
+
+        #toc a {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        #toc a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: #666;
+            margin-top: 80px;
+        }
+
+        @media (max-width: 1400px) {
+            #toc {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            #content {
+                padding: 20px 15px;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: #c86548;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        📚 문서를 불러오는 중...
+    </div>
+
+    <div id="toc"></div>
+
+    <div id="content"></div>
+
+    <div class="back-to-top" id="backToTop">
+        ↑
+    </div>
+
+    <script>
+        // Markdown 파일 URL
+        const markdownUrl = 'Anthropic과_Claude에_대한_이해_v2.2.md';
+
+        // Markdown 파일 로드 및 변환
+        fetch(markdownUrl)
+            .then(response => {
+                if (!response.ok) throw new Error('문서를 불러올 수 없습니다');
+                return response.text();
+            })
+            .then(markdown => {
+                // Marked 설정
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true,
+                    headerIds: true,
+                    mangle: false
+                });
+
+                // Markdown을 HTML로 변환
+                const html = marked.parse(markdown);
+
+                // 콘텐츠 표시
+                document.getElementById('content').innerHTML = html;
+                document.getElementById('content').classList.add('loaded');
+                document.getElementById('loading').style.display = 'none';
+
+                // 목차 생성
+                generateTOC();
+
+                // 스크롤 이벤트 리스너
+                setupScrollEvents();
+            })
+            .catch(error => {
+                document.getElementById('loading').innerHTML = `
+                    <p style="color: red;">⚠️ 문서를 불러오는데 실패했습니다.</p>
+                    <p>${error.message}</p>
+                    <p style="margin-top: 20px;">
+                        <a href="${markdownUrl}" style="color: #D97757;">Markdown 파일 직접 보기</a>
+                    </p>
+                `;
+            });
+
+        // 목차 생성 함수
+        function generateTOC() {
+            const headings = document.querySelectorAll('#content h2, #content h3');
+            if (headings.length === 0) return;
+
+            let tocHTML = '<h3>📑 목차</h3><ul>';
+            headings.forEach((heading, index) => {
+                const level = heading.tagName === 'H2' ? 0 : 20;
+                const id = `heading-${index}`;
+                heading.id = id;
+
+                tocHTML += `<li style="margin-left: ${level}px;">
+                    <a href="#${id}">${heading.textContent}</a>
+                </li>`;
+            });
+            tocHTML += '</ul>';
+
+            const toc = document.getElementById('toc');
+            toc.innerHTML = tocHTML;
+
+            // 화면이 충분히 넓을 때만 목차 표시
+            if (window.innerWidth > 1400) {
+                toc.classList.add('show');
+            }
+
+            // 목차 링크 클릭 시 부드러운 스크롤
+            toc.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        // 스크롤 이벤트 설정
+        function setupScrollEvents() {
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                // Back to top 버튼 표시/숨김
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+
+            // Back to top 버튼 클릭
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // 윈도우 리사이즈 시 목차 표시/숨김
+        window.addEventListener('resize', () => {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1400) {
+                toc.classList.add('show');
+            } else {
+                toc.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
