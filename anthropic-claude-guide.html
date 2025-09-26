@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anthropic과 Claude에 대한 이해</title>
+    <meta name="description" content="AI 안전성과 유용성의 균형을 추구하며 급속한 성장을 이룬 Anthropic과 Claude의 여정">
+    <meta name="author" content="Claude & 써니">
+    <meta property="og:title" content="Anthropic과 Claude에 대한 이해">
+    <meta property="og:description" content="2021년 창업부터 2025년 현재 254조원 기업가치까지, 헌법적 AI로 새로운 패러다임을 제시한 이들의 이야기">
+    <style>
+        :root {
+            --primary-color: #D97757;
+            --secondary-color: #2D3748;
+            --text-color: #333;
+            --bg-color: #FAFAFA;
+            --border-color: #E2E8F0;
+            --code-bg: #F7FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: -40px -20px 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 20px;
+            margin: 0 -20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 60px 0 20px;
+            padding-top: 20px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 40px 0 16px;
+            color: var(--secondary-color);
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin: 30px 0 12px;
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 16px 0 16px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .stats-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin: 30px 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            background: linear-gradient(to right, rgba(217, 119, 87, 0.1), rgba(217, 119, 87, 0.05));
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Anthropic과 Claude에 대한 이해</h1>
+            <p>AI 안전성과 유용성의 균형을 추구하며 급속한 성장을 이룬 Anthropic과 Claude의 여정을 다룹니다. 2021년 창업부터 2025년 현재 254조원 기업가치 평가액 달성까지, 헌법적 AI라는 독특한 접근법으로 AI 업계의 새로운 패러다임을 제시한 이들의 이야기를 살펴보겠습니다.</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#section1">창업 스토리</a></li>
+                <li><a href="#section2">Claude의 탄생</a></li>
+                <li><a href="#section3">투자와 성장</a></li>
+                <li><a href="#section4">모델 체계</a></li>
+                <li><a href="#section5">접근방식</a></li>
+                <li><a href="#section6">사업 전략</a></li>
+                <li><a href="#section7">경쟁 분석</a></li>
+                <li><a href="#section8">한국 시장</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <p style="text-align: center; color: #666; margin: 40px 0;">
+                <strong>참고:</strong> 이 페이지는 Markdown 문서의 HTML 미리보기입니다.<br>
+                전체 내용(33,424자)을 보려면 원본 Markdown 파일을 참조하세요.
+            </p>
+
+            <div class="stats-box">
+                <h3 style="margin-top: 0;">주요 통계</h3>
+                <ul style="list-style: none; margin-left: 0;">
+                    <li>📅 <strong>창업:</strong> 2021년 6월</li>
+                    <li>💰 <strong>기업가치:</strong> 1,830억 달러 (약 254조원)</li>
+                    <li>📊 <strong>ARR:</strong> 50억 달러 (2025년 7월)</li>
+                    <li>🏢 <strong>한국 법인:</strong> 2024년 7월 설립</li>
+                    <li>📝 <strong>총 투자 규모:</strong> 256.54억 달러</li>
+                </ul>
+            </div>
+
+            <h2 id="section1">1. Anthropic의 창업 - OpenAI를 떠난 연구진들의 새로운 도전</h2>
+
+            <p>2021년 6월, AI 업계에 중요한 변화가 일어났습니다. OpenAI 핵심 연구진 중 7명이 회사를 떠나 새로운 기업을 창업한 것입니다. 이들의 중심에는 OpenAI의 연구 담당 부사장이었던 Dario Amodei와 안전 및 정책 담당 부사장이었던 Daniela Amodei 남매가 있었습니다.</p>
+
+            <div class="highlight">
+                <strong>헌법적 AI (Constitutional AI)</strong><br>
+                AI가 명확한 원칙('헌법')에 따라 스스로를 평가하고 개선하는 독창적인 안전성 기술로, RLHF를 RLAIF로 대체하여 비용을 획기적으로 줄이면서도 일관된 안전성을 확보했습니다.
+            </div>
+
+            <h2 id="section2">2. Claude의 탄생과 진화</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>Claude 1 (2023년 3월)</strong><br>
+                    10만 토큰 context window, 첫 번째 모델 출시
+                </div>
+                <div class="timeline-item">
+                    <strong>Claude 2 (2023년 7월)</strong><br>
+                    파일 업로드 기능 추가, 창의성 3배 향상
+                </div>
+                <div class="timeline-item">
+                    <strong>Claude 3 시리즈 (2024년 3월)</strong><br>
+                    Haiku, Sonnet, Opus 3단계 모델 체계 도입
+                </div>
+                <div class="timeline-item">
+                    <strong>Claude 3.5 Sonnet (2024년 6월)</strong><br>
+                    Artifacts 기능, Vision 능력 강화
+                </div>
+                <div class="timeline-item">
+                    <strong>Computer Use (2024년 10월)</strong><br>
+                    AI가 직접 컴퓨터 화면을 조작하는 혁신적 기능
+                </div>
+                <div class="timeline-item">
+                    <strong>Opus 4.1 (2025년 8월)</strong><br>
+                    SWE-bench 74.5% 정확도 달성
+                </div>
+            </div>
+
+            <h2 id="section3">3. 회사 성장과 투자 유치</h2>
+
+            <div class="stats-box">
+                <h4 style="margin-top: 0;">투자 라운드별 현황</h4>
+                <ul>
+                    <li><strong>시리즈 A (2021.9):</strong> 1.24억 달러</li>
+                    <li><strong>시리즈 B (2022.4):</strong> 5.8억 달러</li>
+                    <li><strong>시리즈 C (2023.5):</strong> 4.5억 달러</li>
+                    <li><strong>시리즈 D (2023.9):</strong> 40억 달러 <span class="badge">Amazon</span></li>
+                    <li><strong>시리즈 E (2025.3):</strong> 35억 달러</li>
+                    <li><strong>시리즈 F (2025.9):</strong> 130억 달러 <span class="badge">역대 최대</span></li>
+                </ul>
+            </div>
+
+            <h2 id="section4">4. Claude 3가지 모델 체계</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                <div class="stats-box">
+                    <h4 style="margin-top: 0; color: #4299E1;">🏃 Haiku</h4>
+                    <p>가장 빠른 경량 모델</p>
+                    <ul style="font-size: 0.9rem;">
+                        <li>응답시간: 0.25-0.5초</li>
+                        <li>비용: $0.80/1M tokens</li>
+                        <li>용도: 챗봇, 분류, 요약</li>
+                    </ul>
+                </div>
+                <div class="stats-box">
+                    <h4 style="margin-top: 0; color: #48BB78;">🎭 Sonnet</h4>
+                    <p>균형잡힌 범용 모델</p>
+                    <ul style="font-size: 0.9rem;">
+                        <li>응답시간: 1-3초</li>
+                        <li>비용: $3/1M tokens</li>
+                        <li>용도: 코딩, 콘텐츠, 분석</li>
+                    </ul>
+                </div>
+                <div class="stats-box">
+                    <h4 style="margin-top: 0; color: #9F7AEA;">👑 Opus</h4>
+                    <p>최고 성능 프리미엄 모델</p>
+                    <ul style="font-size: 0.9rem;">
+                        <li>응답시간: 3-30초</li>
+                        <li>비용: $15/1M tokens</li>
+                        <li>용도: 전문분석, 복잡추론</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 id="section8">8. 한국 시장 진출 전략</h2>
+
+            <p>Anthropic은 한국을 아시아의 핵심 시장으로 인식하고 체계적인 진출 전략을 수립하여 관련 업무를 추진하고 있습니다.</p>
+
+            <div class="highlight">
+                <h4>주요 성과</h4>
+                <ul>
+                    <li><strong>SK텔레콤:</strong> 1억 달러 투자 (2023년 8월)</li>
+                    <li><strong>Anthropic Korea:</strong> 한국 법인 설립 (2024년 7월)</li>
+                    <li><strong>더존비즈온:</strong> AWS와 3자 협약 (2024년 7월)</li>
+                    <li><strong>AWS 서울 리전:</strong> 낮은 지연시간 서비스 제공</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                <strong>작성일자:</strong> 2025년 9월 26일<br>
+                <strong>글자수:</strong> 33,424자<br>
+                <strong>작성자:</strong> Claude | <strong>프롬프터:</strong> 써니
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="https://github.com/YOUR_USERNAME/anthropic-claude-guide" style="color: var(--primary-color);">
+                    GitHub에서 전체 문서 보기 →
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
