@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude 완벽 마스터 가이드</title>
+    <meta name="description" content="Claude 설치부터 활용까지 - 입문자를 위한 완벽한 가이드">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+        }
+
+        .guide-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .card-features li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .card-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+
+        .badge.new {
+            background: #ff6b6b;
+            animation: pulse 2s infinite;
+        }
+
+        .roadmap {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 50px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .roadmap h2 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+        }
+
+        .timeline-item.completed::before {
+            background: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .timeline-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .resources {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .resources h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s;
+        }
+
+        .resource-item:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .resource-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .resource-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .guide-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Claude 완벽 마스터 가이드</h1>
+        <p>일단 설치부터! 30분 만에 Claude를 시작하고, 천천히 이해해보세요</p>
+    </div>
+
+    <div class="container">
+        <div class="guide-cards">
+            <!-- Part 1: 설치 가이드 -->
+            <div class="card">
+                <span class="badge new">시작은 여기서!</span>
+                <div class="card-number">1</div>
+                <h2>Claude 완벽 설치 가이드</h2>
+                <p class="card-description">
+                    일단 설치부터! 4가지 플랫폼 (모바일, 웹, 데스크탑, Code) 모두를 30분 안에 설치하세요.
+                </p>
+                <ul class="card-features">
+                    <li>단계별 스크린샷 제공</li>
+                    <li>MCP 설정 완벽 가이드</li>
+                    <li>Node.js & Git 설치</li>
+                    <li>VS Code 연동 설정</li>
+                    <li>설치 중 문제 즉시 해결</li>
+                </ul>
+                <div class="card-buttons">
+                    <a href="./install/" class="btn btn-primary">지금 설치하기</a>
+                    <a href="./install/guide.md" class="btn btn-secondary">마크다운 보기</a>
+                </div>
+            </div>
+
+            <!-- Part 2: 입문 가이드 -->
+            <div class="card">
+                <span class="badge">설치 후 읽기</span>
+                <div class="card-number">2</div>
+                <h2>Claude & Claude Code 입문</h2>
+                <p class="card-description">
+                    설치를 완료했다면, 이제 Claude가 무엇인지 깊이 이해해보세요.
+                </p>
+                <ul class="card-features">
+                    <li>Claude vs ChatGPT 비교</li>
+                    <li>Anthropic 회사 소개</li>
+                    <li>Constitutional AI 이해</li>
+                    <li>활용 사례와 팁</li>
+                    <li>프롬프트 작성법</li>
+                </ul>
+                <div class="card-buttons">
+                    <a href="./introduction/" class="btn btn-primary">이론 공부</a>
+                    <a href="./introduction/chapters/" class="btn btn-secondary">챕터별 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 학습 로드맵 -->
+        <div class="roadmap">
+            <h2>🚀 효율적인 학습 경로</h2>
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <h3>Step 1: 일단 설치!</h3>
+                    <p>복잡한 이론은 나중에! 먼저 설치하고 실행해봅니다. (30분)</p>
+                </div>
+                <div class="timeline-item completed">
+                    <h3>Step 2: 직접 사용해보기</h3>
+                    <p>간단한 질문부터 시작해서 Claude와 대화를 시작합니다. (1시간)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 3: 이론 이해하기</h3>
+                    <p>이제 Claude가 무엇인지, 어떻게 작동하는지 이해합니다. (2시간)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 4: 실전 활용</h3>
+                    <p>업무에 적용하고, 프롬프트를 개선하며 효율을 높입니다. (지속)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 5: 자동화 구축</h3>
+                    <p>반복 작업을 자동화하고 나만의 시스템을 만듭니다. (고급)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 추가 리소스 -->
+        <div class="resources">
+            <h2>📚 추가 리소스</h2>
+            <div class="resource-grid">
+                <div class="resource-item">
+                    <a href="https://claude.ai" target="_blank">
+                        <div class="resource-icon">🌐</div>
+                        <h4>Claude 웹</h4>
+                        <p>바로 시작하기</p>
+                    </a>
+                </div>
+                <div class="resource-item">
+                    <a href="https://docs.anthropic.com" target="_blank">
+                        <div class="resource-icon">📖</div>
+                        <h4>공식 문서</h4>
+                        <p>API & 가이드</p>
+                    </a>
+                </div>
+                <div class="resource-item">
+                    <a href="https://github.com/SUNWOONGKYU/claude-guide" target="_blank">
+                        <div class="resource-icon">💻</div>
+                        <h4>GitHub</h4>
+                        <p>소스코드</p>
+                    </a>
+                </div>
+                <div class="resource-item">
+                    <a href="mailto:claude.guide.kr@gmail.com">
+                        <div class="resource-icon">📧</div>
+                        <h4>문의하기</h4>
+                        <p>도움 요청</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Claude 완벽 마스터 가이드. All rights reserved.</p>
+        <p style="margin-top: 20px;">
+            문의: <a href="mailto:claude.guide.kr@gmail.com">claude.guide.kr@gmail.com</a> |
+            GitHub: <a href="https://github.com/SUNWOONGKYU/claude-guide">@SUNWOONGKYU</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
+            이 가이드는 Anthropic의 공식 문서가 아닙니다.<br>
+            개인적인 경험을 바탕으로 작성된 비공식 가이드입니다.
+        </p>
+    </footer>
+
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
