@@ -161,16 +161,11 @@
         }
 
         #toc {
-            position: fixed;
-            right: 20px;
-            top: 100px;
-            width: 250px;
-            max-height: 70vh;
-            overflow-y: auto;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
             display: none;
         }
 
@@ -210,11 +205,6 @@
             margin-top: 80px;
         }
 
-        @media (max-width: 1400px) {
-            #toc {
-                display: none !important;
-            }
-        }
 
         @media (max-width: 768px) {
             h1 {
@@ -262,9 +252,9 @@
         📚 문서를 불러오는 중...
     </div>
 
-    <div id="toc"></div>
-
-    <div id="content"></div>
+    <div id="content">
+        <div id="toc"></div>
+    </div>
 
     <div class="back-to-top" id="backToTop">
         ↑
@@ -292,13 +282,15 @@
                 // Markdown을 HTML로 변환
                 const html = marked.parse(markdown);
 
-                // 콘텐츠 표시
-                document.getElementById('content').innerHTML = html;
-                document.getElementById('content').classList.add('loaded');
-                document.getElementById('loading').style.display = 'none';
+                // 목차 생성 먼저
+                generateTOC(html);
 
-                // 목차 생성
-                generateTOC();
+                // 콘텐츠 표시 (목차 뒤에 내용 추가)
+                const contentDiv = document.getElementById('content');
+                const tocDiv = document.getElementById('toc');
+                contentDiv.innerHTML = tocDiv.outerHTML + html;
+                contentDiv.classList.add('loaded');
+                document.getElementById('loading').style.display = 'none';
 
                 // 스크롤 이벤트 리스너
                 setupScrollEvents();
@@ -314,8 +306,12 @@
             });
 
         // 목차 생성 함수
-        function generateTOC() {
-            const headings = document.querySelectorAll('#content h2, #content h3');
+        function generateTOC(htmlContent) {
+            // 임시 div에 HTML 넣어서 heading 추출
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+            const headings = tempDiv.querySelectorAll('h2, h3');
+
             if (headings.length === 0) return;
 
             let tocHTML = '<h3>📑 목차</h3><ul>';
@@ -333,10 +329,8 @@
             const toc = document.getElementById('toc');
             toc.innerHTML = tocHTML;
 
-            // 화면이 충분히 넓을 때만 목차 표시
-            if (window.innerWidth > 1400) {
-                toc.classList.add('show');
-            }
+            // 목차 항상 표시
+            toc.classList.add('show');
 
             // 목차 링크 클릭 시 부드러운 스크롤
             toc.querySelectorAll('a').forEach(link => {
@@ -369,15 +363,6 @@
             });
         }
 
-        // 윈도우 리사이즈 시 목차 표시/숨김
-        window.addEventListener('resize', () => {
-            const toc = document.getElementById('toc');
-            if (window.innerWidth > 1400) {
-                toc.classList.add('show');
-            } else {
-                toc.classList.remove('show');
-            }
-        });
     </script>
 </body>
 </html>
